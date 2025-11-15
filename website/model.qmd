@@ -1,0 +1,29 @@
+
+---
+
+### Modélisation prédictive
+
+```markdown
+---
+title: "Modélisation prédictive"
+format: html
+---
+
+# Modèles prédictifs
+
+Nous utilisons la régression linéaire pour prédire la mortalité liée à la pollution.
+
+```{python}
+from sklearn.linear_model import LinearRegression
+import pandas as pd
+
+df = pd.read_csv("data/clean/merged_data.csv")
+X = df[["co2", "pm25"]]
+y = df["mortality_rate"]
+
+model = LinearRegression()
+model.fit(X, y)
+y_pred = model.predict(X)
+
+print("Coefficients :", model.coef_)
+print("Intercept :", model.intercept_)

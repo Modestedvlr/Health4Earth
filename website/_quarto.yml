@@ -1,18 +1,18 @@
 project:
   type: website
-  output-dir: docs
+  output-dir: _site
 
 website:
   title: "Health4Earth"
   navbar:
     left:
-      - text: Accueil
-        href: quarto_site/index.qmd
-      - text: Données
-        href: quarto_site/data.qmd
-      - text: Analyse
-        href: quarto_site/analysis.qmd
-      - text: Modèle
-        href: quarto_site/model.qmd
-      - text: Équipe
-        href: quarto_site/team.qmd
+      - text: "Accueil"
+        href: index.qmd
+      - text: "Données"
+        href: data.qmd
+      - text: "EDA"
+        href: eda.qmd
+      - text: "Modèle"
+        href: model.qmd
+      - text: "Équipe"
+        href: team.qmd

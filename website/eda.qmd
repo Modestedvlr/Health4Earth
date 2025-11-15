@@ -1,0 +1,36 @@
+---
+
+### Analyse exploratoire
+
+```markdown
+---
+title: "Analyse Exploratoire"
+format: html
+---
+
+# Analyse exploratoire
+
+## Visualisations principales
+
+### Pollution mondiale
+![Pollution mondiale](../docs/Air-Pollution-Around-the-World.jpg)
+
+### Pollution par capitale
+![Pollution par capitale](../docs/Air_Pollution_Per_Capital.jpg)
+
+### Décès liés à la pollution
+![Décès liés à la pollution](../docs/Die_Of_Air_pollution.jpg)
+
+### Espérance de vie gagnée
+![Espérance de vie](../docs/Life_Expectancy_From_Cleaner_Air.jpg)
+
+---
+
+## Exemple de graphique interactif avec Plotly
+
+```{python}
+import plotly.express as px
+
+df = pd.read_csv("data/clean/merged_data.csv")
+fig = px.scatter(df, x="pm25", y="mortality_rate", color="continent")
+fig.show()
