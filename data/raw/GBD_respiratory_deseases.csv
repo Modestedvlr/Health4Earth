@@ -1,0 +1,10 @@
+measure_id,measure_name,location_id,location_name,sex_id,sex_name,age_id,age_name,cause_id,cause_name,metric_id,metric_name,year,val,upper,lower
+1,Décès,1,Global,3,Les deux,22,Tout age,294,Toutes causes,1,#,2023,60043088.86146642,61239779.90044624,59045446.995901234
+1,Décès,1,Global,3,Les deux,22,Tout age,294,Toutes causes,2,%,2023,1.0,1.0,1.0
+1,Décès,1,Global,3,Les deux,22,Tout age,294,Toutes causes,3,Taux,2023,744.4132752036382,759.2498319602228,732.0445269811883
+1,Décès,1,Global,3,Les deux,22,Tout age,508,Maladies respiratoires chroniques,1,#,2023,4163664.8186984244,5138236.198230304,3612654.16212662
+1,Décès,1,Global,3,Les deux,22,Tout age,508,Maladies respiratoires chroniques,2,%,2023,0.06933903825034449,0.08525293419099993,0.06062981403848594
+1,Décès,1,Global,3,Les deux,22,Tout age,508,Maladies respiratoires chroniques,3,Taux,2023,51.62105120355651,63.70377190153591,44.78962971428067
+1,Décès,1,Global,3,Les deux,22,Tout age,509,Maladie pulmonaire obstructive chronique,1,#,2023,3426147.9539974383,4079798.7097679465,2955249.039254128
+1,Décès,1,Global,3,Les deux,22,Tout age,509,Maladie pulmonaire obstructive chronique,2,%,2023,0.05705592170919788,0.06795508489699605,0.04920801819519514
+1,Décès,1,Global,3,Les deux,22,Tout age,509,Maladie pulmonaire obstructive chronique,3,Taux,2023,42.47732866728443,50.581280498695506,36.63913129834675
