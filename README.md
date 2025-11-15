@@ -173,7 +173,7 @@ quarto render website/index.qmd
 cd website
 quarto preview
 ```
-Le site s’ouvrira automatiquement dans votre navigateur à l’adresse : http://127.0.0.1:4200/
+Le site s’ouvrira automatiquement dans votre navigateur à l’adresse : http://localhost:5097/
 * Accès au site en ligne
 Le site est déployé via GitHub Pages :
 https://JulienOllier.github.io/Health4Earth/
