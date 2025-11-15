@@ -96,8 +96,7 @@ L’interface du site web proposera une **carte interactive** des capitales mond
 - Une courbe de mortalité liée à la pollution
 - Une courbe d’espérance de vie
 
-### Exemples de visualisations
-Voici les croquis et illustrations qui représentent ces objectifs :
+* Voici les croquis et illustrations qui représentent ces objectifs :
 
 ![Carte interactive](docs/Carte_Interactive_Souhaitee.png)
 
@@ -113,41 +112,9 @@ Voici les croquis et illustrations qui représentent ces objectifs :
 ### Espérance de vie gagnée grâce à un air plus pur
 ![Espérance de vie](docs/Life_Expectancy_From_Cleaner_Air.jpg)
 
-
 ---
 
-## Installation et exécution
-
-1. **Cloner le dépôt** :
-```bash
-git clone https://github.com/JulienOllier/Health4Earth
-cd Health4Earth
-```
-2. **Installer les dépendances** :
-```bash
-pip install -r requirements.txt
-```
-
-3. **Exécuter les scripts principaux** :
-
-* Nettoyage des données
-```bash
-python scripts/cleaning/data_cleaning.py
-```
-* Analyse exploratoire et visualisations
-```bash
-quarto render website/eda.qmd
-```
-* Modélisation prédictive
-```bash
-python scripts/models/model.py
-```
-* Génération du site web interactif
-```bash
-quarto render website/index.qmd
-```
-
-### Pipeline de développement
+## Pipeline de développement
 1. **Collecte des données** :
    - Our World in Data (OWID): émissions de CO₂, pollution atmosphérique
    - World Health Organization (WHO) : mortalité et espérance de vie liées à la pollution
@@ -201,19 +168,13 @@ python scripts/models/model.py
 ```bash
 quarto render website/index.qmd
 ```
-
----
-
-## Prévisualisation du site Quarto localement
+* Prévisualisation du site Quarto localement
 ```bash
 cd website
 quarto preview
 ```
 Le site s’ouvrira automatiquement dans votre navigateur à l’adresse : http://127.0.0.1:4200/
-
----
-
-## Accès au site en ligne
+* Accès au site en ligne
 Le site est déployé via GitHub Pages :
 https://JulienOllier.github.io/Health4Earth/
 
@@ -242,12 +203,14 @@ site : développement du site Quarto
 ---
 
 ## Contribution
-Membre	                   Rôle
 
-Firda               <--->   Nettoyage des données, fusion et préparation
-Julien              <--->   Analyse exploratoire et visualisations interactives
-Modeste	           <--->   Modélisation prédictive et validation
-Tous les membres    <---> 	 Développement du site web, intégration Quarto, déploiement
+* Firda  <--->  Nettoyage des données, fusion et préparation
+
+* Julien  <--->  Analyse exploratoire et visualisations interactives
+
+* Modeste  <--->  Modélisation prédictive et validation
+
+* Tous les membres  <--->  Développement du site web, intégration Quarto, déploiement
 
 ---
 
