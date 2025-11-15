@@ -6,10 +6,12 @@ format: html
 editor: visual
 
 ---
-# Health4Earth — Aperçu du projet
 
+# Health4Earth — Aperçu du projet
 ## Dépôt GitHub
 - URL du dépôt : https://github.com/JulienOllier/Health4Earth
+
+---
 
 ## Composition du groupe
 | Prénom            | Nom             | 
@@ -83,6 +85,7 @@ Health4Earth/
 ├── LICENSE              # Licence MIT
 
 └── README.md            # Ce fichier
+
 ---
 
 ## Visualisations principales
@@ -112,6 +115,7 @@ Voici les croquis et illustrations qui représentent ces objectifs :
 
 
 ---
+
 ### Pipeline de développement
 1. **Collecte des données** :
    - Our World in Data (OWID): émissions de CO₂, pollution atmosphérique
@@ -133,6 +137,7 @@ Voici les croquis et illustrations qui représentent ces objectifs :
 5. **Site web Quarto** :
    - Pages interactives avec widgets
    - Déploiement via GitHub Pages
+
 ---
 
 ## Installation et exécution
@@ -167,6 +172,7 @@ quarto render website/index.qmd
 ```
 
 ---
+
 ## Prévisualisation du site Quarto localement
 ```bash
 cd website
@@ -175,11 +181,13 @@ quarto preview
 Le site s’ouvrira automatiquement dans votre navigateur à l’adresse : http://127.0.0.1:4200/
 
 ---
+
 ## Accès au site en ligne
 Le site est déployé via GitHub Pages :
 https://JulienOllier.github.io/Health4Earth/
 
 ---
+
 ## Technologies utilisées
 - **Python** : pandas, scikit-learn, plotly, folium
 - **Quarto** : pour le site web interactif
@@ -200,6 +208,7 @@ model : modélisation prédictive
 
 site : développement du site Quarto
 
+---
 
 ## Contribution
 Membre	                   Rôle
@@ -208,8 +217,12 @@ Julien              <--->   Analyse exploratoire et visualisations interactives
 Modeste	           <--->   Modélisation prédictive et validation
 Tous les membres    <---> 	 Développement du site web, intégration Quarto, déploiement
 
+---
+
 ## Licence
 Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+---
 
 ## Remarques
 * Toutes les données utilisées sont publiquement disponibles et reproduisibles.
@@ -217,6 +230,7 @@ Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 * Des tests unitaires et un workflow d’intégration continue sont inclus pour garantir la fiabilité du projet.
 
 ---
+
 ```bash
 git add README.md
 git commit -m "Ajout du README final détaillé"
