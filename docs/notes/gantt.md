@@ -3,7 +3,6 @@
 %%{init: {
     "theme": "default",
     "themeVariables": {
-        "background": "#ffffff"
         "primaryColor": "#4CAF50",
         "primaryBorderColor": "#2E7D32",
         "primaryTextColor": "#fff",
@@ -27,7 +26,7 @@ gantt
     title Rétroplanification complète HEALTH4EARTH – Version Stylisée
     dateFormat  YYYY-MM-DD
     axisFormat  %d/%m
-    todayMarker stroke-width:3px,stroke:#FF0000
+    todayMarker off
     excludes    weekends
 
     %% -----------------------------
