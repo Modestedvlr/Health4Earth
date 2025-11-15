@@ -1,4 +1,5 @@
 ```mermaid
+
 %%{init: {
     "theme": "default",
     "themeVariables": {
@@ -23,7 +24,7 @@
 }}%%
 
 gantt
-    title 🔥 Rétroplanification complète HEALTH4EARTH – Version Stylisée
+    title Rétroplanification complète HEALTH4EARTH – Version Stylisée
     dateFormat  YYYY-MM-DD
     axisFormat  %d/%m
     todayMarker stroke-width:3px,stroke:#FF0000
@@ -32,7 +33,7 @@ gantt
     %% -----------------------------
     %% PHASE 1 — INITIALISATION
     %% -----------------------------
-    section 🟩 Initialisation
+    section Initialisation
     Prise en main du sujet                    :done,    2025-10-15, 2d
     Création du dépôt GitHub                  :done,    2025-10-20, 1d
     Mise en place de l’environnement          :done,    2025-10-20, 1d
@@ -42,7 +43,7 @@ gantt
     %% -----------------------------
     %% PHASE 2 — PREP & CLEANING
     %% -----------------------------
-    section 🟨 Préparation des données
+    section Préparation des données
     Nettoyage (missing, types)                :done,    2025-10-23, 2d
     Encodage / Normalisation                  :active,  2025-10-25, 2d
     Dataset final prêt                        :2025-10-27, 1d
@@ -51,7 +52,7 @@ gantt
     %% -----------------------------
     %% PHASE 3 — ANALYSE & MODEL
     %% -----------------------------
-    section 🟦 Analyse & Modélisation
+    section Analyse & Modélisation
     Analyse exploratoire (EDA)                :2025-10-29, 5d
     Feature selection                         :2025-11-03, 2d
     Création des modèles prédictifs           :2025-11-05, 5d
@@ -61,7 +62,7 @@ gantt
     %% -----------------------------
     %% PHASE 4 — SITE WEB
     %% -----------------------------
-    section 🟪 Site web interactif (Quarto)
+    section Site web interactif (Quarto)
     Création du site                          :2025-11-15, 4d
     Intégration visualisations                :2025-11-19, 4d
     Intégration modèles                       :2025-11-23, 3d
@@ -71,7 +72,7 @@ gantt
     %% -----------------------------
     %% PHASE 5 — FINALISATION
     %% -----------------------------
-    section 🔴 Finalisation
+    section Finalisation
     Rapport final                             :2025-12-01, 8d
     Supports de présentation                  :2025-12-09, 2d
     Répétition                                :2025-12-11, 1d
