@@ -23,7 +23,7 @@
 }}%%
 
 gantt
-    title Rétroplanification complète HEALTH4EARTH – Version Stylisée
+    title Planification rétrospective du projet HEALTH4EARTH
     dateFormat  YYYY-MM-DD
     axisFormat  %d/%m
     todayMarker off
