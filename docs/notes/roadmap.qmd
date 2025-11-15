@@ -10,9 +10,9 @@ editor: visual
 
 ## Objectifs du projet
 
-Le projet **Health4Earth** vise à analyser les liens entre les émissions de CO₂, la pollution atmosphérique et la santé publique, notamment les maladies respiratoires, la mortalité et l'espérence de vie des populations du monde entier. Nous cherchons à répondre à la question centrale :
+Le projet **Health4Earth** vise à analyser les liens entre les émissions de CO₂, la pollution atmosphérique et la santé publique. Nous cherchons à répondre à la question centrale :
 
-Comment les émissions de CO₂ et la pollution atmosphérique influencent-elles la santé publique, notamment les maladies respiratoires, la mortalité et l'espérence de vie des populations à travers le monde ?
+Comment les émissions de CO₂ et la pollution atmosphérique influencent-elles la santé publique, notamment les maladies respiratoires, la mortalité et l'espérance de vie des populations à travers le monde ?
 
 ## Méthodologie
 
@@ -33,16 +33,24 @@ Comment les émissions de CO₂ et la pollution atmosphérique influencent-elles
 - Intégration des widgets et cartes interactives
 - Rédaction du rapport final et présentation orale
 
-## Visualisations exploratoires
 
-```{python}
-import pandas as pd
-import plotly.express as px
+# Résultats attendus
 
-df = pd.read_csv("data/cleaned_dataset.csv")
+L’interface du site web proposera une **carte interactive** des capitales mondiales. En cliquant sur une capitale, l’utilisateur pourra visualiser :
 
-fig1 = px.line(df, x="year", y="co2", color="country", title="Émissions de CO₂ par pays")
-fig1.show()
+- Une courbe des émissions de CO₂
+- Une courbe de pollution atmosphérique (PM2.5)
+- Une courbe de mortalité liée à la pollution
+- Une courbe d’espérance de vie
 
-fig2 = px.scatter(df, x="pm25", y="mortality_rate", color="country", title="Corrélation PM2.5 ↔ Mortalité")
-fig2.show()
+Voici les croquis et illustrations qui représentent ces objectifs :
+
+![Carte interactive souhaitée](docs/Carte_Interactive_Souhaitee.png)
+
+![Pollution atmosphérique par capitale](docs/Air_Pollution_Per_Capital.jpg)
+
+![Pollution mondiale](docs/Air-Pollution-Around-the-World.jpg)
+
+![Décès liés à la pollution](docs/Die_Of_Air_pollution.jpg)
+
+![Espérance de vie gagnée grâce à un air plus pur](docs/Life_Expectancy_From_Cleaner_Air.jpg)

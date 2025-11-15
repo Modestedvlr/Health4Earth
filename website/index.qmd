@@ -1,8 +1,10 @@
 ---
-title: "Health4Earth"
+title: "Bienvenue sur Health4Earth"
 format: html
 ---
 
-# Health4Earth
+# Objectif du projet
 
-Projet d’analyse des liens entre pollution atmosphérique, émissions de CO₂ et santé publique mondiale.
+Ce site explore les liens entre pollution atmosphérique, émissions de CO₂ et santé publique à l’échelle mondiale.
+
+Cliquez sur les onglets pour découvrir les données et les visualisations interactives.
