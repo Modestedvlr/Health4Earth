@@ -6,7 +6,6 @@ format: html
 editor: visual
 
 ---
-
 # Health4Earth — Aperçu du projet
 
 ## Dépôt GitHub
@@ -35,36 +34,84 @@ respiratoires**, la **mortalité** et l'**espérance de vie** des populations à
 ### Arborescence du dépôt
 Health4Earth/
 
-├── data/             # Données brutes et nettoyées
+├── data/
 
-├── scripts/          # Scripts Python/R pour traitement et modélisation 
+│ ├── raw/               # Données brutes téléchargées
 
-├── roadmap/          # README.qmd (ce rapport) 
+│ ├── clean/             # Données nettoyées et préparées
 
-├── docs/             # Rapport final, figures exportées
+│ └── metadata/          # Documentation des fichiers et codebook
 
-├── quarto_site/      # Site web interactif
+├── docs/
 
-│ ├── index.qmd
+│ ├── figures/           # Images et graphiques
 
-| ├── data.qmd 
+│ ├── notes/             # Roadmap, diagrammes de Gantt, notes du projet
 
-│ ├── analysis.qmd 
+│ └── sketches/          # Croquis et idées pour le site
 
-│ ├── model.qmd 
+├── scripts/
 
-│ ├── team.qmd 
+│ ├── cleaning/          # Scripts de nettoyage et préparation des données
 
-├── requirements.txt # Dépendances Python 
+│ ├── eda/               # Analyse exploratoire
 
-├── .gitignore 
+│ ├── models/            # Modélisation prédictive
 
-├── README.md        # Présentation du projet
+│ └── utils/             # Fonctions utilitaires
 
-├── quarto.yml       # Configuration du site
+├── website/
 
+│ ├── assets/            # Images, CSS, JS
+
+│ ├── index.qmd          # Page d'accueil
+
+│ ├── data.qmd           # Présentation des données
+
+│ ├── eda.qmd            # Analyse exploratoire
+
+│ ├── model.qmd          # Résultats des modèles
+
+│ ├── team.qmd           # Présentation de l'équipe
+
+│ └── visualisations.qmd # Graphiques et cartes interactives
+
+├── report/
+
+│ └── annexes/           # Annexes pour le rapport final
+
+├── LICENSE              # Licence MIT
+
+└── README.md            # Ce fichier
 ---
 
+## Visualisations principales
+L’interface du site web proposera une **carte interactive** des capitales mondiales. En cliquant sur une capitale, l’utilisateur pourra visualiser :
+
+- Une courbe des émissions de CO₂
+- Une courbe de pollution atmosphérique (PM2.5)
+- Une courbe de mortalité liée à la pollution
+- Une courbe d’espérance de vie
+
+### Exemples de visualisations
+Voici les croquis et illustrations qui représentent ces objectifs :
+
+![Carte interactive](docs/Carte_Interactive_Souhaitee.png)
+
+### Pollution atmosphérique par capitale
+![Pollution par capitale](docs/Air_Pollution_Per_Capital.jpg)
+
+### Pollution mondiale
+![Pollution mondiale](docs/Air-Pollution-Around-the-World.jpg)
+
+### Décès liés à la pollution
+![Décès liés à la pollution](docs/Die_Of_Air_pollution.jpg)
+
+### Espérance de vie gagnée grâce à un air plus pur
+![Espérance de vie](docs/Life_Expectancy_From_Cleaner_Air.jpg)
+
+
+---
 ### Pipeline de développement
 1. **Collecte des données** :
    - Our World in Data (OWID): émissions de CO₂, pollution atmosphérique
@@ -86,9 +133,53 @@ Health4Earth/
 5. **Site web Quarto** :
    - Pages interactives avec widgets
    - Déploiement via GitHub Pages
-
 ---
 
+## Installation et exécution
+
+1. **Cloner le dépôt** :
+```bash
+git clone https://github.com/JulienOllier/Health4Earth
+cd Health4Earth
+```
+2. **Installer les dépendances** :
+```bash
+pip install -r requirements.txt
+```
+
+3. **Exécuter le pipeline** :
+
+* Nettoyage des données
+```bash
+python scripts/cleaning/data_cleaning.py
+```
+* Analyse exploratoire et visualisations
+```bash
+quarto render website/eda.qmd
+```
+* Modélisation prédictive
+```bash
+python scripts/models/model.py
+```
+* Génération du site web interactif
+```bash
+quarto render website/index.qmd
+```
+
+---
+## Prévisualisation du site Quarto localement
+```bash
+cd website
+quarto preview
+```
+Le site s’ouvrira automatiquement dans votre navigateur à l’adresse : http://127.0.0.1:4200/
+
+---
+## Accès au site en ligne
+Le site est déployé via GitHub Pages :
+https://JulienOllier.github.io/Health4Earth/
+
+---
 ## Technologies utilisées
 - **Python** : pandas, scikit-learn, plotly, folium
 - **Quarto** : pour le site web interactif
@@ -98,44 +189,36 @@ Health4Earth/
 
 ---
 
-## Prototypes visuels :
-Images simples (croquis, schémas, prototypes) montrant les résultats attendus :
-- Série chronologique : évolution des émissions de CO₂ et de la pollution atmosphérique
-- Carte interactive : mortalité et espérance de vie liées à la pollution par pays
-- Scatter plot : PM2.5 ↔ mortalité
-
----
-
 ## Branches Git :
 main : branche principale
 
-dev : branche secondaire de développement
+dev : branche de développement
 
-data : traitement et nettoyage des données
+data : nettoyage et préparation des données
 
 model : modélisation prédictive
 
 site : développement du site Quarto
 
 
-## Résultats attendus
+## Contribution
+Membre	                   Rôle
+Firda               <--->   Nettoyage des données, fusion et préparation
+Julien              <--->   Analyse exploratoire et visualisations interactives
+Modeste	           <--->   Modélisation prédictive et validation
+Tous les membres    <---> 	 Développement du site web, intégration Quarto, déploiement
 
-L’interface du site web proposera une **carte interactive** des capitales mondiales. En cliquant sur une capitale, l’utilisateur pourra visualiser :
+## Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
-- Une courbe des émissions de CO₂
-- Une courbe de pollution atmosphérique (PM2.5)
-- Une courbe de mortalité liée à la pollution
-- Une courbe d’espérance de vie
+## Remarques
+* Toutes les données utilisées sont publiquement disponibles et reproduisibles.
+* Chaque script contient des docstrings et la documentation API sera générée via Sphinx.
+* Des tests unitaires et un workflow d’intégration continue sont inclus pour garantir la fiabilité du projet.
 
-Voici les croquis et illustrations qui représentent ces objectifs :
-
-![Carte interactive souhaitée](docs/Carte_Interactive_Souhaitee.png)
-
-![Pollution atmosphérique par capitale](docs/Air_Pollution_Per_Capital.jpg)
-
-![Pollution mondiale](docs/Air-Pollution-Around-the-World.jpg)
-
-![Décès liés à la pollution](docs/Die_Of_Air_pollution.jpg)
-
-![Espérance de vie gagnée grâce à un air plus pur](docs/Life_Expectancy_From_Cleaner_Air.jpg)
-
+---
+```bash
+git add README.md
+git commit -m "Ajout du README final détaillé"
+git push origin main
+```
