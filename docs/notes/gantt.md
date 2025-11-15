@@ -3,7 +3,7 @@ gantt
     title Rétroplanification complète du projet HEALTH4EARTH
     dateFormat  YYYY-MM-DD
     axisFormat  %d/%m
-    todayMarker stroke-width:3px,stroke:#ff0000
+    %% todayMarker stroke-width:3px,stroke:#ff0000
     excludes    weekends
 
     %% -----------------------------
