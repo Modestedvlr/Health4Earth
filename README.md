@@ -116,6 +116,37 @@ Voici les croquis et illustrations qui représentent ces objectifs :
 
 ---
 
+## Installation et exécution
+
+1. **Cloner le dépôt** :
+```bash
+git clone https://github.com/JulienOllier/Health4Earth
+cd Health4Earth
+```
+2. **Installer les dépendances** :
+```bash
+pip install -r requirements.txt
+```
+
+3. **Exécuter les scripts principaux** :
+
+* Nettoyage des données
+```bash
+python scripts/cleaning/data_cleaning.py
+```
+* Analyse exploratoire et visualisations
+```bash
+quarto render website/eda.qmd
+```
+* Modélisation prédictive
+```bash
+python scripts/models/model.py
+```
+* Génération du site web interactif
+```bash
+quarto render website/index.qmd
+```
+
 ### Pipeline de développement
 1. **Collecte des données** :
    - Our World in Data (OWID): émissions de CO₂, pollution atmosphérique
@@ -212,6 +243,7 @@ site : développement du site Quarto
 
 ## Contribution
 Membre	                   Rôle
+
 Firda               <--->   Nettoyage des données, fusion et préparation
 Julien              <--->   Analyse exploratoire et visualisations interactives
 Modeste	           <--->   Modélisation prédictive et validation
