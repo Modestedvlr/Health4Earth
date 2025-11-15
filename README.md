@@ -86,6 +86,64 @@ Health4Earth/
 └── README.md            # Ce fichier
 ---
 
+## Visualisations principales
+L’interface du site web proposera une **carte interactive** des capitales mondiales. En cliquant sur une capitale, l’utilisateur pourra visualiser :
+
+- Une courbe des émissions de CO₂
+- Une courbe de pollution atmosphérique (PM2.5)
+- Une courbe de mortalité liée à la pollution
+- Une courbe d’espérance de vie
+
+### Carte interactive souhaitée
+Voici les croquis et illustrations qui représentent ces objectifs :
+
+![Carte interactive](docs/Carte_Interactive_Souhaitee.png)
+
+### Pollution atmosphérique par capitale
+![Pollution par capitale](docs/Air_Pollution_Per_Capital.jpg)
+
+### Pollution mondiale
+![Pollution mondiale](docs/Air-Pollution-Around-the-World.jpg)
+
+### Décès liés à la pollution
+![Décès liés à la pollution](docs/Die_Of_Air_pollution.jpg)
+
+### Espérance de vie gagnée grâce à un air plus pur
+![Espérance de vie](docs/Life_Expectancy_From_Cleaner_Air.jpg)
+
+---
+
+## Installation et exécution
+
+1. **Cloner le dépôt** :
+```bash
+git clone https://github.com/JulienOllier/Health4Earth
+cd Health4Earth
+```
+2. **Installer les dépendances** :
+```bash
+pip install -r requirements.txt
+```
+
+3. **Exécuter les scripts principaux** :
+
+* Nettoyage des données
+```bash
+python scripts/cleaning/data_cleaning.py
+```
+* Analyse exploratoire et visualisations
+```bash
+quarto render website/eda.qmd
+```
+* Modélisation prédictive
+```bash
+python scripts/models/model.py
+```
+* Génération du site web interactif
+```bash
+quarto render website/index.qmd
+```
+
 ### Pipeline de développement
 1. **Collecte des données** :
    - Our World in Data (OWID): émissions de CO₂, pollution atmosphérique
@@ -139,24 +197,24 @@ model : modélisation prédictive
 site : développement du site Quarto
 
 
-## Résultats attendus
+## Contribution
+Membre	                   Rôle
+Membre A	           <--->   Nettoyage des données, fusion et préparation
+Membre B	           <--->   Analyse exploratoire et visualisations interactives
+Membre C	           <--->   Modélisation prédictive et validation
+Tous les membres    <---> 	 Développement du site web, intégration Quarto, déploiement
 
-L’interface du site web proposera une **carte interactive** des capitales mondiales. En cliquant sur une capitale, l’utilisateur pourra visualiser :
+## Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
-- Une courbe des émissions de CO₂
-- Une courbe de pollution atmosphérique (PM2.5)
-- Une courbe de mortalité liée à la pollution
-- Une courbe d’espérance de vie
+## Remarques
+* Toutes les données utilisées sont publiquement disponibles et reproduisibles.
+* Chaque script contient des docstrings et la documentation API sera générée via Sphinx.
+* Des tests unitaires et un workflow d’intégration continue sont inclus pour garantir la fiabilité du projet.
 
-Voici les croquis et illustrations qui représentent ces objectifs :
-
-![Carte interactive souhaitée](docs/Carte_Interactive_Souhaitee.png)
-
-![Pollution atmosphérique par capitale](docs/Air_Pollution_Per_Capital.jpg)
-
-![Pollution mondiale](docs/Air-Pollution-Around-the-World.jpg)
-
-![Décès liés à la pollution](docs/Die_Of_Air_pollution.jpg)
-
-![Espérance de vie gagnée grâce à un air plus pur](docs/Life_Expectancy_From_Cleaner_Air.jpg)
-
+---
+```bash
+git add README.md
+git commit -m "Ajout du README final détaillé"
+git push origin main
+```
