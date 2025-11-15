@@ -1,0 +1,8 @@
+---
+title: "Health4Earth"
+format: html
+---
+
+# Health4Earth
+
+Projet d’analyse des liens entre pollution atmosphérique, émissions de CO₂ et santé publique mondiale.
