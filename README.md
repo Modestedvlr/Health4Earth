@@ -35,34 +35,55 @@ respiratoires**, la **mortalité** et l'**espérance de vie** des populations à
 ### Arborescence du dépôt
 Health4Earth/
 
-├── data/             # Données brutes et nettoyées
+├── data/
 
-├── scripts/          # Scripts Python/R pour traitement et modélisation 
+│ ├── raw/               # Données brutes téléchargées
 
-├── roadmap/          # README.qmd (ce rapport) 
+│ ├── clean/             # Données nettoyées et préparées
 
-├── docs/             # Rapport final, figures exportées
+│ └── metadata/          # Documentation des fichiers et codebook
 
-├── quarto_site/      # Site web interactif
+├── docs/
 
-│ ├── index.qmd
+│ ├── figures/           # Images et graphiques
 
-| ├── data.qmd 
+│ ├── notes/             # Roadmap, diagrammes de Gantt, notes du projet
 
-│ ├── analysis.qmd 
+│ └── sketches/          # Croquis et idées pour le site
 
-│ ├── model.qmd 
+├── scripts/
 
-│ ├── team.qmd 
+│ ├── cleaning/          # Scripts de nettoyage et préparation des données
 
-├── requirements.txt # Dépendances Python 
+│ ├── eda/               # Analyse exploratoire
 
-├── .gitignore 
+│ ├── models/            # Modélisation prédictive
 
-├── README.md        # Présentation du projet
+│ └── utils/             # Fonctions utilitaires
 
-├── quarto.yml       # Configuration du site
+├── website/
 
+│ ├── assets/            # Images, CSS, JS
+
+│ ├── index.qmd          # Page d'accueil
+
+│ ├── data.qmd           # Présentation des données
+
+│ ├── eda.qmd            # Analyse exploratoire
+
+│ ├── model.qmd          # Résultats des modèles
+
+│ ├── team.qmd           # Présentation de l'équipe
+
+│ └── visualisations.qmd # Graphiques et cartes interactives
+
+├── report/
+
+│ └── annexes/           # Annexes pour le rapport final
+
+├── LICENSE              # Licence MIT
+
+└── README.md            # Ce fichier
 ---
 
 ### Pipeline de développement
