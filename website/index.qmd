@@ -1,0 +1,23 @@
+---
+title: "Health4Earth"
+format: html
+---
+
+# Bienvenue sur Health4Earth
+
+Ce site présente notre projet d'analyse de l'impact des émissions de CO₂ et de la pollution atmosphérique sur la santé publique.
+
+## Navigation
+- [Données](data.qmd)
+- [Analyse exploratoire](eda.qmd)
+- [Modélisation prédictive](model.qmd)
+- [Équipe](team.qmd)
+- [Visualisations interactives](visualisations.qmd)
+
+---
+
+## Objectifs
+
+- Étudier les liens entre pollution et santé publique
+- Proposer des visualisations interactives
+- Mettre en place un site web accessible
