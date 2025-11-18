@@ -1,1 +1,2 @@
-quarto_site/_site/
+# Ignorer les fichiers HTML compilés Quarto
+website/_site/

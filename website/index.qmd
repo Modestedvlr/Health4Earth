@@ -14,8 +14,6 @@ Ce site présente notre projet d'analyse de l'impact des émissions de CO₂ et 
 - [Équipe](team.qmd)
 - [Visualisations interactives](visualisations.qmd)
 
----
-
 ## Objectifs
 
 - Étudier les liens entre pollution et santé publique
