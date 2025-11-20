@@ -1,7 +1,3 @@
----
-
-### Analyse exploratoire
-
 ```markdown
 ---
 title: "Analyse Exploratoire"
@@ -24,7 +20,7 @@ format: html
 ### Espérance de vie gagnée
 ![Espérance de vie](../docs/Life_Expectancy_From_Cleaner_Air.jpg)
 
----
+
 
 ## Exemple de graphique interactif avec Plotly
 

@@ -1,8 +1,4 @@
 
----
-
-### Présentation de l’équipe
-
 ```markdown
 ---
 title: "Équipe"
@@ -18,8 +14,6 @@ format: html
 |   Dossou        | AGOSSOU       | Modélisation prédictive et validation |
 
 Tous les membres participent au développement du site web Quarto et au déploiement.
-
----
 
 ## Contact
 

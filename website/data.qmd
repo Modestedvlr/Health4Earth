@@ -17,7 +17,6 @@ Nous utilisons plusieurs sources publiques :
 - `data/clean/` : données nettoyées
 - `data/metadata/` : documentation et codebooks
 
----
 
 ## Exemple de table des données
 
