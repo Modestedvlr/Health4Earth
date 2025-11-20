@@ -1,0 +1,61 @@
+city,country,latitude,longitude
+Alger,Algeria,36.7538,3.0588
+Luanda,Angola,-8.8390,13.2894
+Tripoli,Libya,32.8872,13.1913
+Bamako,Mali,12.6392,-8.0029
+Khartoum,Sudan,15.5007,32.5599
+Porto-Novo,Benin,6.4969,2.6036
+Yaoundé,Cameroon,3.8480,11.5021
+Yamoussoukro,Côte d'Ivoire,6.8276,-5.2893
+Addis-Abeba,Ethiopia,9.0300,38.7400
+Abuja,Nigeria,9.0765,7.3986
+Ottawa,Canada,45.4215,-75.6972
+Washington D.C.,United States,38.9072,-77.0369
+Nuuk,Greenland,64.1835,-51.7216
+Mexico,Mexico,19.4326,-99.1332
+La Havane,Cuba,23.1136,-82.3666
+Guatemala,Guatemala,14.6349,-90.5069
+Port-au-Prince,Haiti,18.5944,-72.3074
+Tegucigalpa,Honduras,14.0723,-87.1921
+Saint-Domingue,Dominican Republic,18.4861,-69.9312
+Buenos Aires,Argentina,-34.6037,-58.3816
+Sucre,Bolivia,-19.0333,-65.2621
+La Paz,Bolivia,-16.5000,-68.1500
+Brasília,Brazil,-15.8267,-47.9218
+Bogotá,Colombia,4.7110,-74.0721
+Lima,Peru,-12.0464,-77.0428
+Santiago,Chile,-33.4489,-70.6693
+Quito,Ecuador,-0.1807,-78.4678
+Asunción,Paraguay,-25.2637,-57.5759
+Montevideo,Uruguay,-34.9011,-56.1645
+Caracas,Venezuela,10.4806,-66.9036
+Riyad,Saudi Arabia,24.7136,46.6753
+Pékin,China,39.9042,116.4074
+New Delhi,India,28.6139,77.2090
+Jakarta,Indonesia,-6.2088,106.8456
+Astana,Kazakhstan,51.1605,71.4704
+Oulan-Bator,Mongolia,47.8864,106.9057
+Moscou,Russia,55.7558,37.6173
+Séoul,South Korea,37.5665,126.9780
+Tokyo,Japan,35.6895,139.6917
+Kuala Lumpur,Malaysia,3.1390,101.6869
+Islamabad,Pakistan,33.6844,73.0479
+Bangkok,Thailand,13.7563,100.5018
+Paris,France,48.8566,2.3522
+Oslo,Norway,59.9139,10.7522
+Stockholm,Sweden,59.3293,18.0686
+Kyiv,Ukraine,50.4501,30.5234
+Berlin,Germany,52.5200,13.4050
+Madrid,Spain,40.4168,-3.7038
+Rome,Italy,41.9028,12.4964
+Warsaw,Poland,52.2297,21.0122
+Londres,United Kingdom,51.5074,-0.1278
+Canberra,Australia,-35.2809,149.1300
+Port Moresby,Papua New Guinea,-9.4438,147.1803
+Wellington,New Zealand,-41.2865,174.7762
+Suva,Fiji,-18.1248,178.4501
+Honiara,Solomon Islands,-9.4456,159.9729
+Tarawa-Sud,Kiribati,-1.3283,172.9760
+Apia,Samoa,-13.8333,-171.7667
+Nukuʻalofa,Tonga,-21.1394,-175.2045
+
