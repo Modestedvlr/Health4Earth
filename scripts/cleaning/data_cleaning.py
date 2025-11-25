@@ -1,31 +1,32 @@
 import pandas as pd
 import os
 
-# Création du dossier clean s'il n'existe pas
+# Création du dossier de sortie si nécessaire
 os.makedirs("data/clean", exist_ok=True)
 
-# -------------------------------
-# Chargement des données utiles
-# -------------------------------
+# -----------------------
+# 1️⃣ Chargement des données
+# -----------------------
 
-# CO2 et PM2.5
-co2 = pd.read_csv("data/raw/owid-co2-data.csv", usecols=['country', 'year', 'co2', 'pm25'])
+# CO2 (sans pm25, si cette colonne n'existe pas)
+co2 = pd.read_csv("data/raw/owid-co2-data.csv", usecols=['country', 'year', 'co2'])
 
 # Espérance de vie
-life = pd.read_csv("data/raw/WHO_life_expectancy.csv", usecols=['country', 'year', 'life_expectancy'])
+life = pd.read_csv("data/raw/WHO_life_expectancy.csv", usecols=['Country', 'Year', 'Life expectancy '])
 
-# Mortalité due à la pollution de l'air
+# Mortalité liée à la pollution de l'air
 mort = pd.read_csv("data/raw/WHO_air_pollution_mortality.csv")
 
-# -------------------------------
-# Nettoyage et harmonisation
-# -------------------------------
+# -----------------------
+# 2️⃣ Harmonisation des colonnes
+# -----------------------
+co2.columns = co2.columns.str.lower()
+life.columns = ['country', 'year', 'life_expectancy']  # correction du nom avec espace
+mort.columns = mort.columns.str.lower()
 
-# Harmoniser les noms de colonnes
-for df in [co2, life, mort]:
-    df.columns = df.columns.str.lower()
-
-# Nettoyage du dataset de mortalité
+# -----------------------
+# 3️⃣ Nettoyage WHO_air_pollution_mortality
+# -----------------------
 mort = mort.rename(columns={
     "location": "country",
     "period": "year",
@@ -33,20 +34,20 @@ mort = mort.rename(columns={
 })
 mort = mort[["country", "year", "mortality_rate"]].dropna()
 
-# -------------------------------
-# Fusion des datasets
-# -------------------------------
-
+# -----------------------
+# 4️⃣ Fusion progressive
+# -----------------------
 df = co2.merge(life, on=['country', 'year'], how='inner')
 df = df.merge(mort, on=['country', 'year'], how='inner')
 
-# Filtrer à partir de l'année 2000
+# -----------------------
+# 5️⃣ Filtrage années
+# -----------------------
 df = df[df['year'] >= 2000]
 
-# -------------------------------
-# Export du dataset final
-# -------------------------------
-
+# -----------------------
+# 6️⃣ Export
+# -----------------------
 df.to_csv("data/clean/health4earth_dataset.csv", index=False)
 
-print("Dataset nettoyé et sauvegardé dans data/clean/health4earth_dataset.csv")
+print("Dataset final créé : data/clean/health4earth_dataset.csv")
