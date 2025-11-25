@@ -1,62 +1,35 @@
 ---
-title: "Health4Earth — Carte et Graphiques"
+title: "Health4Earth"
 format: html
 ---
 
-```{python}
-#| echo: false
-#| message: false
-#| warning: false
+# Health4Earth
 
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from ipywidgets import interact
+Bienvenue sur le projet **Health4Earth** !  
 
-# Chargement des données nettoyées
-df = pd.read_csv("data/clean/health4earth_cities.csv")
+Ce site permet de visualiser l’évolution de la pollution de l’air, des émissions de CO₂ et de l’espérance de vie dans différentes villes du monde.  
 
-# --- Carte interactive ---
-fig_map = px.scatter_geo(
-    df,
-    lat='latitude',
-    lon='longitude',
-    hover_name='city',
-    hover_data={
-        'country': True,
-        'co2': True,
-        'life_expectancy': True,
-        'mortality_rate': True
-    },
-    size='co2',
-    size_max=20,
-    color='co2',
-    projection="natural earth",
-    title="Carte des villes observées — CO₂, pollution et santé"
-)
-fig_map.update_layout(height=600)
-fig_map.show()
+---
 
-# --- Graphiques par ville ---
-cities = sorted(df['city'].unique())
+## Indicateurs clés (aperçu)
 
-@interact(ville=cities)
-def afficher_graphique(ville):
-    d = df[df["city"] == ville]
+- **CO₂ moyen par pays** : basé sur les données historiques depuis 2000  
+- **Taux de mortalité lié à la pollution**  
+- **Espérance de vie moyenne par pays**  
 
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=d["year"], y=d["co2"],
-                             mode='lines+markers', name="CO₂"))
-    fig.add_trace(go.Scatter(x=d["year"], y=d["mortality_rate"],
-                             mode='lines+markers', name="Mortalité liée à la pollution"))
-    fig.add_trace(go.Scatter(x=d["year"], y=d["life_expectancy"],
-                             mode='lines+markers', name="Espérance de vie"))
+Ces indicateurs sont mis à jour et disponibles pour toutes les villes sélectionnées.  
 
-    fig.update_layout(
-        title=f"Évolution temporelle — {ville}",
-        xaxis_title="Année",
-        yaxis_title="Valeur",
-        height=500,
-        template="plotly_white"
-    )
-    fig.show()
+---
+
+## Visualisations interactives
+
+Pour explorer les données, cliquez ci-dessous :
+
+[🔗 Visualisations interactives](visualisation.html)
+
+---
+
+Vous pourrez :
+
+- Voir la carte des villes avec les indicateurs principaux  
+- Cliquer sur chaque ville pour voir l’évolution temporelle de CO₂, de la pollution et de l’espérance de vie
