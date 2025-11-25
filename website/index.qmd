@@ -1,15 +1,19 @@
 ---
-title: "HEALTH4EARTH — Dashboard"
+title: "Health4Earth — Carte et Graphiques"
 format: html
 ---
 
 ```{python}
+#| echo: false
+#| message: false
+#| warning: false
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from ipywidgets import interact
 
-# Chargement des données fusionnées avec coordonnées des villes
+# Chargement des données nettoyées
 df = pd.read_csv("data/clean/health4earth_cities.csv")
 
 # --- Carte interactive ---
@@ -33,7 +37,7 @@ fig_map = px.scatter_geo(
 fig_map.update_layout(height=600)
 fig_map.show()
 
-# --- Visualisation interactive par ville ---
+# --- Graphiques par ville ---
 cities = sorted(df['city'].unique())
 
 @interact(ville=cities)
@@ -41,27 +45,12 @@ def afficher_graphique(ville):
     d = df[df["city"] == ville]
 
     fig = go.Figure()
-
-    fig.add_trace(go.Scatter(
-        x=d["year"],
-        y=d["co2"],
-        mode='lines+markers',
-        name="CO₂"
-    ))
-
-    fig.add_trace(go.Scatter(
-        x=d["year"],
-        y=d["mortality_rate"],
-        mode='lines+markers',
-        name="Mortalité liée à la pollution"
-    ))
-
-    fig.add_trace(go.Scatter(
-        x=d["year"],
-        y=d["life_expectancy"],
-        mode='lines+markers',
-        name="Espérance de vie"
-    ))
+    fig.add_trace(go.Scatter(x=d["year"], y=d["co2"],
+                             mode='lines+markers', name="CO₂"))
+    fig.add_trace(go.Scatter(x=d["year"], y=d["mortality_rate"],
+                             mode='lines+markers', name="Mortalité liée à la pollution"))
+    fig.add_trace(go.Scatter(x=d["year"], y=d["life_expectancy"],
+                             mode='lines+markers', name="Espérance de vie"))
 
     fig.update_layout(
         title=f"Évolution temporelle — {ville}",
@@ -70,5 +59,4 @@ def afficher_graphique(ville):
         height=500,
         template="plotly_white"
     )
-
     fig.show()
