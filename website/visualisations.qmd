@@ -1,7 +1,6 @@
 ---
 title: "Visualisations interactives"
 format: html
-jupyter: python3
 ---
 
 ```{python}
@@ -10,7 +9,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from ipywidgets import interact
 
-# Chargement du dataset nettoyé
+# Chargement du dataset préparé
 df = pd.read_csv("data/clean/health4earth_cities.csv")
 
 # Carte interactive des villes
@@ -40,30 +39,30 @@ cities = sorted(df['city'].unique())
 @interact(ville=cities)
 def afficher_graphique(ville):
     d = df[df["city"] == ville]
-    
+
     fig = go.Figure()
-    
+
     fig.add_trace(go.Scatter(
         x=d["year"],
         y=d["co2"],
         mode='lines+markers',
         name="CO₂"
     ))
-    
+
     fig.add_trace(go.Scatter(
         x=d["year"],
         y=d["mortality_rate"],
         mode='lines+markers',
         name="Mortalité liée à la pollution"
     ))
-    
+
     fig.add_trace(go.Scatter(
         x=d["year"],
         y=d["life_expectancy"],
         mode='lines+markers',
         name="Espérance de vie"
     ))
-    
+
     fig.update_layout(
         title=f"Évolution temporelle — {ville}",
         xaxis_title="Année",
@@ -71,5 +70,5 @@ def afficher_graphique(ville):
         height=500,
         template="plotly_white"
     )
-    
+
     fig.show()
