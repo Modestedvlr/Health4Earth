@@ -25,7 +25,7 @@ Ces indicateurs sont mis à jour et disponibles pour toutes les villes sélectio
 
 Pour explorer les données, cliquez ci-dessous :
 
-[🔗 Visualisations interactives](visualisation.html)
+[🔗 Visualisations interactives](visualisations.html)
 
 ---
 
