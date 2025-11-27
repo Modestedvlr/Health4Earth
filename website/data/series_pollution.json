@@ -1,0 +1,551 @@
+{
+  "Antigua and Barbuda": {
+    "pollution": 4.68
+  },
+  "Azerbaijan": {
+    "pollution": 96.24
+  },
+  "Bahamas": {
+    "pollution": 9.41
+  },
+  "Belarus": {
+    "pollution": 80.47
+  },
+  "Benin": {
+    "pollution": 90.07
+  },
+  "Botswana": {
+    "pollution": 70.1
+  },
+  "Burkina Faso": {
+    "pollution": 86.88
+  },
+  "Burundi": {
+    "pollution": 8.92
+  },
+  "Cote d'Ivoire": {
+    "pollution": 87.82
+  },
+  "Chad": {
+    "pollution": 90.79
+  },
+  "Comoros": {
+    "pollution": 50.08
+  },
+  "Costa Rica": {
+    "pollution": 7.85
+  },
+  "Djibouti": {
+    "pollution": 68.05
+  },
+  "Estonia": {
+    "pollution": 8.7
+  },
+  "Eswatini": {
+    "pollution": 92.74
+  },
+  "Fiji": {
+    "pollution": 5.8
+  },
+  "Finland": {
+    "pollution": 8.32
+  },
+  "Gambia": {
+    "pollution": 91.48
+  },
+  "Ghana": {
+    "pollution": 90.27
+  },
+  "Guatemala": {
+    "pollution": 5.89
+  },
+  "Guinea": {
+    "pollution": 96.71
+  },
+  "Guinea-Bissau": {
+    "pollution": 90.92
+  },
+  "Guyana": {
+    "pollution": 60.85
+  },
+  "Kenya": {
+    "pollution": 9.02
+  },
+  "Lesotho": {
+    "pollution": 83.52
+  },
+  "Liberia": {
+    "pollution": 62.27
+  },
+  "Madagascar": {
+    "pollution": 65.59
+  },
+  "Malawi": {
+    "pollution": 9.45
+  },
+  "Mauritania": {
+    "pollution": 66.08
+  },
+  "Mauritius": {
+    "pollution": 6.09
+  },
+  "Morocco": {
+    "pollution": 65.46
+  },
+  "Mozambique": {
+    "pollution": 88.64
+  },
+  "Namibia": {
+    "pollution": 9.44
+  },
+  "Niger": {
+    "pollution": 95.77
+  },
+  "Nigeria": {
+    "pollution": 84.12
+  },
+  "Oman": {
+    "pollution": 94.14
+  },
+  "Panama": {
+    "pollution": 7.5
+  },
+  "Paraguay": {
+    "pollution": 5.8
+  },
+  "Portugal": {
+    "pollution": 7.45
+  },
+  "Russian Federation": {
+    "pollution": 8.28
+  },
+  "Saint Lucia": {
+    "pollution": 9.35
+  },
+  "Saint Vincent and the Grenadines": {
+    "pollution": 6.12
+  },
+  "Senegal": {
+    "pollution": 69.67
+  },
+  "Sierra Leone": {
+    "pollution": 97.95
+  },
+  "Singapore": {
+    "pollution": 8.8
+  },
+  "Solomon Islands": {
+    "pollution": 7.84
+  },
+  "Somalia": {
+    "pollution": 81.6
+  },
+  "South Sudan": {
+    "pollution": 9.42
+  },
+  "Sudan": {
+    "pollution": 77.33
+  },
+  "Togo": {
+    "pollution": 92.36
+  },
+  "Trinidad and Tobago": {
+    "pollution": 4.81
+  },
+  "Tunisia": {
+    "pollution": 67.21
+  },
+  "Uganda": {
+    "pollution": 8.38
+  },
+  "United Republic of Tanzania": {
+    "pollution": 42.82
+  },
+  "Vanuatu": {
+    "pollution": 67.54
+  },
+  "Zimbabwe": {
+    "pollution": 8.57
+  },
+  "Albania": {
+    "pollution": 59.76
+  },
+  "Algeria": {
+    "pollution": 8.96
+  },
+  "Angola": {
+    "pollution": 73.39
+  },
+  "Barbados": {
+    "pollution": 9.17
+  },
+  "Belize": {
+    "pollution": 9.26
+  },
+  "Brazil": {
+    "pollution": 8.38
+  },
+  "Cameroon": {
+    "pollution": 8.81
+  },
+  "Canada": {
+    "pollution": 8.11
+  },
+  "Central African Republic": {
+    "pollution": 83.49
+  },
+  "Colombia": {
+    "pollution": 3.42
+  },
+  "Congo": {
+    "pollution": 66.62
+  },
+  "Cyprus": {
+    "pollution": 6.35
+  },
+  "Democratic Republic of the Congo": {
+    "pollution": 81.49
+  },
+  "Dominican Republic": {
+    "pollution": 5.59
+  },
+  "Ecuador": {
+    "pollution": 9.14
+  },
+  "El Salvador": {
+    "pollution": 9.38
+  },
+  "Equatorial Guinea": {
+    "pollution": 61.71
+  },
+  "Eritrea": {
+    "pollution": 97.33
+  },
+  "Ethiopia": {
+    "pollution": 53.88
+  },
+  "Georgia": {
+    "pollution": 97.9
+  },
+  "Grenada": {
+    "pollution": 6.89
+  },
+  "Haiti": {
+    "pollution": 7.33
+  },
+  "Honduras": {
+    "pollution": 6.92
+  },
+  "Iceland": {
+    "pollution": 8.16
+  },
+  "Japan": {
+    "pollution": 8.44
+  },
+  "Kiribati": {
+    "pollution": 63.94
+  },
+  "Latvia": {
+    "pollution": 8.82
+  },
+  "Libya": {
+    "pollution": 8.87
+  },
+  "Lithuania": {
+    "pollution": 7.01
+  },
+  "Maldives": {
+    "pollution": 6.23
+  },
+  "Mali": {
+    "pollution": 7.94
+  },
+  "Mexico": {
+    "pollution": 4.37
+  },
+  "Nicaragua": {
+    "pollution": 6.06
+  },
+  "Norway": {
+    "pollution": 9.43
+  },
+  "Papua New Guinea": {
+    "pollution": 8.82
+  },
+  "Republic of Moldova": {
+    "pollution": 8.61
+  },
+  "Samoa": {
+    "pollution": 6.76
+  },
+  "Saudi Arabia": {
+    "pollution": 98.39
+  },
+  "Spain": {
+    "pollution": 7.83
+  },
+  "Sri Lanka": {
+    "pollution": 8.2
+  },
+  "Sweden": {
+    "pollution": 8.08
+  },
+  "Tonga": {
+    "pollution": 8.81
+  },
+  "Turkmenistan": {
+    "pollution": 87.03
+  },
+  "Ukraine": {
+    "pollution": 91.82
+  },
+  "Uruguay": {
+    "pollution": 9.03
+  },
+  "Zambia": {
+    "pollution": 64.92
+  },
+  "Micronesia (Federated States of)": {
+    "pollution": 66.23
+  },
+  "Argentina": {
+    "pollution": 7.78
+  },
+  "Australia": {
+    "pollution": 7.87
+  },
+  "Austria": {
+    "pollution": 9.12
+  },
+  "Belgium": {
+    "pollution": 8.06
+  },
+  "Bhutan": {
+    "pollution": 9.26
+  },
+  "Bolivia (Plurinational State of)": {
+    "pollution": 9.41
+  },
+  "Brunei Darussalam": {
+    "pollution": 7.38
+  },
+  "Bulgaria": {
+    "pollution": 81.36
+  },
+  "Cambodia": {
+    "pollution": 74.97
+  },
+  "Chile": {
+    "pollution": 7.9
+  },
+  "France": {
+    "pollution": 7.25
+  },
+  "Gabon": {
+    "pollution": 66.78
+  },
+  "Germany": {
+    "pollution": 9.44
+  },
+  "Greece": {
+    "pollution": 8.52
+  },
+  "Hungary": {
+    "pollution": 6.83
+  },
+  "Indonesia": {
+    "pollution": 8.02
+  },
+  "Iran (Islamic Republic of)": {
+    "pollution": 9.2
+  },
+  "Ireland": {
+    "pollution": 8.0
+  },
+  "Italy": {
+    "pollution": 8.27
+  },
+  "Jamaica": {
+    "pollution": 8.74
+  },
+  "Jordan": {
+    "pollution": 9.11
+  },
+  "Kazakhstan": {
+    "pollution": 90.91
+  },
+  "Kuwait": {
+    "pollution": 8.65
+  },
+  "Kyrgyzstan": {
+    "pollution": 9.2
+  },
+  "Luxembourg": {
+    "pollution": 7.87
+  },
+  "Malaysia": {
+    "pollution": 74.13
+  },
+  "Malta": {
+    "pollution": 2.72
+  },
+  "Montenegro": {
+    "pollution": 76.54
+  },
+  "New Zealand": {
+    "pollution": 7.67
+  },
+  "Pakistan": {
+    "pollution": 9.41
+  },
+  "Philippines": {
+    "pollution": 91.78
+  },
+  "Republic of Korea": {
+    "pollution": 7.69
+  },
+  "Romania": {
+    "pollution": 9.35
+  },
+  "Rwanda": {
+    "pollution": 9.03
+  },
+  "Seychelles": {
+    "pollution": 9.1
+  },
+  "Slovakia": {
+    "pollution": 5.58
+  },
+  "Suriname": {
+    "pollution": 50.64
+  },
+  "Switzerland": {
+    "pollution": 8.67
+  },
+  "Tajikistan": {
+    "pollution": 90.55
+  },
+  "United States of America": {
+    "pollution": 7.31
+  },
+  "Uzbekistan": {
+    "pollution": 99.05
+  },
+  "Venezuela (Bolivarian Republic of)": {
+    "pollution": 5.94
+  },
+  "Yemen": {
+    "pollution": 97.48
+  },
+  "Cabo Verde": {
+    "pollution": 82.01
+  },
+  "Denmark": {
+    "pollution": 8.0
+  },
+  "Iraq": {
+    "pollution": 87.0
+  },
+  "Israel": {
+    "pollution": 7.71
+  },
+  "Netherlands (Kingdom of the)": {
+    "pollution": 8.43
+  },
+  "Peru": {
+    "pollution": 9.24
+  },
+  "Sao Tome and Principe": {
+    "pollution": 90.48
+  },
+  "Slovenia": {
+    "pollution": 9.05
+  },
+  "Timor-Leste": {
+    "pollution": 7.96
+  },
+  "United Kingdom of Great Britain and Northern Ireland": {
+    "pollution": 6.97
+  },
+  "Croatia": {
+    "pollution": 7.09
+  },
+  "Czechia": {
+    "pollution": 41.51
+  },
+  "Lebanon": {
+    "pollution": 76.71
+  },
+  "Poland": {
+    "pollution": 5.83
+  },
+  "Afghanistan": {
+    "pollution": 9.47
+  },
+  "Bangladesh": {
+    "pollution": 9.38
+  },
+  "Egypt": {
+    "pollution": 89.57
+  },
+  "India": {
+    "pollution": 97.22
+  },
+  "North Macedonia": {
+    "pollution": 75.53
+  },
+  "South Africa": {
+    "pollution": 9.37
+  },
+  "United Arab Emirates": {
+    "pollution": 8.81
+  },
+  "Armenia": {
+    "pollution": 92.41
+  },
+  "Bosnia and Herzegovina": {
+    "pollution": 6.95
+  },
+  "Cuba": {
+    "pollution": 5.91
+  },
+  "Lao People's Democratic Republic": {
+    "pollution": 9.49
+  },
+  "Mongolia": {
+    "pollution": 95.66
+  },
+  "Syrian Arab Republic": {
+    "pollution": 89.0
+  },
+  "T\u00fcrkiye": {
+    "pollution": 7.95
+  },
+  "Thailand": {
+    "pollution": 8.44
+  },
+  "Viet Nam": {
+    "pollution": 8.29
+  },
+  "Bahrain": {
+    "pollution": 7.8
+  },
+  "Myanmar": {
+    "pollution": 88.31
+  },
+  "Qatar": {
+    "pollution": 90.81
+  },
+  "Serbia": {
+    "pollution": 6.19
+  },
+  "China": {
+    "pollution": 8.5
+  },
+  "Nepal": {
+    "pollution": 91.24
+  },
+  "Democratic People's Republic of Korea": {
+    "pollution": 86.18
+  }
+}

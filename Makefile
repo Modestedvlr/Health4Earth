@@ -1,11 +1,10 @@
-data-ingest:
-\tpython -m health4earth.data_ingest
+co2:
+    python -m health4earth.data_co2
 
-data-clean:
-\tpython -m health4earth.data_clean
+pollution:
+    python -m health4earth.data_pollution
 
-data-transform:
-\tpython -m health4earth.data_transform
+life:
+    python -m health4earth.data_life
 
-build-site:
-\tquarto render website/
+all: co2 pollution life

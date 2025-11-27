@@ -3,7 +3,7 @@ title: "Carte interactive — HEALTH4EARTH"
 format: html
 ---
 
-# Carte interactive
+# 🌍 Carte interactive — Sélecteur d’indicateur
 
 ```{=html}
 <div>
@@ -22,14 +22,14 @@ format: html
 
 <script>
 // Initialiser la carte
-var map = L.map('map').setView([20, 0], 2);
+const map = L.map('map').setView([20, 0], 2);
 
-// Fond de carte OpenStreetMap
+// Fond de carte
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Fonction de couleur selon valeur
+// Fonction couleur
 function getColor(d) {
   return d > 80 ? '#800026' :
          d > 50 ? '#BD0026' :
@@ -40,7 +40,7 @@ function getColor(d) {
                   '#FFEDA0';
 }
 
-// Charger les trois datasets JSON
+// Charger les données
 Promise.all([
   fetch("data/series_co2.json").then(r => r.json()),
   fetch("data/series_pollution.json").then(r => r.json()),
@@ -48,20 +48,13 @@ Promise.all([
   fetch("data/world.geojson").then(r => r.json())
 ]).then(([co2Data, pollutionData, lifeData, world]) => {
 
-  // Stocker les données
-  var datasets = {
-    co2: co2Data,
-    pollution: pollutionData,
-    life: lifeData
-  };
+  const datasets = { co2: co2Data, pollution: pollutionData, life: lifeData };
+  let currentIndicator = "co2";
 
-  // Fonction de style dynamique
-  function style(feature, indicator) {
-    var iso = feature.properties.ISO_A3;
-    var value = 0;
-    if (datasets[indicator][iso]) {
-      value = datasets[indicator][iso][indicator];
-    }
+  // Style dynamique
+  function style(feature) {
+    const iso = feature.properties.ISO_A3;
+    const value = datasets[currentIndicator][iso]?.[currentIndicator] ?? 0;
     return {
       fillColor: getColor(value),
       weight: 1,
@@ -72,23 +65,23 @@ Promise.all([
   }
 
   // Couche choroplèthe
-  var geojsonLayer = L.geoJson(world, {
-    style: function(f) { return style(f, "co2"); },
+  const geojsonLayer = L.geoJson(world, {
+    style: style,
     onEachFeature: function (feature, layer) {
-      var iso = feature.properties.ISO_A3;
-      var val = datasets["co2"][iso] ? datasets["co2"][iso]["co2"] : "N/A";
-      layer.bindPopup("<b>" + feature.properties.ADMIN + "</b><br/>CO₂: " + val);
+      const iso = feature.properties.ISO_A3;
+      const val = datasets[currentIndicator][iso]?.[currentIndicator] ?? "N/A";
+      layer.bindPopup(`<b>${feature.properties.ADMIN}</b><br/>${currentIndicator.toUpperCase()}: ${val}`);
     }
   }).addTo(map);
 
-  // Gestion du changement d’indicateur
+  // Mise à jour de l’indicateur
   document.getElementById("indicator").addEventListener("change", function(e) {
-    var indicator = e.target.value;
+    currentIndicator = e.target.value;
     geojsonLayer.eachLayer(function(layer) {
-      var iso = layer.feature.properties.ISO_A3;
-      var val = datasets[indicator][iso] ? datasets[indicator][iso][indicator] : "N/A";
-      layer.setStyle(style(layer.feature, indicator));
-      layer.bindPopup("<b>" + layer.feature.properties.ADMIN + "</b><br/>" + indicator + ": " + val);
+      const iso = layer.feature.properties.ISO_A3;
+      const val = datasets[currentIndicator][iso]?.[currentIndicator] ?? "N/A";
+      layer.setStyle(style(layer.feature));
+      layer.bindPopup(`<b>${layer.feature.properties.ADMIN}</b><br/>${currentIndicator.toUpperCase()}: ${val}`);
     });
   });
 });
