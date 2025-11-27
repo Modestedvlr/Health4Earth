@@ -1,27 +1,72 @@
-Bienvenue sur le site **HEALTH4EARTH**.  
-Cette page affichera une carte du monde avec les capitales et des indicateurs interactifs.
-
 ---
 title: "Carte interactive — HEALTH4EARTH"
 format: html
 ---
 
-# Carte interactive prototype (Plotly)
+# 🌍 Carte interactive prototype (CO₂ choroplèthe)
 
-```{python}
-import plotly.express as px
+```{=html}
+<div id="map" style="height: 500px;"></div>
 
-# Exemple de données capitales
-data = [
-    {"country": "France", "capital": "Paris", "lat": 48.8566, "lon": 2.3522},
-    {"country": "USA", "capital": "Washington DC", "lat": 38.9072, "lon": -77.0369},
-    {"country": "Japan", "capital": "Tokyo", "lat": 35.6895, "lon": 139.6917},
-    {"country": "Benin", "capital": "Cotonou", "lat": 6.3703, "lon": 2.3912}
-]
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-import pandas as pd
-df = pd.DataFrame(data)
+<script>
+// Initialiser la carte
+var map = L.map('map').setView([20, 0], 2);
 
-fig = px.scatter_geo(df, lat="lat", lon="lon", text="capital",
-                     hover_name="country", projection="natural earth")
-fig.show()
+// Fond de carte OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+// Exemple de données CO₂ par pays (simplifiées)
+var co2Data = {
+  "FRA": {co2: 4.5},
+  "USA": {co2: 15.2},
+  "JPN": {co2: 9.1},
+  "BEN": {co2: 0.6}
+};
+
+// Fonction de couleur selon valeur CO₂
+function getColor(d) {
+  return d > 10 ? '#800026' :
+         d > 5  ? '#BD0026' :
+         d > 2  ? '#E31A1C' :
+         d > 1  ? '#FC4E2A' :
+                  '#FFEDA0';
+}
+
+// Exemple de polygones GeoJSON (ici juste quelques pays fictifs)
+var countries = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {"iso_a3": "FRA", "name": "France"},
+      "geometry": {"type": "Polygon", "coordinates": [[[2,49],[3,49],[3,48],[2,48],[2,49]]]}
+    },
+    {
+      "type": "Feature",
+      "properties": {"iso_a3": "USA", "name": "USA"},
+      "geometry": {"type": "Polygon", "coordinates": [[[-100,40],[-90,40],[-90,30],[-100,30],[-100,40]]]}
+    }
+  ]
+};
+
+// Style des pays
+function style(feature) {
+  var iso = feature.properties.iso_a3;
+  var value = co2Data[iso] ? co2Data[iso].co2 : 0;
+  return {
+    fillColor: getColor(value),
+    weight: 1,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.7
+  };
+}
+
+// Ajouter le choroplèthe
+L.geoJson(countries, {style: style}).addTo(map);
+</script>
