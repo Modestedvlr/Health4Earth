@@ -1,0 +1,74 @@
+---
+title: "Visualisations interactives"
+format: html
+---
+
+```{python}
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from ipywidgets import interact
+
+# Chargement du dataset préparé
+df = pd.read_csv("data/clean/health4earth_cities.csv")
+
+# Carte interactive des villes
+fig_map = px.scatter_geo(
+    df,
+    lat='latitude',
+    lon='longitude',
+    hover_name='city',
+    hover_data={
+        'country': True,
+        'co2': True,
+        'life_expectancy': True,
+        'mortality_rate': True
+    },
+    size='co2',
+    size_max=20,
+    color='co2',
+    projection="natural earth",
+    title="Carte des villes observées — CO₂, pollution et santé"
+)
+fig_map.update_layout(height=600)
+fig_map.show()
+
+# Visualisation interactive par ville
+cities = sorted(df['city'].unique())
+
+@interact(ville=cities)
+def afficher_graphique(ville):
+    d = df[df["city"] == ville]
+
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(
+        x=d["year"],
+        y=d["co2"],
+        mode='lines+markers',
+        name="CO₂"
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=d["year"],
+        y=d["mortality_rate"],
+        mode='lines+markers',
+        name="Mortalité liée à la pollution"
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=d["year"],
+        y=d["life_expectancy"],
+        mode='lines+markers',
+        name="Espérance de vie"
+    ))
+
+    fig.update_layout(
+        title=f"Évolution temporelle — {ville}",
+        xaxis_title="Année",
+        yaxis_title="Valeur",
+        height=500,
+        template="plotly_white"
+    )
+
+    fig.show()

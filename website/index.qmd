@@ -3,19 +3,33 @@ title: "Health4Earth"
 format: html
 ---
 
-# Bienvenue sur Health4Earth
+# Health4Earth
 
-Ce site présente notre projet d'analyse de l'impact des émissions de CO₂ et de la pollution atmosphérique sur la santé publique.
+Bienvenue sur le projet **Health4Earth** !  
 
-## Navigation
-- [Données](data.qmd)
-- [Analyse exploratoire](eda.qmd)
-- [Modélisation prédictive](model.qmd)
-- [Équipe](team.qmd)
-- [Visualisations interactives](visualisations.qmd)
+Ce site permet de visualiser l’évolution de la pollution de l’air, des émissions de CO₂ et de l’espérance de vie dans différentes villes du monde.  
 
-## Objectifs
+---
 
-- Étudier les liens entre pollution et santé publique
-- Proposer des visualisations interactives
-- Mettre en place un site web accessible
+## Indicateurs clés (aperçu)
+
+- **CO₂ moyen par pays** : basé sur les données historiques depuis 2000  
+- **Taux de mortalité lié à la pollution**  
+- **Espérance de vie moyenne par pays**  
+
+Ces indicateurs sont mis à jour et disponibles pour toutes les villes sélectionnées.  
+
+---
+
+## Visualisations interactives
+
+Pour explorer les données, cliquez ci-dessous :
+
+[🔗 Visualisations interactives](visualisations.html)
+
+---
+
+Vous pourrez :
+
+- Voir la carte des villes avec les indicateurs principaux  
+- Cliquer sur chaque ville pour voir l’évolution temporelle de CO₂, de la pollution et de l’espérance de vie
