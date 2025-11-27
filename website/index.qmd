@@ -3,7 +3,7 @@ title: "Carte interactive — HEALTH4EARTH"
 format: html
 ---
 
-# 🌍 Carte interactive prototype (sélecteur d’indicateur)
+# Carte interactive
 
 ```{=html}
 <div>
