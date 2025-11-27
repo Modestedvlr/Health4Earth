@@ -3,10 +3,10 @@ title: "Carte interactive — HEALTH4EARTH"
 format: html
 ---
 
-# 🌍 Carte interactive prototype (CO₂ choroplèthe)
+# Carte interactive prototype (CO₂ choroplèthe)
 
 ```{=html}
-<div id="map" style="height: 500px;"></div>
+<div id="map" style="height: 600px;"></div>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -20,14 +20,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Exemple de données CO₂ par pays (simplifiées)
-var co2Data = {
-  "FRA": {co2: 4.5},
-  "USA": {co2: 15.2},
-  "JPN": {co2: 9.1},
-  "BEN": {co2: 0.6}
-};
-
 // Fonction de couleur selon valeur CO₂
 function getColor(d) {
   return d > 10 ? '#800026' :
@@ -37,36 +29,39 @@ function getColor(d) {
                   '#FFEDA0';
 }
 
-// Exemple de polygones GeoJSON (ici juste quelques pays fictifs)
-var countries = {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {"iso_a3": "FRA", "name": "France"},
-      "geometry": {"type": "Polygon", "coordinates": [[[2,49],[3,49],[3,48],[2,48],[2,49]]]}
-    },
-    {
-      "type": "Feature",
-      "properties": {"iso_a3": "USA", "name": "USA"},
-      "geometry": {"type": "Polygon", "coordinates": [[[-100,40],[-90,40],[-90,30],[-100,30],[-100,40]]]}
-    }
-  ]
-};
+// Charger les données CO₂ (JSON exporté par ton pipeline Python)
+fetch("data/series_co2.json")
+  .then(response => response.json())
+  .then(co2Data => {
+    // Charger le GeoJSON du monde
+    fetch("data/world.geojson")
+      .then(response => response.json())
+      .then(world => {
+        // Style des pays
+        function style(feature) {
+          var iso = feature.properties.ISO_A3;
+          var value = 0;
+          if (co2Data[iso]) {
+            value = co2Data[iso].co2; // valeur par pays
+          }
+          return {
+            fillColor: getColor(value),
+            weight: 1,
+            opacity: 1,
+            color: 'white',
+            fillOpacity: 0.7
+          };
+        }
 
-// Style des pays
-function style(feature) {
-  var iso = feature.properties.iso_a3;
-  var value = co2Data[iso] ? co2Data[iso].co2 : 0;
-  return {
-    fillColor: getColor(value),
-    weight: 1,
-    opacity: 1,
-    color: 'white',
-    fillOpacity: 0.7
-  };
-}
-
-// Ajouter le choroplèthe
-L.geoJson(countries, {style: style}).addTo(map);
+        // Ajouter le choroplèthe
+        L.geoJson(world, {
+          style: style,
+          onEachFeature: function (feature, layer) {
+            var iso = feature.properties.ISO_A3;
+            var val = co2Data[iso] ? co2Data[iso].co2 : "N/A";
+            layer.bindPopup("<b>" + feature.properties.ADMIN + "</b><br/>CO₂: " + val);
+          }
+        }).addTo(map);
+      });
+  });
 </script>
