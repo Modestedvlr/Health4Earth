@@ -5,7 +5,6 @@ format: html
 
 # 🌍 Carte interactive — Sélecteur d’indicateur
 
-```{=html}
 <div>
   <label for="indicator">Choisir un indicateur :</label>
   <select id="indicator">
@@ -78,9 +77,9 @@ Promise.all([
   document.getElementById("indicator").addEventListener("change", function(e) {
     currentIndicator = e.target.value;
     geojsonLayer.eachLayer(function(layer) {
+      layer.setStyle(style(layer.feature));
       const iso = layer.feature.properties.ISO_A3;
       const val = datasets[currentIndicator][iso]?.[currentIndicator] ?? "N/A";
-      layer.setStyle(style(layer.feature));
       layer.bindPopup(`<b>${layer.feature.properties.ADMIN}</b><br/>${currentIndicator.toUpperCase()}: ${val}`);
     });
   });
