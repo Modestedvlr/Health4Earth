@@ -1,10 +1,48 @@
-**1. INTRODUCTION** 
 
-Le projet Health4Earth a pour objectif d’étudier les liens entre les émissions de CO₂, la pollution atmosphérique et la santé publique à l’échelle mondiale. 
-Il s’inscrit dans les enjeux majeurs de l’écologie et de la santé globale, en mettant en évidence comment la pollution de l’air peut affecter la qualité de vie et l’espérance de vie des populations. 
-Cette étude vise à fournir des analyses claires et des visualisations permettant de comprendre l’impact concret des émissions de CO₂ sur la santé à travers le monde.
+**1. INTRODUCTION**
+
+Le projet **Health4Earth** a pour objectif d’étudier les liens entre les émissions de CO₂, la pollution atmosphérique et la santé publique à l’échelle mondiale. Il s’inscrit dans les enjeux majeurs de l’écologie et de la santé globale, en mettant en évidence comment la pollution de l’air peut affecter la qualité de vie et l’espérance de vie des populations.  
+
+L’interface du site web proposera une **carte interactive des capitales mondiales**. En cliquant sur une capitale, l’utilisateur pourra visualiser :  
+- Une courbe des **émissions de CO₂**  
+- Une courbe de **pollution atmosphérique (PM2.5)**  
+- Une courbe de **mortalité liée à la pollution**  
+- Une courbe d’**espérance de vie**  
+
+Ces visualisations permettront de comprendre rapidement l’impact concret de la pollution sur la santé et d’identifier les régions où un air plus pur pourrait augmenter l’espérance de vie.  
+
+Le projet est accompagné de **croquis et illustrations** pour représenter ces objectifs :  
+- Carte interactive des capitales mondiales  
+- Pollution atmosphérique par capitale  
+- Pollution mondiale  
+- Décès liés à la pollution  
+- Espérance de vie gagnée grâce à un air plus pur  
+
+---
 
 **2. STRUCTURE DU PROJET**
+
+Le projet **Health4Earth** est structuré de manière modulaire pour faciliter la gestion des données, l’analyse et la génération du site web interactif :
+
+- **`.github/workflows/`** : workflows GitHub Actions pour automatiser le rendu et les tests.  
+- **`données/`** : jeux de données sur les émissions de CO₂, la pollution et la santé.  
+- **`Docs/`** : documentation complémentaire.  
+- **`Health4Earth/`** : code central du projet.  
+- **`Feuille de route/`** : planification et organisation du projet.  
+- **`Scripts/`** : scripts Python ou R pour le traitement et l’analyse des données.  
+- **`Diapositives/`** : supports de présentation.  
+- **`Tests/`** : tests unitaires pour chaque module.  
+- **`site internet/`** : le site web Quarto, contenant `doc.qmd`.  
+- **`requirements.txt`** : liste des packages Python nécessaires (`matplotlib`, `pandas`, `numpy`, etc.).  
+
+**2.1. Installation et exécution**
+
+```bash
+git clone https://github.com/ton-utilisateur/Health4Earth.git
+cd Health4Earth
+quarto --version
+pip install -r requirements.txt
+quarto render "site internet/doc.qmd"
 
 
 Ce site présente :
