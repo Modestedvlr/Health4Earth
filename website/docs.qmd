@@ -1,5 +1,11 @@
-# Documentation utilisateur
-1. INTRODUCTION 
+**1. INTRODUCTION** 
+
+Le projet Health4Earth a pour objectif d’étudier les liens entre les émissions de CO₂, la pollution atmosphérique et la santé publique à l’échelle mondiale. 
+Il s’inscrit dans les enjeux majeurs de l’écologie et de la santé globale, en mettant en évidence comment la pollution de l’air peut affecter la qualité de vie et l’espérance de vie des populations. 
+Cette étude vise à fournir des analyses claires et des visualisations permettant de comprendre l’impact concret des émissions de CO₂ sur la santé à travers le monde.
+
+**2. STRUCTURE DU PROJET**
+
 
 Ce site présente :
 - Une carte interactive
