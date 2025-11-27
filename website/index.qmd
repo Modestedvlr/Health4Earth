@@ -3,10 +3,19 @@ title: "Carte interactive — HEALTH4EARTH"
 format: html
 ---
 
-# Carte interactive prototype (CO₂ choroplèthe)
+# 🌍 Carte interactive prototype (sélecteur d’indicateur)
 
 ```{=html}
-<div id="map" style="height: 600px;"></div>
+<div>
+  <label for="indicator">Choisir un indicateur :</label>
+  <select id="indicator">
+    <option value="co2">Émissions de CO₂</option>
+    <option value="pollution">Mortalité pollution</option>
+    <option value="life">Espérance de vie</option>
+  </select>
+</div>
+
+<div id="map" style="height: 600px; margin-top: 10px;"></div>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -20,48 +29,67 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Fonction de couleur selon valeur CO₂
+// Fonction de couleur selon valeur
 function getColor(d) {
-  return d > 10 ? '#800026' :
-         d > 5  ? '#BD0026' :
-         d > 2  ? '#E31A1C' :
-         d > 1  ? '#FC4E2A' :
+  return d > 80 ? '#800026' :
+         d > 50 ? '#BD0026' :
+         d > 20 ? '#E31A1C' :
+         d > 10 ? '#FC4E2A' :
+         d > 5  ? '#FD8D3C' :
+         d > 1  ? '#FEB24C' :
                   '#FFEDA0';
 }
 
-// Charger les données CO₂ (JSON exporté par ton pipeline Python)
-fetch("data/series_co2.json")
-  .then(response => response.json())
-  .then(co2Data => {
-    // Charger le GeoJSON du monde
-    fetch("data/world.geojson")
-      .then(response => response.json())
-      .then(world => {
-        // Style des pays
-        function style(feature) {
-          var iso = feature.properties.ISO_A3;
-          var value = 0;
-          if (co2Data[iso]) {
-            value = co2Data[iso].co2; // valeur par pays
-          }
-          return {
-            fillColor: getColor(value),
-            weight: 1,
-            opacity: 1,
-            color: 'white',
-            fillOpacity: 0.7
-          };
-        }
+// Charger les trois datasets JSON
+Promise.all([
+  fetch("data/series_co2.json").then(r => r.json()),
+  fetch("data/series_pollution.json").then(r => r.json()),
+  fetch("data/series_life.json").then(r => r.json()),
+  fetch("data/world.geojson").then(r => r.json())
+]).then(([co2Data, pollutionData, lifeData, world]) => {
 
-        // Ajouter le choroplèthe
-        L.geoJson(world, {
-          style: style,
-          onEachFeature: function (feature, layer) {
-            var iso = feature.properties.ISO_A3;
-            var val = co2Data[iso] ? co2Data[iso].co2 : "N/A";
-            layer.bindPopup("<b>" + feature.properties.ADMIN + "</b><br/>CO₂: " + val);
-          }
-        }).addTo(map);
-      });
+  // Stocker les données
+  var datasets = {
+    co2: co2Data,
+    pollution: pollutionData,
+    life: lifeData
+  };
+
+  // Fonction de style dynamique
+  function style(feature, indicator) {
+    var iso = feature.properties.ISO_A3;
+    var value = 0;
+    if (datasets[indicator][iso]) {
+      value = datasets[indicator][iso][indicator];
+    }
+    return {
+      fillColor: getColor(value),
+      weight: 1,
+      opacity: 1,
+      color: 'white',
+      fillOpacity: 0.7
+    };
+  }
+
+  // Couche choroplèthe
+  var geojsonLayer = L.geoJson(world, {
+    style: function(f) { return style(f, "co2"); },
+    onEachFeature: function (feature, layer) {
+      var iso = feature.properties.ISO_A3;
+      var val = datasets["co2"][iso] ? datasets["co2"][iso]["co2"] : "N/A";
+      layer.bindPopup("<b>" + feature.properties.ADMIN + "</b><br/>CO₂: " + val);
+    }
+  }).addTo(map);
+
+  // Gestion du changement d’indicateur
+  document.getElementById("indicator").addEventListener("change", function(e) {
+    var indicator = e.target.value;
+    geojsonLayer.eachLayer(function(layer) {
+      var iso = layer.feature.properties.ISO_A3;
+      var val = datasets[indicator][iso] ? datasets[indicator][iso][indicator] : "N/A";
+      layer.setStyle(style(layer.feature, indicator));
+      layer.bindPopup("<b>" + layer.feature.properties.ADMIN + "</b><br/>" + indicator + ": " + val);
+    });
   });
+});
 </script>

@@ -1,16 +1,11 @@
-# Makefile pour HEALTH4EARTH
+data-ingest:
+\tpython -m health4earth.data_ingest
 
-install:
-\tpip install -e .
+data-clean:
+\tpython -m health4earth.data_clean
 
-ingest:
-\tpython -m my_module_name.data_ingest
-
-clean:
-\tpython -m my_module_name.data_clean
+data-transform:
+\tpython -m health4earth.data_transform
 
 build-site:
 \tquarto render website/
-
-test:
-\tpytest tests/
