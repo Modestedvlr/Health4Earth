@@ -1,3 +1,20 @@
 dev
 # Ignorer les fichiers HTML compilés Quarto
 website/_site/
+
+
+# Données brutes
+data/raw/*
+!data/raw/.gitkeep
+
+# Outputs volumineux
+data/processed/*
+!data/processed/.gitkeep
+
+# Fichiers temporaires
+__pycache__/
+*.pyc
+*.log
+
+# Build site
+_site/
