@@ -1,35 +1,27 @@
+Bienvenue sur le site **HEALTH4EARTH**.  
+Cette page affichera une carte du monde avec les capitales et des indicateurs interactifs.
+
 ---
-title: "Health4Earth"
+title: "Carte interactive — HEALTH4EARTH"
 format: html
 ---
 
-# Health4Earth
+# Carte interactive prototype (Plotly)
 
-Bienvenue sur le projet **Health4Earth** !  
+```{python}
+import plotly.express as px
 
-Ce site permet de visualiser l’évolution de la pollution de l’air, des émissions de CO₂ et de l’espérance de vie dans différentes villes du monde.  
+# Exemple de données capitales
+data = [
+    {"country": "France", "capital": "Paris", "lat": 48.8566, "lon": 2.3522},
+    {"country": "USA", "capital": "Washington DC", "lat": 38.9072, "lon": -77.0369},
+    {"country": "Japan", "capital": "Tokyo", "lat": 35.6895, "lon": 139.6917},
+    {"country": "Benin", "capital": "Cotonou", "lat": 6.3703, "lon": 2.3912}
+]
 
----
+import pandas as pd
+df = pd.DataFrame(data)
 
-## Indicateurs clés (aperçu)
-
-- **CO₂ moyen par pays** : basé sur les données historiques depuis 2000  
-- **Taux de mortalité lié à la pollution**  
-- **Espérance de vie moyenne par pays**  
-
-Ces indicateurs sont mis à jour et disponibles pour toutes les villes sélectionnées.  
-
----
-
-## Visualisations interactives
-
-Pour explorer les données, cliquez ci-dessous :
-
-[🔗 Visualisations interactives](visualisations.html)
-
----
-
-Vous pourrez :
-
-- Voir la carte des villes avec les indicateurs principaux  
-- Cliquer sur chaque ville pour voir l’évolution temporelle de CO₂, de la pollution et de l’espérance de vie
+fig = px.scatter_geo(df, lat="lat", lon="lon", text="capital",
+                     hover_name="country", projection="natural earth")
+fig.show()

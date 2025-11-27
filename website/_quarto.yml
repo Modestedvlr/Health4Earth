@@ -3,16 +3,17 @@ project:
   output-dir: _site
 
 website:
-  title: "Health4Earth"
+  title: "HEALTH4EARTH"
   navbar:
     left:
-      - text: "Accueil"
+      - text: "Carte"
         href: index.qmd
-      - text: "Données"
-        href: data.qmd
-      - text: "EDA"
-        href: eda.qmd
-      - text: "Modèle"
-        href: model.qmd
-      - text: "Équipe"
-        href: team.qmd
+      - text: "Méthodologie"
+        href: methods.qmd
+      - text: "Documentation"
+        href: docs.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true

@@ -1,0 +1,8 @@
+# Documentation utilisateur
+
+Ce site présente :
+- Une carte interactive
+- Des graphiques temporels
+- Des analyses de corrélation
+
+Pour plus de détails, consultez la documentation API générée avec Sphinx.

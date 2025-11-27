@@ -1,0 +1,5 @@
+pandas
+plotly
+altair
+pooch
+pytest

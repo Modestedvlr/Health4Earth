@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: health4earth
+Version: 0.1.0
+Summary: Visualisation interactive CO2, pollution et santé publique
+Author: Equipe HEALTH4EARTH
+Requires-Dist: pandas
+Requires-Dist: plotly
+Requires-Dist: altair
+Requires-Dist: pooch
+Requires-Dist: pytest
