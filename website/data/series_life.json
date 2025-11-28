@@ -1,551 +1,524 @@
 {
-  "Afghanistan": {
+  "AFG": {
     "life": 65.0
   },
-  "Albania": {
+  "ALB": {
     "life": 77.8
   },
-  "Algeria": {
+  "DZA": {
     "life": 75.6
   },
-  "Angola": {
+  "AGO": {
     "life": 52.4
   },
-  "Antigua and Barbuda": {
+  "ATG": {
     "life": 76.4
   },
-  "Argentina": {
+  "ARG": {
     "life": 76.3
   },
-  "Armenia": {
+  "ARM": {
     "life": 74.8
   },
-  "Australia": {
+  "AUS": {
     "life": 82.8
   },
-  "Austria": {
+  "AUT": {
     "life": 81.5
   },
-  "Azerbaijan": {
+  "AZE": {
     "life": 72.7
   },
-  "Bahamas": {
+  "BHS": {
     "life": 76.1
   },
-  "Bahrain": {
+  "BHR": {
     "life": 76.9
   },
-  "Bangladesh": {
+  "BGD": {
     "life": 71.8
   },
-  "Barbados": {
+  "BRB": {
     "life": 75.5
   },
-  "Belarus": {
+  "BLR": {
     "life": 72.3
   },
-  "Belgium": {
+  "BEL": {
     "life": 81.1
   },
-  "Belize": {
+  "BLZ": {
     "life": 71.0
   },
-  "Benin": {
+  "BEN": {
     "life": 60.0
   },
-  "Bhutan": {
+  "BTN": {
     "life": 69.8
   },
-  "Bolivia (Plurinational State of)": {
-    "life": 77.0
-  },
-  "Bosnia and Herzegovina": {
+  "BIH": {
     "life": 77.4
   },
-  "Botswana": {
+  "BWA": {
     "life": 65.7
   },
-  "Brazil": {
+  "BRA": {
     "life": 75.0
   },
-  "Brunei Darussalam": {
+  "BRN": {
     "life": 77.7
   },
-  "Bulgaria": {
+  "BGR": {
     "life": 74.5
   },
-  "Burkina Faso": {
+  "BFA": {
     "life": 59.9
   },
-  "Burundi": {
+  "BDI": {
     "life": 59.6
   },
-  "C\u00f4te d'Ivoire": {
+  "CIV": {
     "life": 53.3
   },
-  "Cabo Verde": {
+  "CPV": {
     "life": 73.3
   },
-  "Cambodia": {
+  "KHM": {
     "life": 68.7
   },
-  "Cameroon": {
+  "CMR": {
     "life": 57.3
   },
-  "Canada": {
+  "CAN": {
     "life": 82.2
   },
-  "Central African Republic": {
+  "CAF": {
     "life": 52.5
   },
-  "Chad": {
+  "TCD": {
     "life": 53.1
   },
-  "Chile": {
+  "CHL": {
     "life": 85.0
   },
-  "China": {
+  "CHN": {
     "life": 76.1
   },
-  "Colombia": {
+  "COL": {
     "life": 74.8
   },
-  "Comoros": {
+  "COM": {
     "life": 63.5
   },
-  "Congo": {
+  "COG": {
     "life": 64.7
   },
-  "Costa Rica": {
+  "CRI": {
     "life": 79.6
   },
-  "Croatia": {
+  "HRV": {
     "life": 78.0
   },
-  "Cuba": {
+  "CUB": {
     "life": 79.1
   },
-  "Cyprus": {
+  "CYP": {
     "life": 85.0
   },
-  "Czechia": {
+  "CZE": {
     "life": 78.8
   },
-  "Democratic People's Republic of Korea": {
+  "PRK": {
     "life": 76.0
   },
-  "Democratic Republic of the Congo": {
-    "life": 59.8
-  },
-  "Denmark": {
+  "DNK": {
     "life": 86.0
   },
-  "Djibouti": {
+  "DJI": {
     "life": 63.5
   },
-  "Dominican Republic": {
+  "DOM": {
     "life": 73.9
   },
-  "Ecuador": {
+  "ECU": {
     "life": 76.2
   },
-  "Egypt": {
+  "EGY": {
     "life": 79.0
   },
-  "El Salvador": {
+  "SLV": {
     "life": 73.5
   },
-  "Equatorial Guinea": {
+  "GNQ": {
     "life": 58.2
   },
-  "Eritrea": {
+  "ERI": {
     "life": 64.7
   },
-  "Estonia": {
+  "EST": {
     "life": 77.6
   },
-  "Ethiopia": {
+  "ETH": {
     "life": 64.8
   },
-  "Fiji": {
+  "FJI": {
     "life": 69.9
   },
-  "Finland": {
+  "FIN": {
     "life": 81.1
   },
-  "France": {
+  "FRA": {
     "life": 82.4
   },
-  "Gabon": {
+  "GAB": {
     "life": 66.0
   },
-  "Gambia": {
+  "GMB": {
     "life": 61.1
   },
-  "Georgia": {
+  "GEO": {
     "life": 74.4
   },
-  "Germany": {
+  "DEU": {
     "life": 81.0
   },
-  "Ghana": {
+  "GHA": {
     "life": 62.4
   },
-  "Greece": {
+  "GRC": {
     "life": 81.0
   },
-  "Grenada": {
+  "GRD": {
     "life": 73.6
   },
-  "Guatemala": {
+  "GTM": {
     "life": 71.9
   },
-  "Guinea": {
+  "GIN": {
     "life": 59.0
   },
-  "Guinea-Bissau": {
+  "GNB": {
     "life": 58.9
   },
-  "Guyana": {
+  "GUY": {
     "life": 66.2
   },
-  "Haiti": {
+  "HTI": {
     "life": 63.5
   },
-  "Honduras": {
+  "HND": {
     "life": 74.6
   },
-  "Hungary": {
+  "HUN": {
     "life": 75.8
   },
-  "Iceland": {
+  "ISL": {
     "life": 82.7
   },
-  "India": {
+  "IND": {
     "life": 68.3
   },
-  "Indonesia": {
+  "IDN": {
     "life": 69.1
   },
-  "Iran (Islamic Republic of)": {
-    "life": 75.5
-  },
-  "Iraq": {
+  "IRQ": {
     "life": 68.9
   },
-  "Ireland": {
+  "IRL": {
     "life": 81.4
   },
-  "Israel": {
+  "ISR": {
     "life": 82.5
   },
-  "Italy": {
+  "ITA": {
     "life": 82.7
   },
-  "Jamaica": {
+  "JAM": {
     "life": 76.2
   },
-  "Japan": {
+  "JPN": {
     "life": 83.7
   },
-  "Jordan": {
+  "JOR": {
     "life": 74.1
   },
-  "Kazakhstan": {
+  "KAZ": {
     "life": 72.0
   },
-  "Kenya": {
+  "KEN": {
     "life": 63.4
   },
-  "Kiribati": {
+  "KIR": {
     "life": 66.3
   },
-  "Kuwait": {
+  "KWT": {
     "life": 74.7
   },
-  "Kyrgyzstan": {
+  "KGZ": {
     "life": 71.1
   },
-  "Lao People's Democratic Republic": {
+  "LAO": {
     "life": 65.7
   },
-  "Latvia": {
+  "LVA": {
     "life": 74.6
   },
-  "Lebanon": {
+  "LBN": {
     "life": 74.9
   },
-  "Lesotho": {
+  "LSO": {
     "life": 53.7
   },
-  "Liberia": {
+  "LBR": {
     "life": 61.4
   },
-  "Libya": {
+  "LBY": {
     "life": 72.7
   },
-  "Lithuania": {
+  "LTU": {
     "life": 73.6
   },
-  "Luxembourg": {
+  "LUX": {
     "life": 82.0
   },
-  "Madagascar": {
+  "MDG": {
     "life": 65.5
   },
-  "Malawi": {
+  "MWI": {
     "life": 58.3
   },
-  "Malaysia": {
+  "MYS": {
     "life": 75.0
   },
-  "Maldives": {
+  "MDV": {
     "life": 78.5
   },
-  "Mali": {
+  "MLI": {
     "life": 58.2
   },
-  "Malta": {
+  "MLT": {
     "life": 81.7
   },
-  "Mauritania": {
+  "MRT": {
     "life": 63.1
   },
-  "Mauritius": {
+  "MUS": {
     "life": 74.6
   },
-  "Mexico": {
+  "MEX": {
     "life": 76.7
   },
-  "Micronesia (Federated States of)": {
-    "life": 69.4
-  },
-  "Mongolia": {
+  "MNG": {
     "life": 68.8
   },
-  "Montenegro": {
+  "MNE": {
     "life": 76.1
   },
-  "Morocco": {
+  "MAR": {
     "life": 74.3
   },
-  "Mozambique": {
+  "MOZ": {
     "life": 57.6
   },
-  "Myanmar": {
+  "MMR": {
     "life": 66.6
   },
-  "Namibia": {
+  "NAM": {
     "life": 65.8
   },
-  "Nepal": {
+  "NPL": {
     "life": 69.2
   },
-  "Netherlands": {
+  "NLD": {
     "life": 81.9
   },
-  "New Zealand": {
+  "NZL": {
     "life": 81.6
   },
-  "Nicaragua": {
+  "NIC": {
     "life": 74.8
   },
-  "Niger": {
+  "NER": {
     "life": 61.8
   },
-  "Nigeria": {
+  "NGA": {
     "life": 54.5
   },
-  "Norway": {
+  "NOR": {
     "life": 81.8
   },
-  "Oman": {
+  "OMN": {
     "life": 76.6
   },
-  "Pakistan": {
+  "PAK": {
     "life": 66.4
   },
-  "Panama": {
+  "PAN": {
     "life": 77.8
   },
-  "Papua New Guinea": {
+  "PNG": {
     "life": 62.9
   },
-  "Paraguay": {
+  "PRY": {
     "life": 74.0
   },
-  "Peru": {
+  "PER": {
     "life": 75.5
   },
-  "Philippines": {
+  "PHL": {
     "life": 68.5
   },
-  "Poland": {
+  "POL": {
     "life": 77.5
   },
-  "Portugal": {
+  "PRT": {
     "life": 81.1
   },
-  "Qatar": {
+  "QAT": {
     "life": 78.2
   },
-  "Republic of Korea": {
-    "life": 82.3
-  },
-  "Republic of Moldova": {
+  "MDA": {
     "life": 72.1
   },
-  "Romania": {
+  "ROU": {
     "life": 75.0
   },
-  "Russian Federation": {
+  "RUS": {
     "life": 75.0
   },
-  "Rwanda": {
+  "RWA": {
     "life": 66.1
   },
-  "Saint Lucia": {
+  "LCA": {
     "life": 75.2
   },
-  "Saint Vincent and the Grenadines": {
+  "VCT": {
     "life": 73.2
   },
-  "Samoa": {
+  "WSM": {
     "life": 74.0
   },
-  "Sao Tome and Principe": {
+  "STP": {
     "life": 67.5
   },
-  "Saudi Arabia": {
+  "SAU": {
     "life": 74.5
   },
-  "Senegal": {
+  "SEN": {
     "life": 66.7
   },
-  "Serbia": {
+  "SRB": {
     "life": 75.6
   },
-  "Seychelles": {
+  "SYC": {
     "life": 73.2
   },
-  "Sierra Leone": {
+  "SLE": {
     "life": 51.0
   },
-  "Singapore": {
+  "SGP": {
     "life": 83.1
   },
-  "Slovakia": {
+  "SVK": {
     "life": 76.7
   },
-  "Slovenia": {
+  "SVN": {
     "life": 88.0
   },
-  "Solomon Islands": {
+  "SLB": {
     "life": 69.2
   },
-  "Somalia": {
+  "SOM": {
     "life": 55.0
   },
-  "South Africa": {
+  "ZAF": {
     "life": 62.9
   },
-  "South Sudan": {
+  "SSD": {
     "life": 57.3
   },
-  "Spain": {
+  "ESP": {
     "life": 82.8
   },
-  "Sri Lanka": {
+  "LKA": {
     "life": 74.9
   },
-  "Sudan": {
+  "SDN": {
     "life": 64.1
   },
-  "Suriname": {
+  "SUR": {
     "life": 71.6
   },
-  "Swaziland": {
-    "life": 58.9
-  },
-  "Sweden": {
+  "SWE": {
     "life": 82.4
   },
-  "Switzerland": {
+  "CHE": {
     "life": 83.4
   },
-  "Syrian Arab Republic": {
+  "SYR": {
     "life": 64.5
   },
-  "Tajikistan": {
+  "TJK": {
     "life": 69.7
   },
-  "Thailand": {
+  "THA": {
     "life": 74.9
   },
-  "The former Yugoslav republic of Macedonia": {
-    "life": 75.7
-  },
-  "Timor-Leste": {
+  "TLS": {
     "life": 68.3
   },
-  "Togo": {
+  "TGO": {
     "life": 59.9
   },
-  "Tonga": {
+  "TON": {
     "life": 73.5
   },
-  "Trinidad and Tobago": {
+  "TTO": {
     "life": 71.2
   },
-  "Tunisia": {
+  "TUN": {
     "life": 75.3
   },
-  "Turkey": {
-    "life": 75.8
-  },
-  "Turkmenistan": {
+  "TKM": {
     "life": 66.3
   },
-  "Uganda": {
+  "UGA": {
     "life": 62.3
   },
-  "Ukraine": {
+  "UKR": {
     "life": 71.3
   },
-  "United Arab Emirates": {
+  "ARE": {
     "life": 77.1
   },
-  "United Kingdom of Great Britain and Northern Ireland": {
+  "GBR": {
     "life": 81.2
   },
-  "United Republic of Tanzania": {
+  "TZA": {
     "life": 61.8
   },
-  "United States of America": {
+  "USA": {
     "life": 79.3
   },
-  "Uruguay": {
+  "URY": {
     "life": 77.0
   },
-  "Uzbekistan": {
+  "UZB": {
     "life": 69.4
   },
-  "Vanuatu": {
+  "VUT": {
     "life": 72.0
   },
-  "Venezuela (Bolivarian Republic of)": {
-    "life": 74.1
-  },
-  "Viet Nam": {
+  "VNM": {
     "life": 76.0
   },
-  "Yemen": {
+  "YEM": {
     "life": 65.7
   },
-  "Zambia": {
+  "ZMB": {
     "life": 61.8
   },
-  "Zimbabwe": {
+  "ZWE": {
     "life": 67.0
   }
 }

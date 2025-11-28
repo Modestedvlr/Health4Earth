@@ -1,12 +1,12 @@
 ---
-title: "Carte interactive — HEALTH4EARTH"
+title: "HEALTH4EARTH"
 format: html
 ---
 
-# 🌍 Carte interactive — Sélecteur d’indicateur
+# Carte interactive
 
 <div>
-  <label for="indicator">Choisir un indicateur :</label>
+  <label for="indicator"><strong>Choisir un indicateur :</strong></label>
   <select id="indicator">
     <option value="co2">Émissions de CO₂</option>
     <option value="pollution">Mortalité pollution</option>
@@ -14,21 +14,44 @@ format: html
   </select>
 </div>
 
-<div id="map" style="height: 600px; margin-top: 10px;"></div>
+<div id="map" style="height: 600px; margin-top: 15px;"></div>
+
+<!-- Panneau latéral -->
+<div id="panel" style="
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 420px;
+  height: 500px;
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  overflow-y: auto;
+  display: none;
+  z-index: 999;
+">
+  <h3 id="panel-title"></h3>
+  <div id="panel-plot" style="height: 350px;"></div>
+</div>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <script>
-// Initialiser la carte
+
+// =====================================================
+// 1. INITIALISATION DE LA CARTE
+// =====================================================
 const map = L.map('map').setView([20, 0], 2);
 
-// Fond de carte
+// Fond OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Fonction couleur
+// Couleurs de remplissage
 function getColor(d) {
   return d > 80 ? '#800026' :
          d > 50 ? '#BD0026' :
@@ -39,49 +62,138 @@ function getColor(d) {
                   '#FFEDA0';
 }
 
-// Charger les données
+let datasets = {};
+let worldLayer;
+let currentIndicator = "co2";
+
+// =====================================================
+// 2. AFFICHAGE DU PANNEAU AVEC GRAPHIQUES
+// =====================================================
+function showCountryPanel(iso, countryData) {
+
+  document.getElementById("panel-title").textContent = countryData.country;
+
+  const series = countryData.series;
+  const traces = [];
+
+  if (series.co2) {
+    traces.push({
+      x: series.co2.years,
+      y: series.co2.values,
+      mode: "lines",
+      name: "CO₂"
+    });
+  }
+
+  if (series.pollution) {
+    traces.push({
+      x: series.pollution.years,
+      y: series.pollution.values,
+      mode: "lines",
+      name: "Pollution atmosphérique"
+    });
+  }
+
+  if (series.life) {
+    traces.push({
+      x: series.life.years,
+      y: series.life.values,
+      mode: "lines",
+      name: "Espérance de vie"
+    });
+  }
+
+  if (series.mortality) {
+    traces.push({
+      x: series.mortality.years,
+      y: series.mortality.values,
+      mode: "lines",
+      name: "Mortalité pollution"
+    });
+  }
+
+  Plotly.newPlot("panel-plot", traces, {
+    title: "Évolution des indicateurs",
+    margin: { t: 30 }
+  });
+
+  document.getElementById("panel").style.display = "block";
+}
+
+// =====================================================
+// 3. CHARGEMENT DES DONNÉES JSON
+// =====================================================
+
 Promise.all([
-  fetch("data/series_co2.json").then(r => r.json()),
-  fetch("data/series_pollution.json").then(r => r.json()),
-  fetch("data/series_life.json").then(r => r.json()),
+  fetch("data/all_series.json").then(r => r.json()),
   fetch("data/world.geojson").then(r => r.json())
-]).then(([co2Data, pollutionData, lifeData, world]) => {
+]).then(([allSeries, world]) => {
 
-  const datasets = { co2: co2Data, pollution: pollutionData, life: lifeData };
-  let currentIndicator = "co2";
+  datasets = allSeries;
 
-  // Style dynamique
+  // --- Ajout des capitales ---
+  Object.keys(allSeries).forEach(iso => {
+    const p = allSeries[iso];
+    if (p.lat && p.lon) {
+      const marker = L.circleMarker([p.lat, p.lon], {
+        radius: 5,
+        color: "#333",
+        fillColor: "#2b8",
+        fillOpacity: 0.8
+      }).addTo(map);
+
+      marker.on("click", () => {
+        showCountryPanel(iso, p);
+      });
+    }
+  });
+
+  // --- Style des pays ---
   function style(feature) {
     const iso = feature.properties.ISO_A3;
-    const value = datasets[currentIndicator][iso]?.[currentIndicator] ?? 0;
+    const val = datasets[iso]?.latest?.[currentIndicator] ?? 0;
     return {
-      fillColor: getColor(value),
+      fillColor: getColor(val),
       weight: 1,
       opacity: 1,
-      color: 'white',
+      color: "white",
       fillOpacity: 0.7
     };
   }
 
-  // Couche choroplèthe
-  const geojsonLayer = L.geoJson(world, {
+  // --- Ajout du GeoJSON ---
+  worldLayer = L.geoJson(world, {
     style: style,
     onEachFeature: function (feature, layer) {
       const iso = feature.properties.ISO_A3;
-      const val = datasets[currentIndicator][iso]?.[currentIndicator] ?? "N/A";
-      layer.bindPopup(`<b>${feature.properties.ADMIN}</b><br/>${currentIndicator.toUpperCase()}: ${val}`);
+      const val = datasets[iso]?.latest?.[currentIndicator] ?? "N/A";
+
+      layer.bindPopup(`
+        <b>${feature.properties.ADMIN}</b><br>
+        ${currentIndicator.toUpperCase()} : ${val}
+      `);
     }
   }).addTo(map);
 
-  // Mise à jour de l’indicateur
+  // --- Changement d’indicateur ---
   document.getElementById("indicator").addEventListener("change", function(e) {
     currentIndicator = e.target.value;
-    geojsonLayer.eachLayer(function(layer) {
+
+    worldLayer.eachLayer(function(layer) {
       layer.setStyle(style(layer.feature));
+
       const iso = layer.feature.properties.ISO_A3;
-      const val = datasets[currentIndicator][iso]?.[currentIndicator] ?? "N/A";
-      layer.bindPopup(`<b>${layer.feature.properties.ADMIN}</b><br/>${currentIndicator.toUpperCase()}: ${val}`);
+      const val = datasets[iso]?.latest?.[currentIndicator] ?? "N/A";
+
+      layer.bindPopup(`
+        <b>${layer.feature.properties.ADMIN}</b><br>
+        ${currentIndicator.toUpperCase()} : ${val}
+      `);
     });
   });
+
+}).catch(err => {
+  console.error("Erreur de chargement :", err);
 });
+
 </script>

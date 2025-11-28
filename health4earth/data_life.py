@@ -1,3 +1,4 @@
+# health4earth/data_life.py
 import pandas as pd
 import json
 from pathlib import Path
@@ -8,32 +9,30 @@ WEB = Path("website/data")
 def build_life_json():
     df = pd.read_csv(RAW / "WHO_life_expectancy.csv")
 
-    # Renommer les colonnes (attention aux espaces !)
-    df = df.rename(columns={
-        "Country": "country",
-        "Year": "year",
-        "Life expectancy ": "life_expectancy"
-    })
+    # Normaliser le nom de la colonne (attention aux espaces)
+    df = df.rename(columns={'Country': 'country', 'Year': 'year', 'Life expectancy ': 'life_expectancy'})
 
-    # Garder uniquement ce qu'on veut
-    df = df[["country", "year", "life_expectancy"]]
+    # Pour avoir les ISO3, on utilise pycountry
+    import pycountry
+    def get_iso3(name):
+        try:
+            return pycountry.countries.lookup(name).alpha_3
+        except:
+            return None
 
-    # Dernière année dispo
-    latest_year = df["year"].max()
-    df_latest = df[df["year"] == latest_year]
+    df['iso3'] = df['country'].apply(get_iso3)
+    df = df.dropna(subset=['iso3'])
 
-    # Transformer en dictionnaire
-    life_dict = {
-        row["country"]: {"life": row["life_expectancy"]}
-        for _, row in df_latest.iterrows()
-    }
+    latest_year = df['year'].max()
+    df_latest = df[df['year'] == latest_year]
 
-    # Sauvegarde
+    life_dict = {row['iso3']: {'life': row['life_expectancy']} for _, row in df_latest.iterrows()}
+
     WEB.mkdir(parents=True, exist_ok=True)
     with open(WEB / "series_life.json", "w") as f:
         json.dump(life_dict, f, indent=2)
 
-    print("✅ Fichier series_life.json exporté dans website/data/")
+    print("✅ series_life.json généré")
 
 if __name__ == "__main__":
     build_life_json()
