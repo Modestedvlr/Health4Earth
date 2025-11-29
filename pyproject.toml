@@ -18,10 +18,10 @@ dependencies = [
     "numpy",
     "matplotlib",
     "seaborn",
-    "pooch",      # Pour le téléchargement de données
+    "pooch",
     "scipy",
-    "geopandas",  # Si utilisé pour les cartes
-    "openpyxl",   # Pour lire les fichiers Excel
+    "geopandas",
+    "openpyxl",
     "requests"
     "tqdm"
 ]
