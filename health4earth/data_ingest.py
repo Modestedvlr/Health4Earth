@@ -1,21 +1,33 @@
+import pooch
 import pandas as pd
-from pathlib import Path
+import os
 
-RAW_DIR = Path("data/raw")
+# L'URL officielle des données CO2 (Our World in Data)
+URL_CO2 = "https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv"
 
-def download_datasets():
-    RAW_DIR.mkdir(parents=True, exist_ok=True)
+def load_co2_data() -> pd.DataFrame:
+    """
+    Télécharge automatiquement les données CO2 depuis le dépôt OWID
+    et les charge dans un DataFrame pandas.
+    
+    Les données sont mises en cache localement (dans le dossier OS par défaut)
+    pour ne pas les retélécharger à chaque fois.
+    """
+    # Pooch gère le téléchargement et le cache
+    file_path = pooch.retrieve(
+        url=URL_CO2,
+        known_hash=None,  # On met None pour l'instant (on accepte les mises à jour du fichier)
+        fname="owid_co2_data.csv",
+        path=pooch.os_cache("health4earth"), # Stockage propre dans le cache système
+        progressbar=True
+    )
+    
+    # On charge le CSV téléchargé
+    df = pd.read_csv(file_path)
+    return df
 
-    # CO2 (Our World in Data)
-    co2_url = "https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv"
-    pd.read_csv(co2_url).to_csv(RAW_DIR / "co2.csv", index=False)
-
-    # Pollution mortality (Our World in Data)
-    pollution_url = "https://raw.githubusercontent.com/owid/owid-datasets/master/datasets/Air%20pollution%20mortality/air-pollution-mortality.csv"
-    pd.read_csv(pollution_url).to_csv(RAW_DIR / "pollution.csv", index=False)
-
-    # Life expectancy (Our World in Data)
-    life_url = "https://raw.githubusercontent.com/owid/owid-datasets/master/datasets/Life%20expectancy%20(Clio-Infra)/life-expectancy.csv"
-    pd.read_csv(life_url).to_csv(RAW_DIR / "life.csv", index=False)
-
-    print("Datasets downloaded to data/raw/")
+# Exemple d'utilisation si on lance le script directement
+if __name__ == "__main__":
+    df = load_co2_data()
+    print(f"Données chargées ! Taille : {df.shape}")
+    print(df.head())
