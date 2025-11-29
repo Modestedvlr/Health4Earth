@@ -32,9 +32,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest pooch
-        # Installation de votre package en mode éditable avec ses dépendances
-        # Cela utilise votre pyproject.toml
-        pip install -e .
+        # La ligne magique : le point (.) dit d'installer le dossier courant
+        # en lisant le pyproject.toml
+        pip install .
 
     # 4. Vérification de la qualité du code (Linting)
     # Cela rapporte des points "Qualité du code/Organisation"
