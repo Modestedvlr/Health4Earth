@@ -2,9 +2,14 @@ README.md
 pyproject.toml
 health4earth/__init__.py
 health4earth/analytics.py
+health4earth/data_capitales.py
 health4earth/data_clean.py
+health4earth/data_co2.py
 health4earth/data_ingest.py
+health4earth/data_life.py
+health4earth/data_pollution.py
 health4earth/data_transform.py
+health4earth/explorer.py
 health4earth/geo.py
 health4earth/perf.py
 health4earth/utils.py
