@@ -1,199 +1,138 @@
 ---
-title: "HEALTH4EARTH"
-format: html
+title: "Analyse Globale : CO₂, Pollution et Santé"
+author: "Équipe Health4Earth"
+format: 
+  html:
+    code-fold: true
+    toc: true
+    theme: cosmo
+jupyter: python3
 ---
 
-# Carte interactive
+## Introduction et Contexte
 
-<div>
-  <label for="indicator"><strong>Choisir un indicateur :</strong></label>
-  <select id="indicator">
-    <option value="co2">Émissions de CO₂</option>
-    <option value="pollution">Mortalité pollution</option>
-    <option value="life">Espérance de vie</option>
-  </select>
-</div>
+Le changement climatique et la pollution atmosphérique représentent deux des plus grands défis sanitaires du XXIe siècle. Ce projet, **Health4Earth**, vise à explorer les corrélations potentielles entre les émissions industrielles (CO₂) et les indicateurs de santé publique.
 
-<div id="map" style="height: 600px; margin-top: 15px;"></div>
+Dans ce rapport, nous utilisons des données ouvertes provenant de *Our World in Data* (OWID), téléchargées et traitées automatiquement via notre package Python dédié.
 
-<!-- Panneau latéral -->
-<div id="panel" style="
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  width: 420px;
-  height: 500px;
-  background: white;
-  border-radius: 8px;
-  padding: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.25);
-  overflow-y: auto;
-  display: none;
-  z-index: 999;
-">
-  <h3 id="panel-title"></h3>
-  <div id="panel-plot" style="height: 350px;"></div>
-</div>
+```{python}
+#| label: setup
+#| echo: false
+#| warning: false
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+import sys
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
 
-<script>
+# Configuration esthétique des graphiques
+sns.set_theme(style="whitegrid")
+plt.rcParams['figure.figsize'] = [10, 6]
 
-// =====================================================
-// 1. INITIALISATION DE LA CARTE
-// =====================================================
-const map = L.map('map').setView([20, 0], 2);
+# Import du package Health4Earth
+# (Assurez-vous d'avoir fait pip install -e . au préalable)
+from health4earth.data_ingest import load_co2_data
+from health4earth.analytics import HealthAnalyzer
+```
 
-// Fond OpenStreetMap
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap contributors'
-}).addTo(map);
+## 2. Ingestion des Données
+Nous utilisons le module data_ingest pour récupérer les dernières données disponibles. La bibliothèque Pooch assure la mise en cache pour éviter les téléchargements répétitifs.
 
-// Couleurs de remplissage
-function getColor(d) {
-  return d > 80 ? '#800026' :
-         d > 50 ? '#BD0026' :
-         d > 20 ? '#E31A1C' :
-         d > 10 ? '#FC4E2A' :
-         d > 5  ? '#FD8D3C' :
-         d > 1  ? '#FEB24C' :
-                  '#FFEDA0';
-}
+```{python}
+#| label: load-data
 
-let datasets = {};
-let worldLayer;
-let currentIndicator = "co2";
+# Chargement automatique
+df = load_co2_data()
 
-// =====================================================
-// 2. AFFICHAGE DU PANNEAU AVEC GRAPHIQUES
-// =====================================================
-function showCountryPanel(iso, countryData) {
+# --- Préparation des données pour la démonstration ---
+# Le dataset CO2 seul ne contient pas toujours 'pollution' ou 'life_expectancy'.
+# Pour que la classe HealthAnalyzer fonctionne dans cette démo, nous assurons la présence des colonnes.
+if 'pollution' not in df.columns:
+    # Proxy simplifié : CO2 par habitant (si dispo) ou CO2 brut
+    if 'population' in df.columns:
+        df['pollution'] = df['co2'] / df['population'] * 1e6
+    else:
+        df['pollution'] = df['co2']
 
-  document.getElementById("panel-title").textContent = countryData.country;
+if 'life_expectancy' not in df.columns:
+    # Valeur par défaut pour permettre l'instanciation technique de la classe
+    df['life_expectancy'] = 70.0
 
-  const series = countryData.series;
-  const traces = [];
+# Instanciation de notre classe d'analyse (Programmation Orientée Objet)
+analyzer = HealthAnalyzer(df)
 
-  if (series.co2) {
-    traces.push({
-      x: series.co2.years,
-      y: series.co2.values,
-      mode: "lines",
-      name: "CO₂"
-    });
-  }
+print(f"Dataset chargé avec succès : {df.shape[0]} lignes.")
+print(f"Période couverte : {df['year'].min()} - {df['year'].max()}")
+```
 
-  if (series.pollution) {
-    traces.push({
-      x: series.pollution.years,
-      y: series.pollution.values,
-      mode: "lines",
-      name: "Pollution atmosphérique"
-    });
-  }
+## 3. Analyse Temporelle des Émissions
+Comment les émissions mondiales ont-elles évolué au cours du dernier siècle ?
 
-  if (series.life) {
-    traces.push({
-      x: series.life.years,
-      y: series.life.values,
-      mode: "lines",
-      name: "Espérance de vie"
-    });
-  }
+```{python}
+#| label: global-trend
+#| fig-cap: "Évolution des émissions mondiales de CO2 (1900-2022)"
 
-  if (series.mortality) {
-    traces.push({
-      x: series.mortality.years,
-      y: series.mortality.values,
-      mode: "lines",
-      name: "Mortalité pollution"
-    });
-  }
+# Filtrage : On garde uniquement les données 'World'
+df_world = df[df['country'] == 'World']
+# On se concentre sur l'ère industrielle moderne
+df_world = df_world[df_world['year'] >= 1900]
 
-  Plotly.newPlot("panel-plot", traces, {
-    title: "Évolution des indicateurs",
-    margin: { t: 30 }
-  });
+plt.figure(figsize=(10, 5))
+sns.lineplot(data=df_world, x='year', y='co2', linewidth=2.5, color='darkred')
 
-  document.getElementById("panel").style.display = "block";
-}
+plt.title("Explosion des émissions de CO2 depuis 1900")
+plt.ylabel("CO2 (Millions de tonnes)")
+plt.xlabel("Année")
+plt.axvline(x=2020, color='gray', linestyle='--', label='Année 2020 (Covid)')
+plt.legend()
+plt.show()
+```
 
-// =====================================================
-// 3. CHARGEMENT DES DONNÉES JSON
-// =====================================================
+## 4. Les Grands Émetteurs : Comparaison
+Quels sont les pays qui contribuent le plus aux émissions actuelles ? Nous comparons ici les principales puissances économiques.
 
-Promise.all([
-  fetch("data/all_series.json").then(r => r.json()),
-  fetch("data/world.geojson").then(r => r.json())
-]).then(([allSeries, world]) => {
+```{python}
+#| label: country-comparison
+#| fig-cap: "Comparaison des émissions de CO2 : Chine, USA, Inde, Europe, France"
 
-  datasets = allSeries;
+# Sélection des pays d'intérêt
+countries = ['China', 'United States', 'India', 'France', 'Germany']
+df_countries = df[(df['country'].isin(countries)) & (df['year'] >= 1990)]
 
-  // --- Ajout des capitales ---
-  Object.keys(allSeries).forEach(iso => {
-    const p = allSeries[iso];
-    if (p.lat && p.lon) {
-      const marker = L.circleMarker([p.lat, p.lon], {
-        radius: 5,
-        color: "#333",
-        fillColor: "#2b8",
-        fillOpacity: 0.8
-      }).addTo(map);
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=df_countries, x='year', y='co2', hue='country', palette='tab10', linewidth=2)
 
-      marker.on("click", () => {
-        showCountryPanel(iso, p);
-      });
-    }
-  });
+plt.title("Trajectoires d'émissions (1990 - Aujourd'hui)")
+plt.ylabel("CO2 (Millions de tonnes)")
+plt.xlabel("Année")
+plt.legend(title="Pays")
+plt.show()
+```
 
-  // --- Style des pays ---
-  function style(feature) {
-    const iso = feature.properties.ISO_A3;
-    const val = datasets[iso]?.latest?.[currentIndicator] ?? 0;
-    return {
-      fillColor: getColor(val),
-      weight: 1,
-      opacity: 1,
-      color: "white",
-      fillOpacity: 0.7
-    };
-  }
+L'analyse montre clairement la montée en puissance de la Chine (courbe montante) face à une stabilisation, voire une baisse, des émissions en Europe et aux États-Unis.
 
-  // --- Ajout du GeoJSON ---
-  worldLayer = L.geoJson(world, {
-    style: style,
-    onEachFeature: function (feature, layer) {
-      const iso = feature.properties.ISO_A3;
-      const val = datasets[iso]?.latest?.[currentIndicator] ?? "N/A";
 
-      layer.bindPopup(`
-        <b>${feature.properties.ADMIN}</b><br>
-        ${currentIndicator.toUpperCase()} : ${val}
-      `);
-    }
-  }).addTo(map);
+## 5. Analyse des Seuils Critiques (POO)
+Grâce à la méthode get_polluted_years de notre classe HealthAnalyzer, nous pouvons extraire automatiquement les années où la pollution a dépassé un seuil critique.
 
-  // --- Changement d’indicateur ---
-  document.getElementById("indicator").addEventListener("change", function(e) {
-    currentIndicator = e.target.value;
+```{python}
+#| label: critical-years
 
-    worldLayer.eachLayer(function(layer) {
-      layer.setStyle(style(layer.feature));
+# Focus sur la France
+df_france = df[df['country'] == 'France']
+analyzer_france = HealthAnalyzer(df_france)
 
-      const iso = layer.feature.properties.ISO_A3;
-      const val = datasets[iso]?.latest?.[currentIndicator] ?? "N/A";
+# Appel de la méthode POO : Années où la France a émis plus de 400 Mt de CO2
+high_emission_years = analyzer_france.get_polluted_years(threshold=400.0)
 
-      layer.bindPopup(`
-        <b>${layer.feature.properties.ADMIN}</b><br>
-        ${currentIndicator.toUpperCase()} : ${val}
-      `);
-    });
-  });
+print(f"La France a dépassé 400 Mt de CO2 pendant {len(high_emission_years)} années.")
 
-}).catch(err => {
-  console.error("Erreur de chargement :", err);
-});
+# Affichage des 5 années les plus polluantes
+display_cols = ['country', 'year', 'co2']
+print(high_emission_years[display_cols].sort_values(by='co2', ascending=False).head(5))
+```
 
-</script>
+## Conclusion
+Ce tableau de bord démontre la capacité du package Health4Earth à ingérer, traiter et visualiser des données complexes. La structure modulaire du code permet d'ajouter facilement de nouvelles sources de données (santé, hôpitaux) pour affiner l'analyse des corrélations.
