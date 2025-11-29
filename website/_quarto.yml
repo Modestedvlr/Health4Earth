@@ -1,21 +1,18 @@
 project:
   type: website
   output-dir: _site
-  resources:
-    - data/**
 
 website:
-  title: "HEALTH4EARTH"
+  title: "Health4Earth"
   navbar:
     left:
-      - text: "Carte"
-        href: index.qmd
-      - text: "Méthodologie"
-        href: methods.qmd
-      - text: "Documentation"
-        href: docs.qmd
+      - href: index.qmd
+        text: Accueil
+      - href: map.qmd
+        text: Carte Interactive
 
 format:
   html:
     theme: cosmo
     toc: true
+    code-fold: true

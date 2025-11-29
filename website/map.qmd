@@ -1,0 +1,22 @@
+---
+title: "Carte Interactive"
+jupyter: python3
+---
+
+Voici une carte interactive montrant les zones d'étude.
+
+```{python}
+import folium
+
+# Création d'une carte centrée sur l'Europe
+m = folium.Map(location=[48.85, 2.35], zoom_start=4)
+
+# Ajout d'un marqueur (Exemple: Paris)
+folium.Marker(
+    [48.8566, 2.3522], 
+    popup="Paris: Données disponibles",
+    tooltip="Cliquez ici"
+).add_to(m)
+
+# Affichage de la carte
+m
