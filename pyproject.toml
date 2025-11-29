@@ -4,16 +4,23 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "health4earth"
-version = "0.1.0"
-description = "Visualisation interactive CO2, pollution et santé publique"
-authors = [{name = "Equipe HEALTH4EARTH"}]
+version = "0.0.1"
+description = "Analyse CO2 et Santé"
+readme = "README.md"
+requires-python = ">=3.9"
 dependencies = [
     "pandas",
-    "plotly",
-    "altair",
+    "numpy",
+    "matplotlib",
+    "seaborn",
     "pooch",
-    "pytest"
+    "requests",
+    "scipy",
+    "geopandas",  # Si vous l'utilisez
+    "openpyxl"    # Souvent requis pour lire des Excel
 ]
 
-[tool.setuptools]
-packages = ["health4earth"]
+[tool.setuptools.packages.find]
+where = ["src"]  # <--- IMPORTANT : Vérifiez si votre code est dans src/ ou directement à la racine
+# Si votre dossier 'health4earth' est à la racine (comme vu dans votre ls), supprimez les 2 lignes [tool.setuptools...] ci-dessus
+# et laissez setuptools trouver le dossier tout seul.
