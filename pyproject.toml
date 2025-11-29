@@ -23,7 +23,7 @@ dependencies = [
     "geopandas",
     "openpyxl",
     "requests",
-    "tqdm"
+    "tqdm",
     "folium"
 ]
 
