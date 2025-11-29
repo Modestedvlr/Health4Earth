@@ -23,6 +23,7 @@ dependencies = [
     "geopandas",  # Si utilisé pour les cartes
     "openpyxl",   # Pour lire les fichiers Excel
     "requests"
+    "tqdm"
 ]
 
 [project.optional-dependencies]
