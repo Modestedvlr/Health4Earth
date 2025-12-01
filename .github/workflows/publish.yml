@@ -24,8 +24,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Installation du projet et des outils de doc (sphinx, themes, jupyter)
           pip install -e .[dev]
+          # Installation des outils nécessaires
           pip install jupyter ipykernel pyyaml sphinx sphinx-rtd-theme
 
       # 1. Construire le site Quarto
@@ -37,20 +37,14 @@ jobs:
       # 2. Construire la doc Sphinx
       - name: Build Sphinx Documentation
         run: |
-          # On génère le HTML de Sphinx
           python -m sphinx.cmd.build -b html docs/source docs/build/html
-          
-          # CRUCIAL : On crée un dossier 'api' dans le site Quarto
           mkdir -p website/_site/api
-          
-          # On copie le contenu de Sphinx dedans
           cp -r docs/build/html/* website/_site/api/
 
-      # 3. Publier le tout (Quarto + Sphinx inclus)
-      - name: Publish to GitHub Pages
-        uses: quarto-dev/quarto-actions/publish@v2
+      # 3. Publier avec la méthode ROBUSTE (Peaceiris)
+      # Cette action va créer la branche gh-pages de force si elle n'existe pas
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          target: gh-pages
-          path: website/_site
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: website/_site
