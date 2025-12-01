@@ -10,7 +10,9 @@ website:
         text: Accueil
       - href: map.qmd
         text: Carte Interactive
-
+      - href: api/index.html
+        text: Doc Technique
+        
 format:
   html:
     theme: cosmo

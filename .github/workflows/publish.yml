@@ -1,8 +1,8 @@
 on:
   push:
-    branches: [ main, master ] # Vérifiez le nom de votre branche (main ou master)
+    branches: [ main, master ]
 
-name: Render and Publish Quarto
+name: Render Website and Docs
 
 jobs:
   build-deploy:
@@ -24,20 +24,27 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Installation du projet
-          pip install -e .
-          # Installation OBLIGATOIRE de Jupyter pour Quarto
-          pip install jupyter ipykernel pyyaml
-      
+          pip install -e .[dev]
+          # Installation des outils nécessaires
+          pip install jupyter ipykernel pyyaml sphinx sphinx-rtd-theme
+
+      # 1. Construire le site Quarto
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
         with:
           path: website/
 
-      - name: Publish to GitHub Pages
-        uses: quarto-dev/quarto-actions/publish@v2
+      # 2. Construire la doc Sphinx
+      - name: Build Sphinx Documentation
+        run: |
+          python -m sphinx.cmd.build -b html docs/source docs/build/html
+          mkdir -p website/_site/api
+          cp -r docs/build/html/* website/_site/api/
+
+      # 3. Publier avec la méthode ROBUSTE (Peaceiris)
+      # Cette action va créer la branche gh-pages de force si elle n'existe pas
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          target: gh-pages
-          path: website/_site
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: website/_site
