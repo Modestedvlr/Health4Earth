@@ -2,6 +2,9 @@ project:
   type: website
   output-dir: _site
 
+ressources:
+      - "api/**"
+      
 website:
   title: "Health4Earth"
   navbar:
