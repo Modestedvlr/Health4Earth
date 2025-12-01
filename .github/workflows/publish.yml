@@ -1,8 +1,8 @@
 on:
   push:
-    branches: [ main, master ] # Vérifiez le nom de votre branche (main ou master)
+    branches: [ main, master ]
 
-name: Render and Publish Quarto
+name: Render Website and Docs
 
 jobs:
   build-deploy:
@@ -24,16 +24,29 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Installation du projet
-          pip install -e .
-          # Installation OBLIGATOIRE de Jupyter pour Quarto
-          pip install jupyter ipykernel pyyaml
-      
+          # Installation du projet et des outils de doc (sphinx, themes, jupyter)
+          pip install -e .[dev]
+          pip install jupyter ipykernel pyyaml sphinx sphinx-rtd-theme
+
+      # 1. Construire le site Quarto
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
         with:
           path: website/
 
+      # 2. Construire la doc Sphinx
+      - name: Build Sphinx Documentation
+        run: |
+          # On génère le HTML de Sphinx
+          python -m sphinx.cmd.build -b html docs/source docs/build/html
+          
+          # CRUCIAL : On crée un dossier 'api' dans le site Quarto
+          mkdir -p website/_site/api
+          
+          # On copie le contenu de Sphinx dedans
+          cp -r docs/build/html/* website/_site/api/
+
+      # 3. Publier le tout (Quarto + Sphinx inclus)
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
