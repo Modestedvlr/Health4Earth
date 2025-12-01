@@ -1,0 +1,527 @@
+{
+  "ATG": {
+    "pollution": "5 [1-9]"
+  },
+  "AZE": {
+    "pollution": "96 [64-126]"
+  },
+  "BHS": {
+    "pollution": "9 [0-19]"
+  },
+  "BLR": {
+    "pollution": "80 [48-106]"
+  },
+  "BEN": {
+    "pollution": "90 [66-117]"
+  },
+  "BWA": {
+    "pollution": "70 [43-97]"
+  },
+  "BFA": {
+    "pollution": "87 [53-126]"
+  },
+  "BDI": {
+    "pollution": "9 [2-19]"
+  },
+  "TCD": {
+    "pollution": "91 [64-123]"
+  },
+  "COM": {
+    "pollution": "50 [27-75]"
+  },
+  "CRI": {
+    "pollution": "8 [5-10]"
+  },
+  "DJI": {
+    "pollution": "68 [33-104]"
+  },
+  "EST": {
+    "pollution": "9 [5-12]"
+  },
+  "SWZ": {
+    "pollution": "93 [62-127]"
+  },
+  "FJI": {
+    "pollution": "6 [0-14]"
+  },
+  "FIN": {
+    "pollution": "8 [4-13]"
+  },
+  "GMB": {
+    "pollution": "91 [64-121]"
+  },
+  "GHA": {
+    "pollution": "90 [69-114]"
+  },
+  "GTM": {
+    "pollution": "6 [3-9]"
+  },
+  "GIN": {
+    "pollution": "97 [67-130]"
+  },
+  "GNB": {
+    "pollution": "91 [61-126]"
+  },
+  "GUY": {
+    "pollution": "61 [31-90]"
+  },
+  "KEN": {
+    "pollution": "9 [3-17]"
+  },
+  "LSO": {
+    "pollution": "84 [56-112]"
+  },
+  "LBR": {
+    "pollution": "62 [43-82]"
+  },
+  "MDG": {
+    "pollution": "66 [45-89]"
+  },
+  "MWI": {
+    "pollution": "9 [2-17]"
+  },
+  "MRT": {
+    "pollution": "66 [41-92]"
+  },
+  "MUS": {
+    "pollution": "6 [2-11]"
+  },
+  "MAR": {
+    "pollution": "65 [45-85]"
+  },
+  "MOZ": {
+    "pollution": "89 [47-130]"
+  },
+  "NAM": {
+    "pollution": "9 [3-17]"
+  },
+  "NER": {
+    "pollution": "96 [62-131]"
+  },
+  "NGA": {
+    "pollution": "84 [66-104]"
+  },
+  "OMN": {
+    "pollution": "94 [66-119]"
+  },
+  "PAN": {
+    "pollution": "7 [4-10]"
+  },
+  "PRY": {
+    "pollution": "6 [2-10]"
+  },
+  "PRT": {
+    "pollution": "7 [5-10]"
+  },
+  "RUS": {
+    "pollution": "8 [3-16]"
+  },
+  "LCA": {
+    "pollution": "9 [5-13]"
+  },
+  "VCT": {
+    "pollution": "6 [2-12]"
+  },
+  "SEN": {
+    "pollution": "70 [50-89]"
+  },
+  "SLE": {
+    "pollution": "98 [64-132]"
+  },
+  "SGP": {
+    "pollution": "9 [4-15]"
+  },
+  "SLB": {
+    "pollution": "8 [0-21]"
+  },
+  "SOM": {
+    "pollution": "82 [46-124]"
+  },
+  "SSD": {
+    "pollution": "9 [4-16]"
+  },
+  "SDN": {
+    "pollution": "77 [47-106]"
+  },
+  "TGO": {
+    "pollution": "92 [65-119]"
+  },
+  "TTO": {
+    "pollution": "5 [2-9]"
+  },
+  "TUN": {
+    "pollution": "67 [49-86]"
+  },
+  "UGA": {
+    "pollution": "8 [3-16]"
+  },
+  "TZA": {
+    "pollution": "43 [28-59]"
+  },
+  "VUT": {
+    "pollution": "68 [0-133]"
+  },
+  "ZWE": {
+    "pollution": "9 [3-16]"
+  },
+  "ALB": {
+    "pollution": "60 [43-78]"
+  },
+  "DZA": {
+    "pollution": "9 [4-14]"
+  },
+  "AGO": {
+    "pollution": "73 [22-134]"
+  },
+  "BRB": {
+    "pollution": "9 [5-13]"
+  },
+  "BLZ": {
+    "pollution": "9 [1-15]"
+  },
+  "BRA": {
+    "pollution": "8 [5-11]"
+  },
+  "CMR": {
+    "pollution": "9 [3-16]"
+  },
+  "CAN": {
+    "pollution": "8 [5-11]"
+  },
+  "CAF": {
+    "pollution": "83 [26-148]"
+  },
+  "COL": {
+    "pollution": "3 [1-8]"
+  },
+  "COG": {
+    "pollution": "67 [22-121]"
+  },
+  "CYP": {
+    "pollution": "6 [4-8]"
+  },
+  "DOM": {
+    "pollution": "6 [1-12]"
+  },
+  "ECU": {
+    "pollution": "9 [6-12]"
+  },
+  "SLV": {
+    "pollution": "9 [5-14]"
+  },
+  "GNQ": {
+    "pollution": "62 [18-110]"
+  },
+  "ERI": {
+    "pollution": "97 [50-155]"
+  },
+  "ETH": {
+    "pollution": "54 [35-71]"
+  },
+  "GEO": {
+    "pollution": "98 [70-125]"
+  },
+  "GRD": {
+    "pollution": "7 [2-13]"
+  },
+  "HTI": {
+    "pollution": "7 [1-16]"
+  },
+  "HND": {
+    "pollution": "7 [2-15]"
+  },
+  "ISL": {
+    "pollution": "8 [5-12]"
+  },
+  "JPN": {
+    "pollution": "8 [6-11]"
+  },
+  "KIR": {
+    "pollution": "64 [0-128]"
+  },
+  "LVA": {
+    "pollution": "9 [4-15]"
+  },
+  "LBY": {
+    "pollution": "9 [4-15]"
+  },
+  "LTU": {
+    "pollution": "7 [3-13]"
+  },
+  "MDV": {
+    "pollution": "6 [3-11]"
+  },
+  "MLI": {
+    "pollution": "8 [2-16]"
+  },
+  "MEX": {
+    "pollution": "4 [2-7]"
+  },
+  "NIC": {
+    "pollution": "6 [3-10]"
+  },
+  "NOR": {
+    "pollution": "9 [6-13]"
+  },
+  "PNG": {
+    "pollution": "9 [0-22]"
+  },
+  "MDA": {
+    "pollution": "9 [4-15]"
+  },
+  "WSM": {
+    "pollution": "7 [0-19]"
+  },
+  "SAU": {
+    "pollution": "98 [76-121]"
+  },
+  "ESP": {
+    "pollution": "8 [4-11]"
+  },
+  "LKA": {
+    "pollution": "8 [3-16]"
+  },
+  "SWE": {
+    "pollution": "8 [5-11]"
+  },
+  "TON": {
+    "pollution": "9 [0-14]"
+  },
+  "TKM": {
+    "pollution": "87 [62-112]"
+  },
+  "UKR": {
+    "pollution": "92 [56-123]"
+  },
+  "URY": {
+    "pollution": "9 [5-13]"
+  },
+  "ZMB": {
+    "pollution": "65 [34-101]"
+  },
+  "ARG": {
+    "pollution": "8 [3-14]"
+  },
+  "AUS": {
+    "pollution": "8 [5-11]"
+  },
+  "AUT": {
+    "pollution": "9 [5-12]"
+  },
+  "BEL": {
+    "pollution": "8 [5-11]"
+  },
+  "BTN": {
+    "pollution": "9 [5-14]"
+  },
+  "BRN": {
+    "pollution": "7 [4-11]"
+  },
+  "BGR": {
+    "pollution": "81 [58-103]"
+  },
+  "KHM": {
+    "pollution": "75 [56-95]"
+  },
+  "CHL": {
+    "pollution": "8 [5-10]"
+  },
+  "FRA": {
+    "pollution": "7 [5-9]"
+  },
+  "GAB": {
+    "pollution": "67 [24-116]"
+  },
+  "DEU": {
+    "pollution": "9 [5-13]"
+  },
+  "GRC": {
+    "pollution": "9 [5-11]"
+  },
+  "HUN": {
+    "pollution": "7 [3-11]"
+  },
+  "IDN": {
+    "pollution": "8 [2-17]"
+  },
+  "IRL": {
+    "pollution": "8 [4-11]"
+  },
+  "ITA": {
+    "pollution": "8 [5-11]"
+  },
+  "JAM": {
+    "pollution": "9 [5-12]"
+  },
+  "JOR": {
+    "pollution": "9 [5-14]"
+  },
+  "KAZ": {
+    "pollution": "91 [66-115]"
+  },
+  "KWT": {
+    "pollution": "9 [6-11]"
+  },
+  "KGZ": {
+    "pollution": "9 [3-17]"
+  },
+  "LUX": {
+    "pollution": "8 [4-11]"
+  },
+  "MYS": {
+    "pollution": "74 [57-91]"
+  },
+  "MLT": {
+    "pollution": "3 [1-5]"
+  },
+  "MNE": {
+    "pollution": "77 [56-97]"
+  },
+  "NZL": {
+    "pollution": "8 [4-11]"
+  },
+  "PAK": {
+    "pollution": "9 [7-12]"
+  },
+  "PHL": {
+    "pollution": "92 [69-115]"
+  },
+  "ROU": {
+    "pollution": "9 [4-16]"
+  },
+  "RWA": {
+    "pollution": "9 [2-19]"
+  },
+  "SYC": {
+    "pollution": "9 [4-15]"
+  },
+  "SVK": {
+    "pollution": "6 [3-9]"
+  },
+  "SUR": {
+    "pollution": "51 [27-73]"
+  },
+  "CHE": {
+    "pollution": "9 [5-12]"
+  },
+  "TJK": {
+    "pollution": "91 [63-115]"
+  },
+  "USA": {
+    "pollution": "7 [4-10]"
+  },
+  "UZB": {
+    "pollution": "99 [73-124]"
+  },
+  "YEM": {
+    "pollution": "97 [62-140]"
+  },
+  "CPV": {
+    "pollution": "82 [55-112]"
+  },
+  "DNK": {
+    "pollution": "8 [5-11]"
+  },
+  "IRQ": {
+    "pollution": "87 [66-107]"
+  },
+  "ISR": {
+    "pollution": "8 [5-10]"
+  },
+  "PER": {
+    "pollution": "9 [6-12]"
+  },
+  "STP": {
+    "pollution": "90 [60-127]"
+  },
+  "SVN": {
+    "pollution": "9 [6-12]"
+  },
+  "TLS": {
+    "pollution": "8 [2-18]"
+  },
+  "GBR": {
+    "pollution": "7 [4-10]"
+  },
+  "HRV": {
+    "pollution": "7 [3-12]"
+  },
+  "CZE": {
+    "pollution": "42 [29-52]"
+  },
+  "LBN": {
+    "pollution": "77 [54-98]"
+  },
+  "POL": {
+    "pollution": "6 [3-9]"
+  },
+  "AFG": {
+    "pollution": "9 [4-17]"
+  },
+  "BGD": {
+    "pollution": "9 [4-17]"
+  },
+  "EGY": {
+    "pollution": "90 [63-113]"
+  },
+  "IND": {
+    "pollution": "97 [75-121]"
+  },
+  "MKD": {
+    "pollution": "76 [57-94]"
+  },
+  "ZAF": {
+    "pollution": "9 [5-14]"
+  },
+  "ARE": {
+    "pollution": "9 [6-11]"
+  },
+  "ARM": {
+    "pollution": "92 [68-115]"
+  },
+  "BIH": {
+    "pollution": "7 [4-11]"
+  },
+  "CUB": {
+    "pollution": "6 [2-11]"
+  },
+  "LAO": {
+    "pollution": "9 [3-20]"
+  },
+  "MNG": {
+    "pollution": "96 [67-122]"
+  },
+  "SYR": {
+    "pollution": "89 [65-111]"
+  },
+  "TUR": {
+    "pollution": "8 [5-12]"
+  },
+  "THA": {
+    "pollution": "8 [5-12]"
+  },
+  "VNM": {
+    "pollution": "8 [3-17]"
+  },
+  "BHR": {
+    "pollution": "8 [4-14]"
+  },
+  "MMR": {
+    "pollution": "88 [66-115]"
+  },
+  "QAT": {
+    "pollution": "91 [70-109]"
+  },
+  "SRB": {
+    "pollution": "6 [3-10]"
+  },
+  "CHN": {
+    "pollution": "9 [5-12]"
+  },
+  "NPL": {
+    "pollution": "91 [67-122]"
+  },
+  "PRK": {
+    "pollution": "86 [64-112]"
+  }
+}

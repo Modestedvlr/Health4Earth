@@ -1,233 +1,110 @@
----
-Nom du projet: "Health4Earth"
-author: "Équipe Health4Earth"
-date: "25 octobre 2025"
-format: html
-editor: visual
+# Health4Earth
+
+![CI Status](https://github.com/[PSEUDO_DU_PROPRIETAIRE]/[NOM_DU_DEPO]/actions/workflows/publish.yml/badge.svg)
+![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+> **Analyse des liens entre les émissions de CO₂, la pollution atmosphérique et la santé publique à l’échelle mondiale.**
+
+Ce projet a été réalisé dans le cadre du cours **HAX712X - Développement Logiciel** (Université de Montpellier). Il propose une suite d'outils Python pour télécharger, nettoyer et analyser des données environnementales et sanitaires, ainsi qu'un tableau de bord interactif.
+
+🔗 **[Accéder au Site Web du Projet (Dashboard)](https://[PSEUDO_DU_PROPRIETAIRE].github.io/[NOM_DU_DEPO]/)**
 
 ---
 
-# Health4Earth — Aperçu du projet
-## Dépôt GitHub
-- URL du dépôt : https://github.com/JulienOllier/Health4Earth
+## Fonctionnalités Clés
+
+*   **Ingestion Automatique :** Téléchargement des données (OWID) avec gestion de cache système via `pooch` (reproductibilité garantie).
+*   **Analyses Statistiques :** Calculs de corrélations et tendances via une architecture Orientée Objet (`HealthAnalyzer`).
+*   **Visualisation Interactive :** Cartes dynamiques (`folium`) et graphiques intégrés dans un rapport Web (`Quarto`).
+*   **Qualité Logicielle :** Tests unitaires automatisés (`pytest`), Intégration Continue (GitHub Actions) et documentation technique (`Sphinx`).
 
 ---
 
-## Composition du groupe
-| Prénom            | Nom             | 
-|-------------------|-----------------|
-| Dossou Modeste    | AGOSSOU         | 
-| Firdaousse        | KARIMOU         | 
-| Julien            | OLLIER          | 
+## Installation
+
+Pour tester ce projet sur votre machine locale :
+
+1.  **Cloner le dépôt :**
+    ```bash
+    git clone https://github.com/[PSEUDO_DU_PROPRIETAIRE]/[NOM_DU_DEPO].git
+    cd [NOM_DU_DEPO]
+    ```
+
+2.  **Installer les dépendances :**
+    ```bash
+    # Installation en mode éditable avec les dépendances
+    pip install -e .
+    
+    # (Optionnel) Installer les outils de développement (tests, doc)
+    pip install -e .[dev]
+    ```
 
 ---
 
-## Objectif du projet
-Le projet **Health4Earth** vise à analyser les liens entre les émissions de CO₂, la pollution atmosphérique et 
-la santé publique à l’échelle mondiale. Il s’inscrit dans les thématiques de l’écologie et de la santé globale.
+## Exemple d'utilisation
 
-## Question centrale
-Comment les **émissions de CO₂** et la **pollution atmosphérique** influencent-elles la santé publique, notamment les **maladies 
-respiratoires**, la **mortalité** et l'**espérance de vie** des populations à travers le monde ?
+Voici un script rapide pour lancer une analyse :
 
----
+```python
+from health4earth.data_ingest import load_co2_data
+from health4earth.analytics import HealthAnalyzer
 
-## Architecture du projet minimum viable
-### Arborescence du dépôt
-Health4Earth/
+# 1. Chargement des données (téléchargement auto si premier lancement)
+print("Chargement des données...")
+df = load_co2_data()
 
-├── data/
+# 2. Initialisation de l'analyseur
+analyzer = HealthAnalyzer(df)
 
-│ ├── raw/               # Données brutes téléchargées
+# 3. Filtrage des années à forte émission (> 50 MT)
+polluted_years = analyzer.get_polluted_years(threshold=50.0)
+print(f"Nombre d'années concernées : {len(polluted_years)}")
 
-│ ├── clean/             # Données nettoyées et préparées
-
-│ └── metadata/          # Documentation des fichiers et codebook
-
-├── docs/
-
-│ ├── figures/           # Images et graphiques
-
-│ ├── notes/             # Roadmap, diagrammes de Gantt, notes du projet
-
-│ └── sketches/          # Croquis et idées pour le site
-
-├── scripts/
-
-│ ├── cleaning/          # Scripts de nettoyage et préparation des données
-
-│ ├── eda/               # Analyse exploratoire
-
-│ ├── models/            # Modélisation prédictive
-
-│ └── utils/             # Fonctions utilitaires
-
-├── website/
-
-│ ├── assets/            # Images, CSS, JS
-
-│ ├── index.qmd          # Page d'accueil
-
-│ ├── data.qmd           # Présentation des données
-
-│ ├── eda.qmd            # Analyse exploratoire
-
-│ ├── model.qmd          # Résultats des modèles
-
-│ ├── team.qmd           # Présentation de l'équipe
-
-│ └── visualisations.qmd # Graphiques et cartes interactives
-
-├── report/
-
-│ └── annexes/           # Annexes pour le rapport final
-
-├── LICENSE              # Licence MIT
-
-└── README.md            # Ce fichier
-
----
-
-## Visualisations principales
-L’interface du site web proposera une **carte interactive** des capitales mondiales. En cliquant sur une capitale, l’utilisateur pourra visualiser :
-
-- Une courbe des émissions de CO₂
-- Une courbe de pollution atmosphérique (PM2.5)
-- Une courbe de mortalité liée à la pollution
-- Une courbe d’espérance de vie
-
-* Voici les croquis et illustrations qui représentent ces objectifs :
-
-![Carte interactive](docs/Carte_Interactive_Souhaitee.png)
-
-### Pollution atmosphérique par capitale
-![Pollution par capitale](docs/Air_Pollution_Per_Capital.jpg)
-
-### Pollution mondiale
-![Pollution mondiale](docs/Air-Pollution-Around-the-World.jpg)
-
-### Décès liés à la pollution
-![Décès liés à la pollution](docs/Die_Of_Air_pollution.jpg)
-
-### Espérance de vie gagnée grâce à un air plus pur
-![Espérance de vie](docs/Life_Expectancy_From_Cleaner_Air.jpg)
-
----
-
-## Pipeline de développement
-1. **Collecte des données** :
-   - Our World in Data (OWID): émissions de CO₂, pollution atmosphérique
-   - World Health Organization (WHO) : mortalité et espérance de vie liées à la pollution
-   - Global Burden of Disease (GBD) : maladies respiratoires
-   
-2. **Nettoyage et fusion** :
-   - Sélection des variables pertinentes
-   - Harmonisation des formats et des unités
-
-3. **Analyse exploratoire** :
-   - Visualisations temporelles et géographiques
-   - Corrélations pollution ↔ santé
-
-4. **Modélisation** :
-   - Régression linéaire pour prédire la mortalité
-   - Validation croisée
-
-5. **Site web Quarto** :
-   - Pages interactives avec widgets
-   - Déploiement via GitHub Pages
-
----
-
-## Installation et exécution
-
-1. **Cloner le dépôt** :
-```bash
-git clone https://github.com/JulienOllier/Health4Earth
-cd Health4Earth
-```
-2. **Installer les dépendances** :
-```bash
-pip install -r requirements.txt
+# 4. Affichage des premières lignes
+print(polluted_years[['country', 'year', 'co2']].head())
 ```
 
-3. **Exécuter le pipeline** :
+---
 
-* Nettoyage des données
-```bash
-python scripts/cleaning/data_cleaning.py
-```
-* Analyse exploratoire et visualisations
-```bash
-quarto render website/eda.qmd
-```
-* Modélisation prédictive
-```bash
-python scripts/models/model.py
-```
-* Génération du site web interactif
-```bash
-quarto render website/index.qmd
-```
-* Prévisualisation du site Quarto localement
-```bash
-cd website
-quarto preview
-```
-Le site s’ouvrira automatiquement dans votre navigateur à l’adresse : http://localhost:5097/
-* Accès au site en ligne
-Le site est déployé via GitHub Pages :
-https://JulienOllier.github.io/Health4Earth/
+## Roadmap du Projet
+Le développement a suivi les étapes suivantes :
+gantt
+    title Planning de Développement Health4Earth
+    dateFormat  YYYY-MM-DD
+    axisFormat  %d/%m
+    
+    section Conception
+    Choix du sujet          :done,    des1, 2025-10-01, 7d
+    Architecture & Git      :done,    des2, after des1, 5d
+    
+    section Développement
+    Ingestion (Pooch)       :done,    dev1, 2025-10-15, 10d
+    Nettoyage & Classes     :done,    dev2, after dev1, 10d
+    Tests & CI/CD           :active,  dev3, 2025-11-01, 25d
+    
+    section Rendu Final
+    Site Web (Quarto)       :active,  web1, 2025-11-20, 10d
+    Documentation & Slides  :         doc1, after web1, 5d
 
 ---
 
-## Technologies utilisées
-- **Python** : pandas, scikit-learn, plotly, folium
-- **Quarto** : pour le site web interactif
-- **Git & GitHub** : gestion collaborative
-- **Mermaid** : diagramme de Gantt
-- **Markdown/LaTeX** : rédaction technique
+## Développement & Tests
+Le projet intègre une suite de tests automatisés.
+```Bash
+# Lancer les tests unitaires
+python -m pytest tests/
 
----
+# Générer la documentation technique (HTML)
+cd docs
+python -m sphinx.cmd.build -b html source build/html
+```
 
-## Branches Git :
-main : branche principale
+## Auteurs
+[Dossou Modeste AGOSSOU]
+[Firdaousse KARIMOU]
+[Juien OLLIER]
 
-dev : branche de développement
-
-data : nettoyage et préparation des données
-
-model : modélisation prédictive
-
-site : développement du site Quarto
-
----
-
-## Contribution
-
-* Firda  <--->  Nettoyage des données, fusion et préparation
-
-* Julien  <--->  Analyse exploratoire et visualisations interactives
-
-* Modeste  <--->  Modélisation prédictive et validation
-
-* Tous les membres  <--->  Développement du site web, intégration Quarto, déploiement
-
----
 
 ## Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
----
-
-## Remarques
-* Toutes les données utilisées sont publiquement disponibles et reproduisibles.
-* Chaque script contient des docstrings et la documentation API sera générée via Sphinx.
-* Des tests unitaires et un workflow d’intégration continue sont inclus pour garantir la fiabilité du projet.
-
----
-
-```bash
-git add README.md
-git commit -m "Ajout du README final détaillé"
-git push origin main
-```
+Projet sous licence MIT.

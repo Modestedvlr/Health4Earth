@@ -1,35 +1,138 @@
 ---
-title: "Health4Earth"
-format: html
+title: "Analyse Globale : CO₂, Pollution et Santé"
+author: "Équipe Health4Earth"
+format: 
+  html:
+    code-fold: true
+    toc: true
+    theme: cosmo
+jupyter: python3
 ---
 
-# Health4Earth
+## Introduction et Contexte
 
-Bienvenue sur le projet **Health4Earth** !  
+Le changement climatique et la pollution atmosphérique représentent deux des plus grands défis sanitaires du XXIe siècle. Ce projet, **Health4Earth**, vise à explorer les corrélations potentielles entre les émissions industrielles (CO₂) et les indicateurs de santé publique.
 
-Ce site permet de visualiser l’évolution de la pollution de l’air, des émissions de CO₂ et de l’espérance de vie dans différentes villes du monde.  
+Dans ce rapport, nous utilisons des données ouvertes provenant de *Our World in Data* (OWID), téléchargées et traitées automatiquement via notre package Python dédié.
 
----
+```{python}
+#| label: setup
+#| echo: false
+#| warning: false
 
-## Indicateurs clés (aperçu)
+import sys
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
 
-- **CO₂ moyen par pays** : basé sur les données historiques depuis 2000  
-- **Taux de mortalité lié à la pollution**  
-- **Espérance de vie moyenne par pays**  
+# Configuration esthétique des graphiques
+sns.set_theme(style="whitegrid")
+plt.rcParams['figure.figsize'] = [10, 6]
 
-Ces indicateurs sont mis à jour et disponibles pour toutes les villes sélectionnées.  
+# Import du package Health4Earth
+# (Assurez-vous d'avoir fait pip install -e . au préalable)
+from health4earth.data_ingest import load_co2_data
+from health4earth.analytics import HealthAnalyzer
+```
 
----
+## 2. Ingestion des Données
+Nous utilisons le module data_ingest pour récupérer les dernières données disponibles. La bibliothèque Pooch assure la mise en cache pour éviter les téléchargements répétitifs.
 
-## Visualisations interactives
+```{python}
+#| label: load-data
 
-Pour explorer les données, cliquez ci-dessous :
+# Chargement automatique
+df = load_co2_data()
 
-[🔗 Visualisations interactives](visualisations.html)
+# --- Préparation des données pour la démonstration ---
+# Le dataset CO2 seul ne contient pas toujours 'pollution' ou 'life_expectancy'.
+# Pour que la classe HealthAnalyzer fonctionne dans cette démo, nous assurons la présence des colonnes.
+if 'pollution' not in df.columns:
+    # Proxy simplifié : CO2 par habitant (si dispo) ou CO2 brut
+    if 'population' in df.columns:
+        df['pollution'] = df['co2'] / df['population'] * 1e6
+    else:
+        df['pollution'] = df['co2']
 
----
+if 'life_expectancy' not in df.columns:
+    # Valeur par défaut pour permettre l'instanciation technique de la classe
+    df['life_expectancy'] = 70.0
 
-Vous pourrez :
+# Instanciation de notre classe d'analyse (Programmation Orientée Objet)
+analyzer = HealthAnalyzer(df)
 
-- Voir la carte des villes avec les indicateurs principaux  
-- Cliquer sur chaque ville pour voir l’évolution temporelle de CO₂, de la pollution et de l’espérance de vie
+print(f"Dataset chargé avec succès : {df.shape[0]} lignes.")
+print(f"Période couverte : {df['year'].min()} - {df['year'].max()}")
+```
+
+## 3. Analyse Temporelle des Émissions
+Comment les émissions mondiales ont-elles évolué au cours du dernier siècle ?
+
+```{python}
+#| label: global-trend
+#| fig-cap: "Évolution des émissions mondiales de CO2 (1900-2022)"
+
+# Filtrage : On garde uniquement les données 'World'
+df_world = df[df['country'] == 'World']
+# On se concentre sur l'ère industrielle moderne
+df_world = df_world[df_world['year'] >= 1900]
+
+plt.figure(figsize=(10, 5))
+sns.lineplot(data=df_world, x='year', y='co2', linewidth=2.5, color='darkred')
+
+plt.title("Explosion des émissions de CO2 depuis 1900")
+plt.ylabel("CO2 (Millions de tonnes)")
+plt.xlabel("Année")
+plt.axvline(x=2020, color='gray', linestyle='--', label='Année 2020 (Covid)')
+plt.legend()
+plt.show()
+```
+
+## 4. Les Grands Émetteurs : Comparaison
+Quels sont les pays qui contribuent le plus aux émissions actuelles ? Nous comparons ici les principales puissances économiques.
+
+```{python}
+#| label: country-comparison
+#| fig-cap: "Comparaison des émissions de CO2 : Chine, USA, Inde, Europe, France"
+
+# Sélection des pays d'intérêt
+countries = ['China', 'United States', 'India', 'France', 'Germany']
+df_countries = df[(df['country'].isin(countries)) & (df['year'] >= 1990)]
+
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=df_countries, x='year', y='co2', hue='country', palette='tab10', linewidth=2)
+
+plt.title("Trajectoires d'émissions (1990 - Aujourd'hui)")
+plt.ylabel("CO2 (Millions de tonnes)")
+plt.xlabel("Année")
+plt.legend(title="Pays")
+plt.show()
+```
+
+L'analyse montre clairement la montée en puissance de la Chine (courbe montante) face à une stabilisation, voire une baisse, des émissions en Europe et aux États-Unis.
+
+
+## 5. Analyse des Seuils Critiques (POO)
+Grâce à la méthode get_polluted_years de notre classe HealthAnalyzer, nous pouvons extraire automatiquement les années où la pollution a dépassé un seuil critique.
+
+```{python}
+#| label: critical-years
+
+# Focus sur la France
+df_france = df[df['country'] == 'France']
+analyzer_france = HealthAnalyzer(df_france)
+
+# Appel de la méthode POO : Années où la France a émis plus de 400 Mt de CO2
+high_emission_years = analyzer_france.get_polluted_years(threshold=400.0)
+
+print(f"La France a dépassé 400 Mt de CO2 pendant {len(high_emission_years)} années.")
+
+# Affichage des 5 années les plus polluantes
+display_cols = ['country', 'year', 'co2']
+print(high_emission_years[display_cols].sort_values(by='co2', ascending=False).head(5))
+```
+
+## Conclusion
+Ce tableau de bord démontre la capacité du package Health4Earth à ingérer, traiter et visualiser des données complexes. La structure modulaire du code permet d'ajouter facilement de nouvelles sources de données (santé, hôpitaux) pour affiner l'analyse des corrélations.

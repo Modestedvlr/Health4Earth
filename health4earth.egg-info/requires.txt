@@ -1,0 +1,16 @@
+pandas
+numpy
+matplotlib
+seaborn
+pooch
+scipy
+geopandas
+openpyxl
+requests
+tqdm
+
+[dev]
+pytest
+flake8
+sphinx
+sphinx-rtd-theme

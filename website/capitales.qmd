@@ -1,0 +1,72 @@
+---
+title: "Analyse par capitale — HEALTH4EARTH"
+format: html
+---
+
+# 🏙️ Analyse interactive par capitale
+
+```{=html}
+<div>
+  <label for="capital">Choisir une capitale :</label>
+  <select id="capital"></select>
+</div>
+
+<div id="charts"></div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<script>
+// Charger les données capitales
+fetch("data/series_capitales.json")
+  .then(r => r.json())
+  .then(data => {
+    const select = document.getElementById("capital");
+
+    // Remplir le sélecteur
+    Object.keys(data).forEach(cap => {
+      const opt = document.createElement("option");
+      opt.value = cap;
+      opt.textContent = cap;
+      select.appendChild(opt);
+    });
+
+    // Fonction de rendu des graphiques
+    function renderCharts(cap) {
+      const series = data[cap].series;
+
+      const years = series.map(d => d.year);
+      const co2 = series.map(d => d.co2);
+      const pollution = series.map(d => d.pollution);
+      const life = series.map(d => d.life);
+
+      const traces = [
+        {
+          x: years, y: co2, name: "CO₂ (t/hab)", type: "scatter", mode: "lines+markers", line: {color: "#1f77b4"}
+        },
+        {
+          x: years, y: pollution, name: "Pollution (décès/100k)", type: "scatter", mode: "lines+markers", line: {color: "#d62728"}
+        },
+        {
+          x: years, y: life, name: "Espérance de vie", type: "scatter", mode: "lines+markers", line: {color: "#2ca02c"}
+        }
+      ];
+
+      const layout = {
+        title: `Indicateurs pour ${cap}`,
+        xaxis: {title: "Année"},
+        yaxis: {title: "Valeur"},
+        legend: {orientation: "h"}
+      };
+
+      Plotly.newPlot("charts", traces, layout);
+    }
+
+    // Rendu initial
+    renderCharts(select.value);
+
+    // Changement de capitale
+    select.addEventListener("change", e => {
+      renderCharts(e.target.value);
+    });
+  });
+</script>

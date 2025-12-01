@@ -1,0 +1,524 @@
+{
+  "AFG": {
+    "life": 65.0
+  },
+  "ALB": {
+    "life": 77.8
+  },
+  "DZA": {
+    "life": 75.6
+  },
+  "AGO": {
+    "life": 52.4
+  },
+  "ATG": {
+    "life": 76.4
+  },
+  "ARG": {
+    "life": 76.3
+  },
+  "ARM": {
+    "life": 74.8
+  },
+  "AUS": {
+    "life": 82.8
+  },
+  "AUT": {
+    "life": 81.5
+  },
+  "AZE": {
+    "life": 72.7
+  },
+  "BHS": {
+    "life": 76.1
+  },
+  "BHR": {
+    "life": 76.9
+  },
+  "BGD": {
+    "life": 71.8
+  },
+  "BRB": {
+    "life": 75.5
+  },
+  "BLR": {
+    "life": 72.3
+  },
+  "BEL": {
+    "life": 81.1
+  },
+  "BLZ": {
+    "life": 71.0
+  },
+  "BEN": {
+    "life": 60.0
+  },
+  "BTN": {
+    "life": 69.8
+  },
+  "BIH": {
+    "life": 77.4
+  },
+  "BWA": {
+    "life": 65.7
+  },
+  "BRA": {
+    "life": 75.0
+  },
+  "BRN": {
+    "life": 77.7
+  },
+  "BGR": {
+    "life": 74.5
+  },
+  "BFA": {
+    "life": 59.9
+  },
+  "BDI": {
+    "life": 59.6
+  },
+  "CIV": {
+    "life": 53.3
+  },
+  "CPV": {
+    "life": 73.3
+  },
+  "KHM": {
+    "life": 68.7
+  },
+  "CMR": {
+    "life": 57.3
+  },
+  "CAN": {
+    "life": 82.2
+  },
+  "CAF": {
+    "life": 52.5
+  },
+  "TCD": {
+    "life": 53.1
+  },
+  "CHL": {
+    "life": 85.0
+  },
+  "CHN": {
+    "life": 76.1
+  },
+  "COL": {
+    "life": 74.8
+  },
+  "COM": {
+    "life": 63.5
+  },
+  "COG": {
+    "life": 64.7
+  },
+  "CRI": {
+    "life": 79.6
+  },
+  "HRV": {
+    "life": 78.0
+  },
+  "CUB": {
+    "life": 79.1
+  },
+  "CYP": {
+    "life": 85.0
+  },
+  "CZE": {
+    "life": 78.8
+  },
+  "PRK": {
+    "life": 76.0
+  },
+  "DNK": {
+    "life": 86.0
+  },
+  "DJI": {
+    "life": 63.5
+  },
+  "DOM": {
+    "life": 73.9
+  },
+  "ECU": {
+    "life": 76.2
+  },
+  "EGY": {
+    "life": 79.0
+  },
+  "SLV": {
+    "life": 73.5
+  },
+  "GNQ": {
+    "life": 58.2
+  },
+  "ERI": {
+    "life": 64.7
+  },
+  "EST": {
+    "life": 77.6
+  },
+  "ETH": {
+    "life": 64.8
+  },
+  "FJI": {
+    "life": 69.9
+  },
+  "FIN": {
+    "life": 81.1
+  },
+  "FRA": {
+    "life": 82.4
+  },
+  "GAB": {
+    "life": 66.0
+  },
+  "GMB": {
+    "life": 61.1
+  },
+  "GEO": {
+    "life": 74.4
+  },
+  "DEU": {
+    "life": 81.0
+  },
+  "GHA": {
+    "life": 62.4
+  },
+  "GRC": {
+    "life": 81.0
+  },
+  "GRD": {
+    "life": 73.6
+  },
+  "GTM": {
+    "life": 71.9
+  },
+  "GIN": {
+    "life": 59.0
+  },
+  "GNB": {
+    "life": 58.9
+  },
+  "GUY": {
+    "life": 66.2
+  },
+  "HTI": {
+    "life": 63.5
+  },
+  "HND": {
+    "life": 74.6
+  },
+  "HUN": {
+    "life": 75.8
+  },
+  "ISL": {
+    "life": 82.7
+  },
+  "IND": {
+    "life": 68.3
+  },
+  "IDN": {
+    "life": 69.1
+  },
+  "IRQ": {
+    "life": 68.9
+  },
+  "IRL": {
+    "life": 81.4
+  },
+  "ISR": {
+    "life": 82.5
+  },
+  "ITA": {
+    "life": 82.7
+  },
+  "JAM": {
+    "life": 76.2
+  },
+  "JPN": {
+    "life": 83.7
+  },
+  "JOR": {
+    "life": 74.1
+  },
+  "KAZ": {
+    "life": 72.0
+  },
+  "KEN": {
+    "life": 63.4
+  },
+  "KIR": {
+    "life": 66.3
+  },
+  "KWT": {
+    "life": 74.7
+  },
+  "KGZ": {
+    "life": 71.1
+  },
+  "LAO": {
+    "life": 65.7
+  },
+  "LVA": {
+    "life": 74.6
+  },
+  "LBN": {
+    "life": 74.9
+  },
+  "LSO": {
+    "life": 53.7
+  },
+  "LBR": {
+    "life": 61.4
+  },
+  "LBY": {
+    "life": 72.7
+  },
+  "LTU": {
+    "life": 73.6
+  },
+  "LUX": {
+    "life": 82.0
+  },
+  "MDG": {
+    "life": 65.5
+  },
+  "MWI": {
+    "life": 58.3
+  },
+  "MYS": {
+    "life": 75.0
+  },
+  "MDV": {
+    "life": 78.5
+  },
+  "MLI": {
+    "life": 58.2
+  },
+  "MLT": {
+    "life": 81.7
+  },
+  "MRT": {
+    "life": 63.1
+  },
+  "MUS": {
+    "life": 74.6
+  },
+  "MEX": {
+    "life": 76.7
+  },
+  "MNG": {
+    "life": 68.8
+  },
+  "MNE": {
+    "life": 76.1
+  },
+  "MAR": {
+    "life": 74.3
+  },
+  "MOZ": {
+    "life": 57.6
+  },
+  "MMR": {
+    "life": 66.6
+  },
+  "NAM": {
+    "life": 65.8
+  },
+  "NPL": {
+    "life": 69.2
+  },
+  "NLD": {
+    "life": 81.9
+  },
+  "NZL": {
+    "life": 81.6
+  },
+  "NIC": {
+    "life": 74.8
+  },
+  "NER": {
+    "life": 61.8
+  },
+  "NGA": {
+    "life": 54.5
+  },
+  "NOR": {
+    "life": 81.8
+  },
+  "OMN": {
+    "life": 76.6
+  },
+  "PAK": {
+    "life": 66.4
+  },
+  "PAN": {
+    "life": 77.8
+  },
+  "PNG": {
+    "life": 62.9
+  },
+  "PRY": {
+    "life": 74.0
+  },
+  "PER": {
+    "life": 75.5
+  },
+  "PHL": {
+    "life": 68.5
+  },
+  "POL": {
+    "life": 77.5
+  },
+  "PRT": {
+    "life": 81.1
+  },
+  "QAT": {
+    "life": 78.2
+  },
+  "MDA": {
+    "life": 72.1
+  },
+  "ROU": {
+    "life": 75.0
+  },
+  "RUS": {
+    "life": 75.0
+  },
+  "RWA": {
+    "life": 66.1
+  },
+  "LCA": {
+    "life": 75.2
+  },
+  "VCT": {
+    "life": 73.2
+  },
+  "WSM": {
+    "life": 74.0
+  },
+  "STP": {
+    "life": 67.5
+  },
+  "SAU": {
+    "life": 74.5
+  },
+  "SEN": {
+    "life": 66.7
+  },
+  "SRB": {
+    "life": 75.6
+  },
+  "SYC": {
+    "life": 73.2
+  },
+  "SLE": {
+    "life": 51.0
+  },
+  "SGP": {
+    "life": 83.1
+  },
+  "SVK": {
+    "life": 76.7
+  },
+  "SVN": {
+    "life": 88.0
+  },
+  "SLB": {
+    "life": 69.2
+  },
+  "SOM": {
+    "life": 55.0
+  },
+  "ZAF": {
+    "life": 62.9
+  },
+  "SSD": {
+    "life": 57.3
+  },
+  "ESP": {
+    "life": 82.8
+  },
+  "LKA": {
+    "life": 74.9
+  },
+  "SDN": {
+    "life": 64.1
+  },
+  "SUR": {
+    "life": 71.6
+  },
+  "SWE": {
+    "life": 82.4
+  },
+  "CHE": {
+    "life": 83.4
+  },
+  "SYR": {
+    "life": 64.5
+  },
+  "TJK": {
+    "life": 69.7
+  },
+  "THA": {
+    "life": 74.9
+  },
+  "TLS": {
+    "life": 68.3
+  },
+  "TGO": {
+    "life": 59.9
+  },
+  "TON": {
+    "life": 73.5
+  },
+  "TTO": {
+    "life": 71.2
+  },
+  "TUN": {
+    "life": 75.3
+  },
+  "TKM": {
+    "life": 66.3
+  },
+  "UGA": {
+    "life": 62.3
+  },
+  "UKR": {
+    "life": 71.3
+  },
+  "ARE": {
+    "life": 77.1
+  },
+  "GBR": {
+    "life": 81.2
+  },
+  "TZA": {
+    "life": 61.8
+  },
+  "USA": {
+    "life": 79.3
+  },
+  "URY": {
+    "life": 77.0
+  },
+  "UZB": {
+    "life": 69.4
+  },
+  "VUT": {
+    "life": 72.0
+  },
+  "VNM": {
+    "life": 76.0
+  },
+  "YEM": {
+    "life": 65.7
+  },
+  "ZMB": {
+    "life": 61.8
+  },
+  "ZWE": {
+    "life": 67.0
+  }
+}

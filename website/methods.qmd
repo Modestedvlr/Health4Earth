@@ -1,0 +1,4 @@
+# Méthodologie
+
+- Sources de données : Our World in Data, WHO, Banque Mondiale, Natural Earth.
+- Pipeline : ingestion → nettoyage → transformation → visualisation.
