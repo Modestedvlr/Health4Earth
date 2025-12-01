@@ -11,8 +11,8 @@ website:
       - href: map.qmd
         text: Carte Interactive
       - href: api/index.html
-        text: Doc Technique
-        
+        text: Documentation
+
 format:
   html:
     theme: cosmo
