@@ -1,6 +1,6 @@
 on:
   push:
-    branches: main  # ou master, vérifiez le nom de votre branche principale
+    branches: [ main, master ] # Vérifiez le nom de votre branche (main ou master)
 
 name: Render and Publish Quarto
 
@@ -24,12 +24,15 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e .  # Installe health4earth + pandas, folium, etc.
-
+          # Installation du projet
+          pip install -e .
+          # Installation OBLIGATOIRE de Jupyter pour Quarto
+          pip install jupyter ipykernel pyyaml
+      
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
         with:
-          path: website/  # Le dossier où sont vos fichiers .qmd
+          path: website/
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
