@@ -1,22 +1,75 @@
 ---
-title: "Carte Interactive"
+title: "Carte Mondiale Interactive"
+format:
+  html:
+    theme: cosmo
+    toc: false
 jupyter: python3
 ---
 
-Voici une carte interactive montrant les zones d'étude.
+Cette carte présente la situation sanitaire et environnementale des pays suivis.
+Cliquez sur un marqueur pour voir les détails.
 
 ```{python}
+#| echo: false
+#| warning: false
+
 import folium
+import pandas as pd
+from health4earth.data_ingest import load_merged_data
 
-# Création d'une carte centrée sur l'Europe
-m = folium.Map(location=[48.85, 2.35], zoom_start=4)
+# 1. Chargement des données
+df = load_merged_data()
 
-# Ajout d'un marqueur (Exemple: Paris)
-folium.Marker(
-    [48.8566, 2.3522], 
-    popup="Paris: Données disponibles",
-    tooltip="Cliquez ici"
-).add_to(m)
+# On prend l'année la plus récente disponible pour tout le monde (ex: 2020)
+df_recent = df[df['year'] == 2020]
 
-# Affichage de la carte
+# 2. Coordonnées des Capitales (Focus sur les pays majeurs pour la démo)
+# Dans un projet pro, on chargerait un CSV de coordonnées.
+capitals = {
+    'France': [48.85, 2.35],
+    'United States': [38.90, -77.03],
+    'China': [39.90, 116.40],
+    'India': [28.61, 77.20],
+    'Brazil': [-15.78, -47.92],
+    'Germany': [52.52, 13.40],
+    'United Kingdom': [51.50, -0.12],
+    'Japan': [35.67, 139.65],
+    'South Africa': [-25.74, 28.22]
+}
+
+# 3. Création de la carte
+m = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
+
+for country, coords in capitals.items():
+    # Récupération des données du pays
+    row = df_recent[df_recent['country'] == country]
+    
+    if not row.empty:
+        co2 = row['co2'].values[0]
+        life = row['life_expectancy'].values[0]
+        deaths = row['pollution_deaths'].values[0]
+        
+        # HTML du Popup (Mise en forme)
+        html_popup = f"""
+        <div style="font-family: sans-serif; width: 200px;">
+            <h4 style="margin-bottom: 5px;">{country}</h4>
+            <b>CO2:</b> {co2:.1f} Mt<br>
+            <b>Espérance de vie:</b> {life:.1f} ans<br>
+            <b>Mortalité (Pollution):</b> {int(deaths)} décès<br>
+            <hr style="margin: 5px 0;">
+            <a href="index.html" target="_top">Voir prédictions 2030 ➡️</a>
+        </div>
+        """
+        
+        # Couleur du marqueur selon le CO2 (Vert < 200, Orange < 1000, Rouge > 1000)
+        color = 'green' if co2 < 200 else 'orange' if co2 < 1000 else 'red'
+        
+        folium.Marker(
+            location=coords,
+            popup=folium.Popup(html_popup, max_width=300),
+            tooltip=f"{country} (Cliquez pour détails)",
+            icon=folium.Icon(color=color, icon="info-sign")
+        ).add_to(m)
+
 m

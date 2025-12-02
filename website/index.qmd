@@ -1,19 +1,17 @@
 ---
-title: "Analyse Globale : CO₂, Pollution et Santé"
-author: "Équipe Health4Earth"
+title: "Health4Earth Dashboard"
+subtitle: "Analyse d'Impact & Prédictions 2030"
 format: 
   html:
-    code-fold: true
-    toc: true
     theme: cosmo
+    toc: true
+    code-fold: true
 jupyter: python3
 ---
 
-## Introduction et Contexte
+## Objectif du Projet
 
-Le changement climatique et la pollution atmosphérique représentent deux des plus grands défis sanitaires du XXIe siècle. Ce projet, **Health4Earth**, vise à explorer les corrélations potentielles entre les émissions industrielles (CO₂) et les indicateurs de santé publique.
-
-Dans ce rapport, nous utilisons des données ouvertes provenant de *Our World in Data* (OWID), téléchargées et traitées automatiquement via notre package Python dédié.
+Ce tableau de bord interactif permet de visualiser l'impact des émissions de CO₂ sur la santé publique mondiale et de **projeter ces tendances jusqu'en 2030** grâce à des algorithmes d'apprentissage automatique (Machine Learning).
 
 ```{python}
 #| label: setup
@@ -27,112 +25,106 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
-# Configuration esthétique des graphiques
+# Configuration Graphique
 sns.set_theme(style="whitegrid")
-plt.rcParams['figure.figsize'] = [10, 6]
+plt.rcParams['figure.figsize'] = [12, 6]
 
-# Import du package Health4Earth
-# (Assurez-vous d'avoir fait pip install -e . au préalable)
-from health4earth.data_ingest import load_co2_data
+# Import du package
+from health4earth.data_ingest import load_merged_data
 from health4earth.analytics import HealthAnalyzer
-```
 
-## 2. Ingestion des Données
-Nous utilisons le module data_ingest pour récupérer les dernières données disponibles. La bibliothèque Pooch assure la mise en cache pour éviter les téléchargements répétitifs.
-
-```{python}
-#| label: load-data
-
-# Chargement automatique
-df = load_co2_data()
-
-# --- Préparation des données pour la démonstration ---
-# Le dataset CO2 seul ne contient pas toujours 'pollution' ou 'life_expectancy'.
-# Pour que la classe HealthAnalyzer fonctionne dans cette démo, nous assurons la présence des colonnes.
-if 'pollution' not in df.columns:
-    # Proxy simplifié : CO2 par habitant (si dispo) ou CO2 brut
-    if 'population' in df.columns:
-        df['pollution'] = df['co2'] / df['population'] * 1e6
-    else:
-        df['pollution'] = df['co2']
-
-if 'life_expectancy' not in df.columns:
-    # Valeur par défaut pour permettre l'instanciation technique de la classe
-    df['life_expectancy'] = 70.0
-
-# Instanciation de notre classe d'analyse (Programmation Orientée Objet)
+# Chargement des données
+df = load_merged_data()
 analyzer = HealthAnalyzer(df)
-
-print(f"Dataset chargé avec succès : {df.shape[0]} lignes.")
-print(f"Période couverte : {df['year'].min()} - {df['year'].max()}")
 ```
 
-## 3. Analyse Temporelle des Émissions
-Comment les émissions mondiales ont-elles évolué au cours du dernier siècle ?
+
+## Corrélation Globale : CO₂ vs Santé
+
+Existe-t-il un lien visible entre la pollution industrielle et l'espérance de vie ?
 
 ```{python}
-#| label: global-trend
-#| fig-cap: "Évolution des émissions mondiales de CO2 (1900-2022)"
+#| label: correlation-plot
+#| fig-cap: "Relation entre CO2 et Mortalité liée à la pollution (2020)"
 
-# Filtrage : On garde uniquement les données 'World'
-df_world = df[df['country'] == 'World']
-# On se concentre sur l'ère industrielle moderne
-df_world = df_world[df_world['year'] >= 1900]
-
-plt.figure(figsize=(10, 5))
-sns.lineplot(data=df_world, x='year', y='co2', linewidth=2.5, color='darkred')
-
-plt.title("Explosion des émissions de CO2 depuis 1900")
-plt.ylabel("CO2 (Millions de tonnes)")
-plt.xlabel("Année")
-plt.axvline(x=2020, color='gray', linestyle='--', label='Année 2020 (Covid)')
-plt.legend()
-plt.show()
-```
-
-## 4. Les Grands Émetteurs : Comparaison
-Quels sont les pays qui contribuent le plus aux émissions actuelles ? Nous comparons ici les principales puissances économiques.
-
-```{python}
-#| label: country-comparison
-#| fig-cap: "Comparaison des émissions de CO2 : Chine, USA, Inde, Europe, France"
-
-# Sélection des pays d'intérêt
-countries = ['China', 'United States', 'India', 'France', 'Germany']
-df_countries = df[(df['country'].isin(countries)) & (df['year'] >= 1990)]
+df_2020 = df[df['year'] == 2020].dropna()
 
 plt.figure(figsize=(10, 6))
-sns.lineplot(data=df_countries, x='year', y='co2', hue='country', palette='tab10', linewidth=2)
-
-plt.title("Trajectoires d'émissions (1990 - Aujourd'hui)")
-plt.ylabel("CO2 (Millions de tonnes)")
-plt.xlabel("Année")
-plt.legend(title="Pays")
+sns.scatterplot(
+    data=df_2020, 
+    x="co2", 
+    y="pollution_deaths", 
+    size="population", 
+    sizes=(20, 500), 
+    hue="life_expectancy",
+    palette="viridis",
+    alpha=0.7
+)
+plt.xscale('log')
+plt.yscale('log')
+plt.title("Impact du CO2 sur la mortalité (Échelle Logarithmique)")
+plt.xlabel("Émissions de CO2 (Log)")
+plt.ylabel("Décès liés à la pollution (Log)")
+plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., title="Espérance de Vie")
 plt.show()
 ```
 
-L'analyse montre clairement la montée en puissance de la Chine (courbe montante) face à une stabilisation, voire une baisse, des émissions en Europe et aux États-Unis.
 
 
-## 5. Analyse des Seuils Critiques (POO)
-Grâce à la méthode get_polluted_years de notre classe HealthAnalyzer, nous pouvons extraire automatiquement les années où la pollution a dépassé un seuil critique.
+## Focus France : Prédictions 2030
+
+Nous utilisons un modèle de Régression Linéaire (Scikit-Learn) entraîné sur les données historiques (2000-2024) pour prédire les tendances futures.
+
+### Évolution du CO₂
+
+La France respectera-t-elle ses objectifs de réduction ?
 
 ```{python}
-#| label: critical-years
+#| label: predict-co2
+#| warning: false
 
-# Focus sur la France
-df_france = df[df['country'] == 'France']
-analyzer_france = HealthAnalyzer(df_france)
+# Appel de la méthode de prédiction (Machine Learning)
+df_pred_co2 = analyzer.predict_evolution("France", "co2", year_horizon=2030)
 
-# Appel de la méthode POO : Années où la France a émis plus de 400 Mt de CO2
-high_emission_years = analyzer_france.get_polluted_years(threshold=400.0)
-
-print(f"La France a dépassé 400 Mt de CO2 pendant {len(high_emission_years)} années.")
-
-# Affichage des 5 années les plus polluantes
-display_cols = ['country', 'year', 'co2']
-print(high_emission_years[display_cols].sort_values(by='co2', ascending=False).head(5))
+if df_pred_co2 is not None:
+    plt.figure(figsize=(12, 5))
+    
+    # Historique
+    sns.lineplot(data=df_pred_co2[df_pred_co2['type']=='Historique'], x='year', y='co2', label='Historique', color='blue', linewidth=2)
+    
+    # Prédiction
+    sns.lineplot(data=df_pred_co2[df_pred_co2['type']=='Prédiction'], x='year', y='co2', label='Prédiction IA (2030)', color='red', linestyle='--', linewidth=2)
+    
+    plt.title("Prédiction des émissions de CO2 en France (Horizon 2030)")
+    plt.ylabel("CO2 (Millions de tonnes)")
+    plt.axvline(x=2024, color='gray', alpha=0.5, linestyle=':')
+    plt.fill_between(df_pred_co2['year'], df_pred_co2['co2'] - 10, df_pred_co2['co2'] + 10, color='red', alpha=0.1)
+    plt.show()
+else:
+    print("Pas assez de données pour la prédiction.")
 ```
 
-## Conclusion
-Ce tableau de bord démontre la capacité du package Health4Earth à ingérer, traiter et visualiser des données complexes. La structure modulaire du code permet d'ajouter facilement de nouvelles sources de données (santé, hôpitaux) pour affiner l'analyse des corrélations.
+
+
+### Impact sur l'Espérance de Vie
+
+Quel impact ces changements environnementaux auront-ils sur la santé ?
+
+```{python}
+#| label: predict-life
+#| warning: false
+
+df_pred_life = analyzer.predict_evolution("France", "life_expectancy", year_horizon=2030)
+
+if df_pred_life is not None:
+    plt.figure(figsize=(12, 5))
+    
+    sns.lineplot(data=df_pred_life, x='year', y='life_expectancy', hue='type', palette={'Historique': 'green', 'Prédiction': 'orange'}, linewidth=2.5)
+    
+    plt.title("Projection de l'Espérance de Vie en France")
+    plt.ylabel("Années")
+    plt.show()
+```
+
+## Conclusion :
+Ce modèle montre que malgré une tendance à la baisse des émissions de CO₂ en France, l'impact sur la santé publique reste un enjeu majeur. La continuité des efforts écologiques est essentielle pour maintenir la courbe d'espérance de vie à la hausse.
