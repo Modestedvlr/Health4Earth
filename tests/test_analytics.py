@@ -2,34 +2,35 @@ import pandas as pd
 import pytest
 from health4earth.analytics import HealthAnalyzer
 
-# Création de données fictives pour les tests
 @pytest.fixture
 def fake_df():
+    """Crée un petit DataFrame fictif pour tester la logique sans internet."""
     return pd.DataFrame({
-        "year": [2020, 2021, 2022],
-        "co2": [100, 110, 105],
-        "pollution": [40, 60, 45],
-        "life_expectancy": [80, 79, 81]
+        "country": ["France"] * 10 + ["USA"] * 10,
+        "year": list(range(2000, 2010)) * 2,
+        "co2": [100 + i for i in range(10)] + [500 + i*2 for i in range(10)],
+        "pollution_deaths": [50 - i for i in range(10)] + [100 - i for i in range(10)],
+        "life_expectancy": [80 + i*0.1 for i in range(10)] + [78 + i*0.1 for i in range(10)]
     })
 
 def test_analyzer_init(fake_df):
-    """Test si la classe s'initialise bien."""
     analyzer = HealthAnalyzer(fake_df)
     assert analyzer.data is not None
 
-def test_correlation(fake_df):
-    """Test du calcul de corrélation."""
+def test_get_country_data(fake_df):
     analyzer = HealthAnalyzer(fake_df)
-    corr_matrix = analyzer.correlation_analysis()
-    
-    # La matrice doit être de taille 3x3
-    assert corr_matrix.shape == (3, 3)
-    # La diagonale d'une corrélation est toujours égale à 1.0
-    assert corr_matrix.iloc[0, 0] == 1.0
+    df_fr = analyzer.get_country_data("France")
+    assert len(df_fr) == 10
+    assert df_fr['country'].unique()[0] == "France"
 
-def test_missing_columns():
-    """Test si l'erreur est bien levée quand il manque des colonnes."""
-    bad_df = pd.DataFrame({"co2": [1, 2]}) # Manque pollution et life_expectancy
+def test_prediction_structure(fake_df):
+    """Teste si la prédiction renvoie bien le format attendu."""
+    analyzer = HealthAnalyzer(fake_df)
     
-    with pytest.raises(ValueError):
-        HealthAnalyzer(bad_df)
+    # On demande une prédiction jusqu'en 2015 (nos données s'arrêtent en 2009)
+    df_pred = analyzer.predict_evolution("France", "co2", year_horizon=2015)
+    
+    assert df_pred is not None
+    assert "type" in df_pred.columns
+    assert "Prédiction" in df_pred["type"].unique()
+    assert df_pred["year"].max() == 2015
