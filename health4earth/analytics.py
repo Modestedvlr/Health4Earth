@@ -22,6 +22,18 @@ class HealthAnalyzer:
         """
         self.data = df.sort_values('year')
 
+    def get_country_data(self, country: str) -> pd.DataFrame:
+        """
+        Extrait les données spécifiques à un pays.
+        
+        Args:
+            country (str): Le nom du pays (ex: 'France').
+            
+        Returns:
+            pd.DataFrame: Un sous-ensemble des données filtré par pays.
+        """
+        return self.data[self.data['country'] == country].copy()
+
     def predict_evolution(self, country: str, target_col: str, year_horizon: int = 2030):
         """
         Prédit l'évolution future d'un indicateur jusqu'à une année donnée.
@@ -39,21 +51,28 @@ class HealthAnalyzer:
             pd.DataFrame: Un tableau contenant l'historique réel et les années prédites.
             Retourne None si les données sont insuffisantes.
         """
-        df_country = self.data[self.data['country'] == country].copy()
+        # On utilise la méthode interne pour récupérer les données
+        df_country = self.get_country_data(country)
+        
+        # On filtre pour garder les données récentes (>= 2000) et valides
         df_recent = df_country[df_country['year'] >= 2000].dropna(subset=[target_col])
         
         if len(df_recent) < 5:
             return None 
 
+        # Préparation du modèle ML
         X = df_recent[['year']].values
         y = df_recent[target_col].values
         
         model = LinearRegression()
         model.fit(X, y)
 
-        future_years = np.arange(df_country['year'].max() + 1, year_horizon + 1).reshape(-1, 1)
+        # Génération des années futures
+        last_year = int(df_country['year'].max())
+        future_years = np.arange(last_year + 1, year_horizon + 1).reshape(-1, 1)
         future_preds = model.predict(future_years)
         
+        # Construction du DataFrame de prédiction
         df_future = pd.DataFrame({
             'year': future_years.flatten(),
             target_col: future_preds,
@@ -61,6 +80,7 @@ class HealthAnalyzer:
             'country': country
         })
         
+        # Construction de l'historique
         df_history = df_country[['year', target_col]].copy()
         df_history['type'] = 'Historique'
         df_history['country'] = country
