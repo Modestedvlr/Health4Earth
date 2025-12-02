@@ -9,18 +9,19 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: Accueil & Carte
-      - href: dashboard.qmd
-        text: Analyse & Prédictions
-      - href: code.qmd
-        text: Code Source
+        text: Accueil
+      - href: analysis.qmd
+        text: Analyse Exploratoire
+      - href: predictions.qmd
+        text: Prédictions
       - href: methods.qmd
         text: Méthodologie
       - href: api/index.html
-        text: Documentation API
+        text: Documentation
 
 format:
   html:
     theme: cosmo
     toc: true
     code-fold: true
+    page-layout: article

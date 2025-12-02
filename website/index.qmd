@@ -1,61 +1,86 @@
 ---
-title: "Accueil - Health4Earth"
-format: html
+title: "health4earth"
+format: 
+  html:
+    theme: cosmo
+    toc: false
+    page-layout: full
 jupyter: python3
 ---
 
-## Objectifs du Projet
-
-Le projet **Health4Earth** a pour vocation d'analyser l'impact environnemental sur la santé humaine.
-Notre plateforme interactive permet de :
-
-1.  **Visualiser** les données mondiales de CO2 et de pollution.
-2.  **Comprendre** les liens avec la mortalité et l'espérance de vie.
-3.  **Prédire** les évolutions futures (Horizon 2030) grâce à l'IA.
-
----
-
-## Carte Mondiale Interactive
-
-Cliquez sur les marqueurs pour voir les indicateurs clés par pays.
-*(Les données ci-dessous sont les plus récentes disponibles).*
+## Carte Interactive
 
 ```{python}
 #| echo: false
 #| warning: false
+#| output: true
 
 import folium
+import base64
+import io
+import matplotlib.pyplot as plt
+import pandas as pd
 from health4earth.data_ingest import load_merged_data
 
+# 1. Chargement
 df = load_merged_data()
-df_recent = df[df['year'] == 2020]
 
-# Liste élargie des capitales pour faire "Carte du Monde"
-capitals = {
-    'France': [48.85, 2.35], 'United States': [38.90, -77.03], 
-    'China': [39.90, 116.40], 'India': [28.61, 77.20],
-    'Brazil': [-15.78, -47.92], 'South Africa': [-25.74, 28.22],
-    'Australia': [-35.28, 149.13], 'Japan': [35.67, 139.65],
-    'Russia': [55.75, 37.61], 'Canada': [45.42, -75.70],
-    'Egypt': [30.04, 31.23], 'Mexico': [19.43, -99.13]
-}
+# 2. Fonction magique : Générer un graphique en Base64 (Image texte)
+def get_graph_base64(country_name):
+    """Génère un graphique d'évolution pour un pays et le retourne en Base64 pour HTML."""
+    country_data = df[df['country'] == country_name]
+    if country_data.empty or len(country_data) < 5:
+        return None
+        
+    # Création du graphique (Petit format pour le popup)
+    plt.figure(figsize=(4, 2.5))
+    plt.plot(country_data['year'], country_data['co2'], color='red', linewidth=2)
+    plt.title(f"Évolution CO2: {country_name}", fontsize=10)
+    plt.xlabel("Année", fontsize=8)
+    plt.ylabel("Mt CO2", fontsize=8)
+    plt.tight_layout()
+    
+    # Sauvegarde en mémoire
+    img = io.BytesIO()
+    plt.savefig(img, format='png', transparent=True)
+    img.seek(0)
+    
+    # Encodage
+    return base64.b64encode(img.getvalue()).decode()
 
+# 3. Préparation de la carte
 m = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
 
+# Liste des pays clés avec leurs coordonnées
+capitals = {
+    'France': [48.85, 2.35], 'United States': [38.90, -77.03],
+    'China': [39.90, 116.40], 'India': [28.61, 77.20],
+    'Brazil': [-15.78, -47.92], 'Germany': [52.52, 13.40],
+    'Russia': [55.75, 37.61], 'Japan': [35.67, 139.65]
+}
+
 for country, coords in capitals.items():
-    row = df_recent[df_recent['country'] == country]
-    if not row.empty:
-        co2 = row['co2'].values[0]
-        life = row['life_expectancy'].values[0]
-        
+    # Génération du graphique
+    b64_img = get_graph_base64(country)
+    
+    # Création du HTML pour le popup
+    if b64_img:
         html = f"""
-        <div style="font-family:sans-serif; width:150px">
-            <b>{country}</b><hr>
-            CO2: {co2:.0f} Mt<br>
-            Vie: {life:.1f} ans<br>
-            <a href="dashboard.html" target="_top">Voir Graphiques 📊</a>
+        <div style="width:300px; text-align:center;">
+            <h4>{country}</h4>
+            <img src="data:image/png;base64,{b64_img}" width="280">
+            <br>
+            <a href="predictions.html" target="_top">Voir prédictions complètes ➡️</a>
         </div>
         """
-        folium.Marker(coords, popup=html, icon=folium.Icon(color="blue", icon="info-sign")).add_to(m)
+        iframe = folium.IFrame(html, width=320, height=250)
+        popup = folium.Popup(iframe, max_width=350)
+        
+        folium.Marker(
+            location=coords,
+            popup=popup,
+            icon=folium.Icon(color="red", icon="stats")
+        ).add_to(m)
 
 m
+```

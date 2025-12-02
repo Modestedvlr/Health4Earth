@@ -1,6 +1,9 @@
 ---
 title: "Analyse & Prédictions"
 jupyter: python3
+format:
+  html:
+    code-fold: true
 ---
 
 ## 1. Corrélations Santé / Environnement
@@ -10,6 +13,9 @@ Analyse de l'impact du CO2 sur l'espérance de vie mondiale.
 ```{python}
 #| echo: false
 #| warning: false
+#| output: false
+
+# Le bloc ci-dessus (output: false) cache les messages de chargement
 import seaborn as sns
 import matplotlib.pyplot as plt
 from health4earth.data_ingest import load_merged_data
@@ -17,10 +23,27 @@ from health4earth.analytics import HealthAnalyzer
 
 df = load_merged_data()
 analyzer = HealthAnalyzer(df)
+```
+
+```{python}
+#| echo: false
+#| warning: false
 
 sns.set_theme(style="whitegrid")
 plt.figure(figsize=(10, 5))
-sns.scatterplot(data=df[df['year']==2020], x='co2', y='life_expectancy', hue='life_expectancy', palette='viridis', legend=False)
+
+# On filtre les données aberrantes pour le graphique
+df_clean = df[(df['year'] == 2020) & (df['co2'] > 0) & (df['life_expectancy'] > 0)]
+
+sns.scatterplot(
+    data=df_clean, 
+    x='co2', 
+    y='life_expectancy', 
+    hue='life_expectancy', 
+    palette='viridis', 
+    legend=False,
+    alpha=0.7
+)
 plt.xscale('log')
 plt.title("Espérance de vie vs Émissions CO2 (2020)")
 plt.xlabel("CO2 (Log scale)")
@@ -29,16 +52,16 @@ plt.show()
 ```
 
 ## 2. Prédictions France 2030
-
 Utilisation de l'IA pour projeter les tendances.
-
 ```{python}
 #| echo: false
 #| warning: false
+
 pred = analyzer.predict_evolution("France", "co2", 2030)
 if pred is not None:
     plt.figure(figsize=(10, 5))
-    sns.lineplot(data=pred, x='year', y='co2', hue='type', palette=['blue', 'red'])
+    sns.lineplot(data=pred, x='year', y='co2', hue='type', palette={'Historique': 'blue', 'Prédiction': 'red'})
     plt.title("Prédiction CO2 France 2030")
+    plt.axvline(x=2024, color='gray', linestyle='--')
     plt.show()
 ```

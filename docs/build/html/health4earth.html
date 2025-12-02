@@ -67,7 +67,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-health4earth.data_ingest">health4earth.data_ingest module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_ingest.load_co2_data"><code class="docutils literal notranslate"><span class="pre">load_co2_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_ingest.load_merged_data"><code class="docutils literal notranslate"><span class="pre">load_merged_data()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-health4earth.data_life">health4earth.data_life module</a><ul>
@@ -90,10 +90,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#health4earth.geo.add_capitals"><code class="docutils literal notranslate"><span class="pre">add_capitals()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.perf">health4earth.perf module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.perf.measure_performance"><code class="docutils literal notranslate"><span class="pre">measure_performance()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#health4earth-perf-module">health4earth.perf module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-health4earth.utils">health4earth.utils module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#health4earth.utils.hello"><code class="docutils literal notranslate"><span class="pre">hello()</span></code></a></li>
 </ul>
@@ -145,12 +142,13 @@
 <dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">health4earth.analytics.</span></span><span class="sig-name descname"><span class="pre">HealthAnalyzer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Classe chargée d’analyser les relations statistiques entre les facteurs environnementaux
-et la santé publique.</p>
+<p>Moteur d’analyse statistique et prédictive du projet Health4Earth.</p>
+<p>Cette classe encapsule la logique métier et les algorithmes de Machine Learning.
+Elle suit le paradigme de Programmation Orientée Objet (POO).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer.data">
 <span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.data" title="Link to this definition"></a></dt>
-<dd><p>Le jeu de données complet contenant CO2, pollution et espérance de vie.</p>
+<dd><p>Le jeu de données complet chargé en mémoire.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pd.DataFrame</p>
@@ -159,29 +157,42 @@ et la santé publique.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer.correlation_analysis">
-<span class="sig-name descname"><span class="pre">correlation_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer.correlation_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.correlation_analysis" title="Link to this definition"></a></dt>
-<dd><p>Calcule la matrice de corrélation entre les variables clés.</p>
+<dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer.get_country_data">
+<span class="sig-name descname"><span class="pre">get_country_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer.get_country_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.get_country_data" title="Link to this definition"></a></dt>
+<dd><p>Extrait les données spécifiques à un pays.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Une matrice de corrélation (3x3).</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>country</strong> (<em>str</em>) – Le nom du pays (ex: ‘France’).</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>pd.DataFrame</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Un sous-ensemble des données filtré par pays.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer.get_polluted_years">
-<span class="sig-name descname"><span class="pre">get_polluted_years</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer.get_polluted_years"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.get_polluted_years" title="Link to this definition"></a></dt>
-<dd><p>Identifie les années où la pollution a dépassé un certain seuil.</p>
+<dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer.predict_evolution">
+<span class="sig-name descname"><span class="pre">predict_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_horizon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2030</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer.predict_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.predict_evolution" title="Link to this definition"></a></dt>
+<dd><p>Prédit l’évolution future d’un indicateur jusqu’à une année donnée.</p>
+<dl class="simple">
+<dt>Méthodologie :</dt><dd><p>Utilise une <strong>Régression Linéaire</strong> (Scikit-Learn) entraînée sur les
+20 dernières années de données disponibles pour projeter la tendance.</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>threshold</strong> (<em>float</em>) – Le seuil de pollution (par défaut 50.0).</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>country</strong> (<em>str</em>) – Le pays cible (ex: ‘France’).</p></li>
+<li><p><strong>target_col</strong> (<em>str</em>) – La variable à prédire (‘co2’, ‘life_expectancy’).</p></li>
+<li><p><strong>year_horizon</strong> (<em>int</em>) – L’année cible de la prédiction (défaut 2030).</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Les lignes filtrées correspondant aux années critiques.</p>
+<dd class="field-even"><p>Un tableau contenant l’historique réel et les années prédites.
+Retourne None si les données sont insuffisantes.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pd.DataFrame</p>
@@ -239,12 +250,33 @@ et la santé publique.</p>
 <section id="module-health4earth.data_ingest">
 <span id="health4earth-data-ingest-module"></span><h2>health4earth.data_ingest module<a class="headerlink" href="#module-health4earth.data_ingest" title="Link to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_ingest.load_co2_data">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_ingest.</span></span><span class="sig-name descname"><span class="pre">load_co2_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/health4earth/data_ingest.html#load_co2_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_ingest.load_co2_data" title="Link to this definition"></a></dt>
-<dd><p>Télécharge automatiquement les données CO2 depuis le dépôt OWID
-et les charge dans un DataFrame pandas.</p>
-<p>Les données sont mises en cache localement (dans le dossier OS par défaut)
-pour ne pas les retélécharger à chaque fois.</p>
+<dt class="sig sig-object py" id="health4earth.data_ingest.load_merged_data">
+<span class="sig-prename descclassname"><span class="pre">health4earth.data_ingest.</span></span><span class="sig-name descname"><span class="pre">load_merged_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/health4earth/data_ingest.html#load_merged_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_ingest.load_merged_data" title="Link to this definition"></a></dt>
+<dd><p>Télécharge, nettoie et fusionne les données mondiales (CO2, Pollution, Santé).</p>
+<p>Cette fonction est le point d’entrée principal du pipeline de données.
+Elle utilise la librairie <strong>Pooch</strong> pour gérer le cache local (évite de retélécharger à chaque fois).</p>
+<dl class="simple">
+<dt>Stratégie de résilience :</dt><dd><p>Si les serveurs de l’OMS/OWID sont inaccessibles pour la pollution,
+la fonction génère des données estimées basées sur des corrélations scientifiques
+connues (Mode ‘Fallback’) pour assurer le fonctionnement de l’application.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Un DataFrame unique contenant pour chaque Pays et Année :</dt><dd><ul class="simple">
+<li><p><cite>co2</cite>: Émissions en millions de tonnes.</p></li>
+<li><p><cite>pollution_deaths</cite>: Nombre de décès attribués à la pollution de l’air.</p></li>
+<li><p><cite>life_expectancy</cite>: Espérance de vie moyenne à la naissance.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -300,13 +332,8 @@ pour ne pas les retélécharger à chaque fois.</p>
 </dd></dl>
 
 </section>
-<section id="module-health4earth.perf">
-<span id="health4earth-perf-module"></span><h2>health4earth.perf module<a class="headerlink" href="#module-health4earth.perf" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.perf.measure_performance">
-<span class="sig-prename descclassname"><span class="pre">health4earth.perf.</span></span><span class="sig-name descname"><span class="pre">measure_performance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/perf.html#measure_performance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.perf.measure_performance" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
+<section id="health4earth-perf-module">
+<h2>health4earth.perf module<a class="headerlink" href="#health4earth-perf-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-health4earth.utils">
 <span id="health4earth-utils-module"></span><h2>health4earth.utils module<a class="headerlink" href="#module-health4earth.utils" title="Link to this heading"></a></h2>

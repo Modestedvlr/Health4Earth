@@ -8,6 +8,8 @@ geopandas
 openpyxl
 requests
 tqdm
+folium
+scikit-learn
 
 [dev]
 pytest
