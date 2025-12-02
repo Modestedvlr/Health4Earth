@@ -1,5 +1,5 @@
 ---
-title: "Carte Mondiale Interactive"
+title: "Carte Interactive"
 format:
   html:
     theme: cosmo
@@ -7,68 +7,58 @@ format:
 jupyter: python3
 ---
 
-Cette carte présente la situation sanitaire et environnementale des pays suivis.
-Cliquez sur un marqueur pour voir les détails.
+Visualisation géolocalisée des indicateurs clés (Données les plus récentes).
 
 ```{python}
 #| echo: false
 #| warning: false
 
 import folium
-import pandas as pd
 from health4earth.data_ingest import load_merged_data
 
-# 1. Chargement des données
 df = load_merged_data()
+# On prend 2019 car c'est l'année la plus complète pour la pollution
+df_recent = df[df['year'] == 2019]
 
-# On prend l'année la plus récente disponible pour tout le monde (ex: 2020)
-df_recent = df[df['year'] == 2020]
-
-# 2. Coordonnées des Capitales (Focus sur les pays majeurs pour la démo)
-# Dans un projet pro, on chargerait un CSV de coordonnées.
+# Liste des pays à afficher
 capitals = {
     'France': [48.85, 2.35],
     'United States': [38.90, -77.03],
     'China': [39.90, 116.40],
     'India': [28.61, 77.20],
     'Brazil': [-15.78, -47.92],
-    'Germany': [52.52, 13.40],
-    'United Kingdom': [51.50, -0.12],
-    'Japan': [35.67, 139.65],
-    'South Africa': [-25.74, 28.22]
+    'Germany': [52.52, 13.40]
 }
 
-# 3. Création de la carte
-m = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
+m = folium.Map(location=[25, 0], zoom_start=2, tiles="CartoDB positron")
 
 for country, coords in capitals.items():
-    # Récupération des données du pays
     row = df_recent[df_recent['country'] == country]
     
     if not row.empty:
         co2 = row['co2'].values[0]
         life = row['life_expectancy'].values[0]
-        deaths = row['pollution_deaths'].values[0]
+        deaths = int(row['pollution_deaths'].values[0])
         
-        # HTML du Popup (Mise en forme)
-        html_popup = f"""
-        <div style="font-family: sans-serif; width: 200px;">
-            <h4 style="margin-bottom: 5px;">{country}</h4>
-            <b>CO2:</b> {co2:.1f} Mt<br>
-            <b>Espérance de vie:</b> {life:.1f} ans<br>
-            <b>Mortalité (Pollution):</b> {int(deaths)} décès<br>
-            <hr style="margin: 5px 0;">
-            <a href="index.html" target="_top">Voir prédictions 2030 ➡️</a>
+        # Code HTML pour le popup interactif
+        html = f"""
+        <div style="font-family:sans-serif; width:180px">
+            <h4>{country}</h4>
+            <hr>
+            <b>CO2:</b> {co2:.0f} Mt<br>
+            <b>Vie:</b> {life:.1f} ans<br>
+            <b>Décès (Air):</b> {deaths:,}<br>
+            <br>
+            <a href="index.html" target="_top" style="color:blue">Voir Analyse 📈</a>
         </div>
         """
         
-        # Couleur du marqueur selon le CO2 (Vert < 200, Orange < 1000, Rouge > 1000)
-        color = 'green' if co2 < 200 else 'orange' if co2 < 1000 else 'red'
+        # Couleur selon le CO2
+        color = 'red' if co2 > 1000 else 'orange' if co2 > 300 else 'green'
         
         folium.Marker(
             location=coords,
-            popup=folium.Popup(html_popup, max_width=300),
-            tooltip=f"{country} (Cliquez pour détails)",
+            popup=folium.Popup(html, max_width=250),
             icon=folium.Icon(color=color, icon="info-sign")
         ).add_to(m)
 
