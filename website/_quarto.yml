@@ -1,20 +1,23 @@
 project:
   type: website
   output-dir: _site
+  resources:
+    - "api/**"
 
-ressources:
-      - "api/**"
-      
 website:
   title: "Health4Earth"
   navbar:
     left:
       - href: index.qmd
-        text: Accueil
-      - href: map.qmd
-        text: Carte Interactive
+        text: Accueil & Carte
+      - href: dashboard.qmd
+        text: Analyse & Prédictions
+      - href: code.qmd
+        text: Code Source
+      - href: methods.qmd
+        text: Méthodologie
       - href: api/index.html
-        text: Documentation
+        text: Documentation API
 
 format:
   html:

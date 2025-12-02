@@ -1,0 +1,44 @@
+---
+title: "Analyse & Prédictions"
+jupyter: python3
+---
+
+## 1. Corrélations Santé / Environnement
+
+Analyse de l'impact du CO2 sur l'espérance de vie mondiale.
+
+```{python}
+#| echo: false
+#| warning: false
+import seaborn as sns
+import matplotlib.pyplot as plt
+from health4earth.data_ingest import load_merged_data
+from health4earth.analytics import HealthAnalyzer
+
+df = load_merged_data()
+analyzer = HealthAnalyzer(df)
+
+sns.set_theme(style="whitegrid")
+plt.figure(figsize=(10, 5))
+sns.scatterplot(data=df[df['year']==2020], x='co2', y='life_expectancy', hue='life_expectancy', palette='viridis', legend=False)
+plt.xscale('log')
+plt.title("Espérance de vie vs Émissions CO2 (2020)")
+plt.xlabel("CO2 (Log scale)")
+plt.ylabel("Espérance de vie (Années)")
+plt.show()
+```
+
+## 2. Prédictions France 2030
+
+Utilisation de l'IA pour projeter les tendances.
+
+```{python}
+#| echo: false
+#| warning: false
+pred = analyzer.predict_evolution("France", "co2", 2030)
+if pred is not None:
+    plt.figure(figsize=(10, 5))
+    sns.lineplot(data=pred, x='year', y='co2', hue='type', palette=['blue', 'red'])
+    plt.title("Prédiction CO2 France 2030")
+    plt.show()
+```

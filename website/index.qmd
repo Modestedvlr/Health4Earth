@@ -1,123 +1,61 @@
 ---
-title: "Health4Earth Dashboard"
-subtitle: "Analyse d'Impact & Prédictions 2030"
-format: 
-  html:
-    theme: cosmo
-    toc: true
-    code-fold: true
+title: "Accueil - Health4Earth"
+format: html
 jupyter: python3
 ---
 
-## Objectif du Projet
+## Objectifs du Projet
 
-Ce tableau de bord analyse l'impact des émissions industrielles sur la santé publique mondiale.
-Il intègre un module d'**Intelligence Artificielle** (Régression Linéaire) pour anticiper les tendances jusqu'en 2030.
+Le projet **Health4Earth** a pour vocation d'analyser l'impact environnemental sur la santé humaine.
+Notre plateforme interactive permet de :
+
+1.  **Visualiser** les données mondiales de CO2 et de pollution.
+2.  **Comprendre** les liens avec la mortalité et l'espérance de vie.
+3.  **Prédire** les évolutions futures (Horizon 2030) grâce à l'IA.
+
+---
+
+## Carte Mondiale Interactive
+
+Cliquez sur les marqueurs pour voir les indicateurs clés par pays.
+*(Les données ci-dessous sont les plus récentes disponibles).*
 
 ```{python}
-#| label: setup
 #| echo: false
 #| warning: false
 
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# Configuration Graphique
-sns.set_theme(style="whitegrid")
-plt.rcParams['figure.figsize'] = [11, 6]
-
-# Import du package Health4Earth
+import folium
 from health4earth.data_ingest import load_merged_data
-from health4earth.analytics import HealthAnalyzer
 
-# Chargement du "Super-Dataset"
 df = load_merged_data()
-analyzer = HealthAnalyzer(df)
-```
+df_recent = df[df['year'] == 2020]
 
+# Liste élargie des capitales pour faire "Carte du Monde"
+capitals = {
+    'France': [48.85, 2.35], 'United States': [38.90, -77.03], 
+    'China': [39.90, 116.40], 'India': [28.61, 77.20],
+    'Brazil': [-15.78, -47.92], 'South Africa': [-25.74, 28.22],
+    'Australia': [-35.28, 149.13], 'Japan': [35.67, 139.65],
+    'Russia': [55.75, 37.61], 'Canada': [45.42, -75.70],
+    'Egypt': [30.04, 31.23], 'Mexico': [19.43, -99.13]
+}
 
-## Corrélation : Pollution vs Espérance de Vie
-L'analyse croisée des données (Sources: OWID & IHME) révèle les inégalités face à la pollution.
+m = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
 
-```{python}
-#| label: correlation-plot
-#| fig-cap: "Impact de la pollution de l'air sur la mortalité (2019)"
+for country, coords in capitals.items():
+    row = df_recent[df_recent['country'] == country]
+    if not row.empty:
+        co2 = row['co2'].values[0]
+        life = row['life_expectancy'].values[0]
+        
+        html = f"""
+        <div style="font-family:sans-serif; width:150px">
+            <b>{country}</b><hr>
+            CO2: {co2:.0f} Mt<br>
+            Vie: {life:.1f} ans<br>
+            <a href="dashboard.html" target="_top">Voir Graphiques 📊</a>
+        </div>
+        """
+        folium.Marker(coords, popup=html, icon=folium.Icon(color="blue", icon="info-sign")).add_to(m)
 
-# On prend une année récente avec des données complètes
-df_focus = df[df['year'] == 2019].dropna(subset=['pollution_deaths', 'life_expectancy'])
-
-plt.figure(figsize=(10, 6))
-sns.scatterplot(
-    data=df_focus, 
-    x="life_expectancy", 
-    y="pollution_deaths", 
-    size="population", 
-    sizes=(20, 1000), 
-    hue="life_expectancy",
-    palette="RdYlGn",
-    alpha=0.7,
-    legend=False
-)
-plt.title("Mortalité due à la pollution vs Espérance de Vie")
-plt.xlabel("Espérance de vie (Années)")
-plt.ylabel("Décès liés à la pollution (Total)")
-plt.yscale('log')
-plt.grid(True, which="both", ls="--", alpha=0.3)
-plt.show()
-```
-
-
-
-## Intelligence Artificielle : Prédictions 2030
-Nous utilisons le module scikit-learn pour projeter les tendances historiques de la France.
-
-### Trajectoire Carbone (CO₂) 
-
-La France respectera-t-elle ses objectifs de réduction ?
-
-```{python}
-#| label: predict-co2
-#| warning: false
-
-# Prédiction ML
-df_pred_co2 = analyzer.predict_evolution("France", "co2", year_horizon=2030)
-
-if df_pred_co2 is not None:
-    plt.figure(figsize=(12, 5))
-    
-    # Zone historique
-    sns.lineplot(data=df_pred_co2[df_pred_co2['type']=='Historique'], x='year', y='co2', label='Données Réelles', color='#1f77b4', linewidth=2.5)
-    
-    # Zone prédiction
-    sns.lineplot(data=df_pred_co2[df_pred_co2['type']=='Prédiction'], x='year', y='co2', label='Projection IA (2030)', color='#d62728', linestyle='--', linewidth=2.5)
-    
-    plt.title("France : Trajectoire des émissions de CO2")
-    plt.ylabel("CO2 (Millions de tonnes)")
-    plt.axvline(x=2024, color='gray', linestyle=':')
-    plt.legend()
-    plt.show()
-```
-
-
-
-### Impact sur l'Espérance de Vie
-
-Quel impact ces changements environnementaux auront-ils sur la santé ?
-
-```{python}
-#| label: predict-life
-#| warning: false
-
-df_pred_life = analyzer.predict_evolution("France", "life_expectancy", year_horizon=2030)
-
-if df_pred_life is not None:
-    plt.figure(figsize=(12, 5))
-    sns.lineplot(data=df_pred_life, x='year', y='life_expectancy', hue='type', palette={'Historique': 'green', 'Prédiction': 'orange'}, linewidth=2.5)
-    plt.title("France : Projection de l'Espérance de Vie")
-    plt.ylabel("Années")
-    plt.show()
-```
-
-## Conclusion :
-Ce modèle montre que malgré une tendance à la baisse des émissions de CO₂ en France, l'impact sur la santé publique reste un enjeu majeur. La continuité des efforts écologiques est essentielle pour maintenir la courbe d'espérance de vie à la hausse.
+m

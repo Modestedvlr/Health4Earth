@@ -1,4 +1,22 @@
-# Méthodologie
+---
+title: "Méthodologie & Outils"
+---
 
-- Sources de données : Our World in Data, WHO, Banque Mondiale, Natural Earth.
-- Pipeline : ingestion → nettoyage → transformation → visualisation.
+## Stack Technique
+
+Notre projet repose sur une chaîne d'outils modernes de Data Science :
+
+1.  **Python 3.10** : Langage principal.
+2.  **Pandas & NumPy** : Manipulation et nettoyage des données massives.
+3.  **Pooch** : Gestionnaire de téléchargement et de cache (garantit la reproductibilité).
+4.  **Scikit-Learn** : Algorithmes de Régression Linéaire pour les prédictions 2030.
+5.  **Folium** : Cartographie interactive (Leaflet.js).
+6.  **Quarto** : Génération du site web et des rapports.
+
+## Méthodologie DevOps
+
+Nous avons appliqué les bonnes pratiques du développement logiciel :
+
+*   **Versionning** : Git & GitHub (Branches, Pull Requests).
+*   **CI/CD** : GitHub Actions lance les tests et déploie le site à chaque modification.
+*   **Qualité** : Tests unitaires (`pytest`) et documentation automatique (`Sphinx`).
