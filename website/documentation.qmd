@@ -1,0 +1,10 @@
+---
+title: "Documentation"
+format: html
+---
+
+::: {.callout-note}
+Cette documentation est générée automatiquement depuis les docstrings du code source via Sphinx.
+:::
+
+<iframe src="api/index.html" width="100%" height="600px" style="border:none;"></iframe>

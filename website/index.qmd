@@ -1,86 +1,130 @@
 ---
-title: "health4earth"
+title: "Accueil"
 format: 
   html:
-    theme: cosmo
+    page-layout: custom
     toc: false
-    page-layout: full
 jupyter: python3
 ---
 
-## Carte Interactive
+::: {.grid}
+::: {.g-col-12 .text-center style="background-color: #f8f9fa; padding: 15px; border-bottom: 1px solid #ddd;"}
+### Observatoire Health4Earth
+**Cliquez sur un pays pour visualiser son Bilan Santé & Climat**
+:::
+:::
+
+```{python}
+#| echo: false
+#| warning: false
+#| output: false
+
+# --- BLOC 1 : CALCULS (Caché pour éviter les textes parasites) ---
+import folium
+import requests
+import matplotlib.pyplot as plt
+import io
+import base64
+import pandas as pd
+import json
+from health4earth.data_ingest import load_merged_data
+
+# On empêche l'affichage intempestif des graphiques matplotlib
+plt.ioff()
+
+# Chargement des données
+df = load_merged_data()
+
+# Fonction de génération du graphique popup
+def get_graph_b64(iso_code, country_name):
+    data = df[df['iso_code'] == iso_code]
+    if len(data) < 5: return None
+    
+    fig, ax1 = plt.subplots(figsize=(5, 3))
+    
+    # Axe Gauche
+    l1, = ax1.plot(data['year'], data['co2'], color='grey', label='CO2', linewidth=2)
+    l2, = ax1.plot(data['year'], data['pollution_deaths'], color='red', linestyle='--', label='Décès')
+    ax1.set_ylabel('Volume', fontsize=8)
+    ax1.tick_params(axis='y', labelsize=8)
+    
+    # Axe Droit
+    ax2 = ax1.twinx()
+    l3, = ax2.plot(data['year'], data['life_expectancy'], color='green', linewidth=2, label='Vie')
+    l4, = ax2.plot(data['year'], data['pollution_concentration'], color='orange', linestyle=':', label='Poll.')
+    ax2.set_ylabel('Indices', fontsize=8)
+    ax2.tick_params(axis='y', labelsize=8)
+    
+    plt.title(f"Bilan : {country_name}", fontsize=10, fontweight='bold')
+    
+    lines = [l1, l2, l3, l4]
+    labels = [l.get_label() for l in lines]
+    ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=4, fontsize=7, frameon=False)
+    
+    plt.tight_layout()
+    img = io.BytesIO()
+    plt.savefig(img, format='png', bbox_inches='tight')
+    img.seek(0)
+    plt.close(fig)
+    return base64.b64encode(img.getvalue()).decode()
+
+# Récupération GeoJSON
+geo_url = "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json"
+geo_data = requests.get(geo_url).json()
+```
 
 ```{python}
 #| echo: false
 #| warning: false
 #| output: true
 
-import folium
-import base64
-import io
-import matplotlib.pyplot as plt
-import pandas as pd
-from health4earth.data_ingest import load_merged_data
+# --- BLOC 2 : AFFICHAGE CARTE (Visible) ---
 
-# 1. Chargement
-df = load_merged_data()
+# Configuration de la carte statique
+m = folium.Map(
+    location=[25, 0], 
+    zoom_start=2, 
+    tiles="CartoDB positron", 
+    height="85vh", 
+    width="100%",
+    zoom_control=False,
+    scrollWheelZoom=False,
+    dragging=False,
+    doubleClickZoom=False,
+    boxZoom=False
+)
 
-# 2. Fonction magique : Générer un graphique en Base64 (Image texte)
-def get_graph_base64(country_name):
-    """Génère un graphique d'évolution pour un pays et le retourne en Base64 pour HTML."""
-    country_data = df[df['country'] == country_name]
-    if country_data.empty or len(country_data) < 5:
-        return None
+# Liste des pays disponibles dans nos données
+available_isos = df['iso_code'].unique()
+
+# Styles
+style_invisible = {'fillColor': '#3388ff', 'color': '#3388ff', 'weight': 1, 'fillOpacity': 0.0}
+style_highlight = {'fillColor': '#3388ff', 'color': 'black', 'weight': 2, 'fillOpacity': 0.4}
+
+for feature in geo_data['features']:
+    country_iso = feature['id']
+    country_name = feature['properties']['name']
+    
+    # On ajoute uniquement les pays qu'on connaît
+    if country_iso in available_isos:
+        b64 = get_graph_b64(country_iso, country_name)
         
-    # Création du graphique (Petit format pour le popup)
-    plt.figure(figsize=(4, 2.5))
-    plt.plot(country_data['year'], country_data['co2'], color='red', linewidth=2)
-    plt.title(f"Évolution CO2: {country_name}", fontsize=10)
-    plt.xlabel("Année", fontsize=8)
-    plt.ylabel("Mt CO2", fontsize=8)
-    plt.tight_layout()
-    
-    # Sauvegarde en mémoire
-    img = io.BytesIO()
-    plt.savefig(img, format='png', transparent=True)
-    img.seek(0)
-    
-    # Encodage
-    return base64.b64encode(img.getvalue()).decode()
-
-# 3. Préparation de la carte
-m = folium.Map(location=[20, 0], zoom_start=2, tiles="CartoDB positron")
-
-# Liste des pays clés avec leurs coordonnées
-capitals = {
-    'France': [48.85, 2.35], 'United States': [38.90, -77.03],
-    'China': [39.90, 116.40], 'India': [28.61, 77.20],
-    'Brazil': [-15.78, -47.92], 'Germany': [52.52, 13.40],
-    'Russia': [55.75, 37.61], 'Japan': [35.67, 139.65]
-}
-
-for country, coords in capitals.items():
-    # Génération du graphique
-    b64_img = get_graph_base64(country)
-    
-    # Création du HTML pour le popup
-    if b64_img:
-        html = f"""
-        <div style="width:300px; text-align:center;">
-            <h4>{country}</h4>
-            <img src="data:image/png;base64,{b64_img}" width="280">
-            <br>
-            <a href="predictions.html" target="_top">Voir prédictions complètes ➡️</a>
-        </div>
-        """
-        iframe = folium.IFrame(html, width=320, height=250)
-        popup = folium.Popup(iframe, max_width=350)
-        
-        folium.Marker(
-            location=coords,
-            popup=popup,
-            icon=folium.Icon(color="red", icon="stats")
-        ).add_to(m)
+        if b64:
+            html = f"""
+            <div style="text-align:center; width: 400px;">
+                <img src="data:image/png;base64,{b64}" width="100%">
+            </div>
+            """
+            iframe = folium.IFrame(html, width=420, height=320)
+            popup = folium.Popup(iframe, max_width=450)
+            
+            folium.GeoJson(
+                feature,
+                style_function=lambda x: style_invisible,
+                highlight_function=lambda x: style_highlight,
+                popup=popup,
+                tooltip=f"📊 {country_name}"
+            ).add_to(m)
 
 m
 ```

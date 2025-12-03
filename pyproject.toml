@@ -26,6 +26,7 @@ dependencies = [
     "tqdm",
     "folium",
     "scikit-learn"
+    "plotly"
 ]
 
 [project.optional-dependencies]
