@@ -5,6 +5,7 @@ from health4earth.analytics import HealthAnalyzer
 @pytest.fixture
 def fake_df():
     """Crée un petit DataFrame fictif pour tester la logique sans internet."""
+    # Données fictives allant de 2000 à 2009
     return pd.DataFrame({
         "country": ["France"] * 10 + ["USA"] * 10,
         "year": list(range(2000, 2010)) * 2,
@@ -27,8 +28,9 @@ def test_prediction_structure(fake_df):
     """Teste si la prédiction renvoie bien le format attendu."""
     analyzer = HealthAnalyzer(fake_df)
     
-    # On demande une prédiction jusqu'en 2015 (nos données s'arrêtent en 2009)
-    df_pred = analyzer.predict_evolution("France", "co2", year_horizon=2015)
+    # CORRECTION ICI : On utilise les nouveaux arguments 'year_end' et 'year_start_pred'
+    # Nos fausses données s'arrêtent en 2009, donc on prédit de 2010 à 2015
+    df_pred = analyzer.predict_evolution("France", "co2", year_start_pred=2010, year_end=2015)
     
     assert df_pred is not None
     assert "type" in df_pred.columns
