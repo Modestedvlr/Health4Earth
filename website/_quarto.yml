@@ -12,11 +12,9 @@ website:
         text: Accueil
       - href: analysis.qmd
         text: Analyse Exploratoire
-      - href: predictions.qmd
-        text: Prédictions
-      - href: methods.qmd
-        text: Méthodologie
-      - href: api/index.html
+      - href: predictions_france.qmd
+        text: Prédiction France
+      - href: documentation.qmd
         text: Documentation
 
 format:
@@ -25,3 +23,4 @@ format:
     toc: true
     code-fold: true
     page-layout: article
+    mainfont: "Segoe UI"
