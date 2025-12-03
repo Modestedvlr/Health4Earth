@@ -26,7 +26,7 @@ sns.set_theme(style="whitegrid")
 plt.rcParams['figure.figsize'] = [10, 6]
 ```
 
-## 1. La Fracture Nord-Sud : Développement vs Santé
+## 1. Développement vs Santé
 Nous analysons ici le lien entre le développement industriel (approximé par les émissions de CO₂) et l'espérance de vie.
 
 ```{python}
@@ -102,5 +102,14 @@ df = load_merged_data()
 df_2020 = df[df['year'] == 2020]
 
 # 3. Génération via Seaborn
-sns.scatterplot(data=df_2020, x='co2', y='life_expectancy', ...)
+sns.scatterplot(
+    data=df_2020, 
+    x='co2', 
+    y='life_expectancy', 
+    hue='life_expectancy', 
+    size='population', 
+    sizes=(20, 500), 
+    palette='viridis', 
+    legend=False,
+    alpha=0.8)
 ```
