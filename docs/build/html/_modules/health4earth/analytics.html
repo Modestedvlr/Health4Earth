@@ -41,6 +41,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Guide d’Utilisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">health4earth</a></li>
 </ul>
 
@@ -77,80 +79,46 @@
 <a class="viewcode-back" href="../../health4earth.html#health4earth.analytics.HealthAnalyzer">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">HealthAnalyzer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Moteur d&#39;analyse statistique et prédictive du projet Health4Earth.</span>
-<span class="sd">    </span>
-<span class="sd">    Cette classe encapsule la logique métier et les algorithmes de Machine Learning.</span>
-<span class="sd">    Elle suit le paradigme de Programmation Orientée Objet (POO).</span>
-<span class="sd">    </span>
-<span class="sd">    Attributes:</span>
-<span class="sd">        data (pd.DataFrame): Le jeu de données complet chargé en mémoire.</span>
+<span class="sd">    Moteur d&#39;analyse statistique et prédictive Health4Earth.</span>
+<span class="sd">    Gère les régressions linéaires pour les projections 2025-2050.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialise l&#39;analyseur.</span>
-<span class="sd">        </span>
-<span class="sd">        Args:</span>
-<span class="sd">            df (pd.DataFrame): Le DataFrame issu de `load_merged_data`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="HealthAnalyzer.get_country_data">
 <a class="viewcode-back" href="../../health4earth.html#health4earth.analytics.HealthAnalyzer.get_country_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_country_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Extrait les données spécifiques à un pays.</span>
-<span class="sd">        </span>
-<span class="sd">        Args:</span>
-<span class="sd">            country (str): Le nom du pays (ex: &#39;France&#39;).</span>
-<span class="sd">            </span>
-<span class="sd">        Returns:</span>
-<span class="sd">            pd.DataFrame: Un sous-ensemble des données filtré par pays.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extrait les données spécifiques à un pays.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="HealthAnalyzer.predict_evolution">
 <a class="viewcode-back" href="../../health4earth.html#health4earth.analytics.HealthAnalyzer.predict_evolution">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">predict_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">year_horizon</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2030</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict_evolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">year_start_pred</span><span class="o">=</span><span class="mi">2024</span><span class="p">,</span> <span class="n">year_end</span><span class="o">=</span><span class="mi">2050</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Prédit l&#39;évolution future d&#39;un indicateur jusqu&#39;à une année donnée.</span>
-<span class="sd">        </span>
-<span class="sd">        Méthodologie :</span>
-<span class="sd">            Utilise une **Régression Linéaire** (Scikit-Learn) entraînée sur les </span>
-<span class="sd">            20 dernières années de données disponibles pour projeter la tendance.</span>
-<span class="sd">        </span>
-<span class="sd">        Args:</span>
-<span class="sd">            country (str): Le pays cible (ex: &#39;France&#39;).</span>
-<span class="sd">            target_col (str): La variable à prédire (&#39;co2&#39;, &#39;life_expectancy&#39;).</span>
-<span class="sd">            year_horizon (int): L&#39;année cible de la prédiction (défaut 2030).</span>
-<span class="sd">            </span>
-<span class="sd">        Returns:</span>
-<span class="sd">            pd.DataFrame: Un tableau contenant l&#39;historique réel et les années prédites.</span>
-<span class="sd">            Retourne None si les données sont insuffisantes.</span>
+<span class="sd">        Prédit l&#39;évolution future d&#39;un indicateur.</span>
+<span class="sd">        Utilise les données depuis 2000 pour entraîner le modèle.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># On utilise la méthode interne pour récupérer les données</span>
         <span class="n">df_country</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_country_data</span><span class="p">(</span><span class="n">country</span><span class="p">)</span>
+        <span class="c1"># On entraîne sur les 20 dernières années pour avoir une tendance récente</span>
+        <span class="n">df_train</span> <span class="o">=</span> <span class="n">df_country</span><span class="p">[</span><span class="n">df_country</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
         
-        <span class="c1"># On filtre pour garder les données récentes (&gt;= 2000) et valides</span>
-        <span class="n">df_recent</span> <span class="o">=</span> <span class="n">df_country</span><span class="p">[</span><span class="n">df_country</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
-        
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_recent</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span> 
 
-        <span class="c1"># Préparation du modèle ML</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">df_recent</span><span class="p">[[</span><span class="s1">&#39;year&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">df_recent</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="c1"># Machine Learning</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[[</span><span class="s1">&#39;year&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
         
         <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
         <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-        <span class="c1"># Génération des années futures</span>
-        <span class="n">last_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">df_country</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-        <span class="n">future_years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">last_year</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">year_horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Génération des années futures (de maintenant à 2050)</span>
+        <span class="n">future_years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">year_start_pred</span><span class="p">,</span> <span class="n">year_end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">future_preds</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future_years</span><span class="p">)</span>
         
-        <span class="c1"># Construction du DataFrame de prédiction</span>
+        <span class="c1"># DataFrame Prédiction</span>
         <span class="n">df_future</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
             <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="n">future_years</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
             <span class="n">target_col</span><span class="p">:</span> <span class="n">future_preds</span><span class="p">,</span>
@@ -158,7 +126,7 @@
             <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="n">country</span>
         <span class="p">})</span>
         
-        <span class="c1"># Construction de l&#39;historique</span>
+        <span class="c1"># DataFrame Historique (pour l&#39;affichage complet)</span>
         <span class="n">df_history</span> <span class="o">=</span> <span class="n">df_country</span><span class="p">[[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">target_col</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">df_history</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Historique&#39;</span>
         <span class="n">df_history</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">country</span>

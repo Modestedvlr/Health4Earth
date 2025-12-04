@@ -43,6 +43,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Guide d’Utilisation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">health4earth</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">health4earth package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
@@ -142,62 +144,19 @@
 <dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">health4earth.analytics.</span></span><span class="sig-name descname"><span class="pre">HealthAnalyzer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Moteur d’analyse statistique et prédictive du projet Health4Earth.</p>
-<p>Cette classe encapsule la logique métier et les algorithmes de Machine Learning.
-Elle suit le paradigme de Programmation Orientée Objet (POO).</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer.data">
-<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.data" title="Link to this definition"></a></dt>
-<dd><p>Le jeu de données complet chargé en mémoire.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
+<p>Moteur d’analyse statistique et prédictive Health4Earth.
+Gère les régressions linéaires pour les projections 2025-2050.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer.get_country_data">
 <span class="sig-name descname"><span class="pre">get_country_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer.get_country_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.get_country_data" title="Link to this definition"></a></dt>
 <dd><p>Extrait les données spécifiques à un pays.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>country</strong> (<em>str</em>) – Le nom du pays (ex: ‘France’).</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Un sous-ensemble des données filtré par pays.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer.predict_evolution">
-<span class="sig-name descname"><span class="pre">predict_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_horizon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2030</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer.predict_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.predict_evolution" title="Link to this definition"></a></dt>
-<dd><p>Prédit l’évolution future d’un indicateur jusqu’à une année donnée.</p>
-<dl class="simple">
-<dt>Méthodologie :</dt><dd><p>Utilise une <strong>Régression Linéaire</strong> (Scikit-Learn) entraînée sur les
-20 dernières années de données disponibles pour projeter la tendance.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>country</strong> (<em>str</em>) – Le pays cible (ex: ‘France’).</p></li>
-<li><p><strong>target_col</strong> (<em>str</em>) – La variable à prédire (‘co2’, ‘life_expectancy’).</p></li>
-<li><p><strong>year_horizon</strong> (<em>int</em>) – L’année cible de la prédiction (défaut 2030).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Un tableau contenant l’historique réel et les années prédites.
-Retourne None si les données sont insuffisantes.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
+<span class="sig-name descname"><span class="pre">predict_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_start_pred</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2024</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2050</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer.predict_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.predict_evolution" title="Link to this definition"></a></dt>
+<dd><p>Prédit l’évolution future d’un indicateur.
+Utilise les données depuis 2000 pour entraîner le modèle.</p>
 </dd></dl>
 
 </dd></dl>
@@ -252,31 +211,8 @@ Retourne None si les données sont insuffisantes.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="health4earth.data_ingest.load_merged_data">
 <span class="sig-prename descclassname"><span class="pre">health4earth.data_ingest.</span></span><span class="sig-name descname"><span class="pre">load_merged_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/health4earth/data_ingest.html#load_merged_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_ingest.load_merged_data" title="Link to this definition"></a></dt>
-<dd><p>Télécharge, nettoie et fusionne les données mondiales (CO2, Pollution, Santé).</p>
-<p>Cette fonction est le point d’entrée principal du pipeline de données.
-Elle utilise la librairie <strong>Pooch</strong> pour gérer le cache local (évite de retélécharger à chaque fois).</p>
-<dl class="simple">
-<dt>Stratégie de résilience :</dt><dd><p>Si les serveurs de l’OMS/OWID sont inaccessibles pour la pollution,
-la fonction génère des données estimées basées sur des corrélations scientifiques
-connues (Mode ‘Fallback’) pour assurer le fonctionnement de l’application.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><dl class="simple">
-<dt>Un DataFrame unique contenant pour chaque Pays et Année :</dt><dd><ul class="simple">
-<li><p><cite>co2</cite>: Émissions en millions de tonnes.</p></li>
-<li><p><cite>pollution_deaths</cite>: Nombre de décès attribués à la pollution de l’air.</p></li>
-<li><p><cite>life_expectancy</cite>: Espérance de vie moyenne à la naissance.</p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>pd.DataFrame</p>
-</dd>
-</dl>
+<dd><p>Charge les données. Si les sources externes échouent, génère un dataset
+mathématiquement réaliste pour garantir le fonctionnement du site.</p>
 </dd></dl>
 
 </section>

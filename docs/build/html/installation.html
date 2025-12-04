@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Documentation Health4Earth &mdash; Health4Earth 0.1 documentation</title>
+  <title>Installation &mdash; Health4Earth 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -19,7 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation" href="installation.html" /> 
+    <link rel="next" title="Guide d’Utilisation" href="usage.html" />
+    <link rel="prev" title="Documentation Health4Earth" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -30,7 +31,7 @@
 
           
           
-          <a href="#" class="icon icon-home">
+          <a href="index.html" class="icon icon-home">
             Health4Earth
           </a>
 <div role="search">
@@ -42,8 +43,13 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pre-requis">Pré-requis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-via-git">Installation via Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verification">Vérification</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Guide d’Utilisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">health4earth</a></li>
 </ul>
@@ -54,17 +60,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">Health4Earth</a>
+          <a href="index.html">Health4Earth</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Documentation Health4Earth</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -72,45 +78,43 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="documentation-health4earth">
-<h1>Documentation Health4Earth<a class="headerlink" href="#documentation-health4earth" title="Link to this heading"></a></h1>
-<p>Add your content using <code class="docutils literal notranslate"><span class="pre">reStructuredText</span></code> syntax. See the
-<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a></p>
-<p>Bienvenue sur la documentation technique du projet Health4Earth.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#pre-requis">Pré-requis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-via-git">Installation via Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#verification">Vérification</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Guide d’Utilisation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#chargement-des-donnees">Chargement des Données</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#analyse-et-predictions">Analyse et Prédictions</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">health4earth</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="health4earth.html">health4earth package</a></li>
-</ul>
-</li>
-</ul>
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<section id="pre-requis">
+<h2>Pré-requis<a class="headerlink" href="#pre-requis" title="Link to this heading"></a></h2>
+<p>Ce projet nécessite <strong>Python 3.10</strong> ou une version supérieure.</p>
+</section>
+<section id="installation-via-git">
+<h2>Installation via Git<a class="headerlink" href="#installation-via-git" title="Link to this heading"></a></h2>
+<p>Pour installer le package <code class="docutils literal notranslate"><span class="pre">health4earth</span></code> et l’utiliser sur votre machine :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Cloner le dépôt</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/VOTRE-PSEUDO/Health4Earth.git
+<span class="nb">cd</span><span class="w"> </span>Health4Earth
+
+<span class="c1"># 2. Installer les dépendances</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+
+<span class="c1"># 3. (Optionnel) Installer les outils de développement (tests, doc)</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>dev<span class="o">]</span>
+</pre></div>
 </div>
 </section>
-<section id="index-et-tables">
-<h1>Index et Tables<a class="headerlink" href="#index-et-tables" title="Link to this heading"></a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-</ul>
+<section id="verification">
+<h2>Vérification<a class="headerlink" href="#verification" title="Link to this heading"></a></h2>
+<p>Pour vérifier que l’installation a fonctionné :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">health4earth</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Health4Earth est installé !&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Documentation Health4Earth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Guide d’Utilisation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
