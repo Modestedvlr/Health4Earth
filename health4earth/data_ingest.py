@@ -12,7 +12,7 @@ def load_merged_data() -> pd.DataFrame:
     Charge les données. Si les sources externes échouent, génère un dataset
     mathématiquement réaliste pour garantir le fonctionnement du site.
     """
-    print("--- Démarrage Ingestion ---")
+    # print("--- Démarrage Ingestion ---")
     
     # 1. Base Pays & Années
     # On génère une structure propre pour tous les pays de 1990 à 2024
