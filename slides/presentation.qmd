@@ -1,82 +1,191 @@
 ---
 title: "Health4Earth"
-subtitle: "Data Science & Environnement"
-author: "Master HAX712X"
+subtitle: "Analyse et Visualisation de Données de l'Impact Environnemental sur la Santé"
+author: "Équipe Projet Health4Earth - Master 1 SSD"
 format:
   revealjs:
-    theme: league
-    transition: slide
+    theme: night
+    transition: concave
     slide-number: true
     logo: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+    footer: "Université de Montpellier - 2025"
+    code-overflow: wrap
+    css: custom_slides.css
 jupyter: python3
 ---
 
-## 1. Le Projet
-
-**Problématique :**
-Comment corréler les données massives de pollution (CO₂) avec la santé publique ?
-
-**Stack Technique :**
-*   **Python 3.10** (Package structuré)
-*   **Scikit-Learn** (Prédictions IA)
-*   **Folium** (Cartographie)
-*   **GitHub Actions** (CI/CD)
+# 1. Contexte et Objectifs {background-color="#1a1a2e"}
 
 ---
 
-## 2. Architecture & Données
+## La Problématique
+::: {.fragment .fade-up}
+> *Dans quelle mesure le développement industriel et les émissions de CO₂ impactent-ils la santé publique mondiale ?*
+:::
+**Nos Objectifs :**
 
-::: {.mermaid}
+1.  **Agrégation** de données hétérogènes (Climat vs Santé).
+
+2.  **Visualisation** des disparités mondiales.
+
+3.  **Prédiction** des trajectoires à l'horizon 2050.
+
+---
+
+# 2. Architecture Technique {background-color="#16213e"}
+
+---
+
+## Le Pipeline de Données
+
+Une architecture modulaire et automatisée :
+
+```{mermaid}
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '32px', 'fontFamily': 'Helvetica', 'darkMode': true }}}%%
 flowchart LR
-    A[OWID / WHO\n(Cloud)] -->|Pooch| B(Cache Local)
-    B -->|Ingest| C{Fusion & Nettoyage}
-    C -->|Pandas| D[HealthAnalyzer]
-    D --> E[Régression Linéaire]
-    E --> F[Dashboard Quarto]
+    A(Sources Web) -->|Pooch| B(Cache Local)
+    B -->|Nettoyage| C{Dataset Fusionné}
+    C -->|Pandas| D[Classe HealthAnalyzer]
+    D -->|Scikit-Learn| E[Modèle IA]
+    E & D -->|Quarto| F(Dashboard Web)
+
+    style A fill:#e74c3c,stroke:#fff,stroke-width:2px,color:white
+    style B fill:#e67e22,stroke:#fff,stroke-width:2px,color:white
+    style C fill:#f1c40f,stroke:#fff,stroke-width:2px,color:black
+    style D fill:#3498db,stroke:#fff,stroke-width:2px,color:white
+    style E fill:#9b59b6,stroke:#fff,stroke-width:2px,color:white
+    style F fill:#2ecc71,stroke:#fff,stroke-width:2px,color:white
+```
+
+::: {.incremental style="font-size: 0.8em; margin-top: 30px;"}
+
+* Ingestion : Téléchargement sécurisé et mise en cache (pooch).
+
+* Traitement : Fusion des sources hétérogènes (Climat + Santé).
+
+* Analyse : Structure Orientée Objet (class HealthAnalyzer).
+
+* IA : Calcul des prédictions 2050 sur les données nettoyées.
+
+* Rendu : Génération du site statique interactif.
 :::
 
-*   **Robustesse :** Système de "Fallback" si les API échouent.
-*   **Performance :** Cache système pour éviter la latence.
+---
+
+## Focus : Robustesse (Ingestion)
+
+Nous avons implémenté un système de **"Fallback"** (Tolérance aux pannes).
+
+*   **Problème :** Les API/CSV sources changent souvent d'URL (Erreurs 404).
+
+*   **Solution :** Si le téléchargement échoue, le module `data_ingest` bascule automatiquement sur une génération de données réalistes basée sur des corrélations historiques.
+
+*   **Résultat :** L'application ne plante **jamais** en démonstration.
 
 ---
 
-## 3. Démo : Prédiction IA
+# 3. Intelligence Artificielle {background-color="#0f3460"}
 
-Code réel exécuté dans ces slides :
+---
+
+## Méthodologie Prédictive
+
+Nous utilisons le **Machine Learning** pour projeter les tendances.
+
+*   **Modèle :** Régression Linéaire (Supervisé).
+
+*   **Entraînement :** Fenêtre glissante sur les 20 dernières années (2004-2024).
+
+*   **Cibles :** CO₂, Espérance de vie, Mortalité liée à la pollution.
+
+---
+
+## Démonstration du Code (Live)
+
+Exécution réelle du package `health4earth` :
 
 ```{python}
 #| echo: true
-import sys, os
+#| eval: true
+
+import sys
+import os
+import pandas as pd
+# Import du package développé
 sys.path.append(os.path.abspath(".."))
-from health4earth.data_ingest import load_merged_data
 from health4earth.analytics import HealthAnalyzer
 
-# 1. Chargement
-df = load_merged_data()
-analyzer = HealthAnalyzer(df)
+# Simulation de données pour l'exemple
+data = pd.DataFrame({
+    'country': ['France'] * 20,
+    'year': range(2000, 2020),
+    'co2': [400 - i*5 for i in range(20)] # Tendance baissière
+})
 
-# 2. Prédiction France 2030
-pred = analyzer.predict_evolution("France", "co2", 2030)
-print(pred.tail(3)) # Affiche les 3 dernières années prédites
+# Initialisation de notre classe
+analyzer = HealthAnalyzer(data)
+print(f"Classe HealthAnalyzer instanciée avec succès.")
 ```
 
+# 4. Interface & Visualisation {background-color="#533483"}
 
-## 4. Résultats Visuels
+---
 
-Trajectoire prédite pour la France (CO₂) :
+## Le Dashboard Web
 
-```{python}
-#| echo: false
-#| fig-align: center
-import seaborn as sns
-import matplotlib.pyplot as plt
+Déploiement automatisé sur **GitHub Pages**.
 
-plt.figure(figsize=(10, 4))
-sns.lineplot(data=pred, x='year', y='co2', hue='type', palette=['blue', 'red'])
-plt.title("Projection 2030 (Régression Linéaire)")
-plt.show()
-```
+**Fonctionnalités clés :**
 
-Merci !
-Site Web & Documentation :
-github.com/PSEUDO/Health4Earth
+*   **Carte Choroplèthe :** Vue mondiale des émissions et indicateurs.
+
+*   **Popups Intelligents :** Graphiques générés en Python (Matplotlib) et encodés en Base64 directement dans les marqueurs.
+
+*   **Exploration Plotly :** Sélecteurs interactifs pour comparer les courbes des pays.
+
+---
+
+# 5. Qualité Logicielle & Bilan {background-color="#e94560"}
+
+---
+
+## Pratiques DevOps (CI/CD)
+
+Le projet respecte les standards industriels :
+
+*   **Tests Unitaires :** `pytest` exécuté à chaque commit.
+
+*   **Documentation :** Générée via `Sphinx` et intégrée au site via Iframe.
+
+*   **Intégration Continue :** GitHub Actions (Build, Test, Deploy).
+
+*   **Packaging :** Installation standard via `pip install .` (`pyproject.toml`).
+
+---
+
+## Auto-Critique & Perspectives
+
+**Difficultés rencontrées :**
+
+*   Intégration hybride Quarto / Sphinx (résolu via Iframe CSS).
+
+*   Instabilité des sources de données (résolu via système de Fallback).
+
+**Améliorations possibles :**
+
+*   Utiliser des modèles non-linéaires (Prophet, LSTM) pour des prédictions plus fines.
+
+
+*   Ajouter une API REST (FastAPI) pour servir les prédictions à d'autres applications.
+
+---
+
+# Merci de votre attention {background-image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" background-opacity="0.4"}
+
+**Lien du projet :**
+
+[github.com/JulienOllier/Health4Earth](https://github.com/JulienOllier/Health4Earth)
+
+
+
+*Questions ?*
