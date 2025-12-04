@@ -1,27 +1,77 @@
 ---
-title: "Tableau de Bord Environnemental"
+pagetitle: "Health4Earth - Accueil"
 format: 
   html:
-    page-layout: full
+    page-layout: custom
     toc: false
 jupyter: python3
 ---
 
-::: {.grid}
-::: {.g-col-12 .text-center style="background-color: white; padding: 40px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px;"}
-# Observatoire Health4Earth
-<p style="font-size: 1.2em; color: #666;">
-Analyse et Visualisation de l'Impact Environnemental sur la Santé Publique
+<!-- HEADER / INTRO GLOBALE -->
+::: {.grid .text-center style="background-color: #f8f9fa; padding: 60px 20px; margin-bottom: 20px;"}
+::: {.g-col-12}
+<h1 style="color: #2c3e50; font-weight: 800; font-size: 3em; margin-bottom: 10px;">Observatoire</h1>
+<p style="font-size: 1.3em; color: #666; max-width: 800px; margin: 0 auto;">
+Health4Earth est une plateforme de science des données dédiée à l'analyse croisée des impacts environnementaux sur la santé humaine.
 </p>
 :::
 :::
+
+<!-- SECTION : CONTEXTE & VISION -->
+<div style="max-width: 900px; margin: 0 auto; padding: 20px;">
+
+<div style="margin-bottom: 50px; border-left: 5px solid #e74c3c; padding-left: 20px;">
+<h2 style="color: #e74c3c; margin-top: 0;">La Cause</h2>
+<h4 style="color: #555; margin-top: 0;">Le coût invisible du progrès.</h4>
+<p style="font-size: 1.1em; line-height: 1.6; text-align: justify;">
+Depuis la révolution industrielle, le développement économique est corrélé à une explosion des émissions de CO₂. Si l'impact sur le réchauffement climatique est connu, le lien direct avec la santé publique mondiale (maladies respiratoires, espérance de vie) reste complexe à quantifier. La pollution ne connaît pas de frontières, mais ses conséquences sont inégalement réparties.
+</p>
+</div>
+
+<div style="margin-bottom: 50px; border-left: 5px solid #3498db; padding-left: 20px;">
+<h2 style="color: #3498db; margin-top: 0;">Notre Approche</h2>
+<h4 style="color: #555; margin-top: 0;">Décloisonner les données.</h4>
+<p style="font-size: 1.1em; line-height: 1.6; text-align: justify;">
+Les données climatiques (OWID) et sanitaires (OMS) existent, mais elles sont souvent isolées. Notre projet utilise des algorithmes d'ingestion automatisés pour fusionner ces sources hétérogènes. Nous transformons des millions de points de données bruts en indicateurs clairs, permettant de visualiser les corrélations entre la qualité de l'air et la mortalité.
+</p>
+</div>
+
+<div style="margin-bottom: 50px; border-left: 5px solid #2ecc71; padding-left: 20px;">
+<h2 style="color: #2ecc71; margin-top: 0;">La Vision 2050</h2>
+<h4 style="color: #555; margin-top: 0;">Prévoir pour agir.</h4>
+<p style="font-size: 1.1em; line-height: 1.6; text-align: justify;">
+Observer le passé ne suffit plus. Grâce au Machine Learning (Régression Linéaire), Health4Earth projette les tendances actuelles jusqu'en 2050. Nous cherchons à répondre à une question cruciale : <em>Les politiques actuelles de réduction des émissions suffiront-elles à endiguer la mortalité liée à la pollution dans les décennies à venir ?</em>
+</p>
+</div>
+
+</div>
+
+<!-- TITRE DE LA CARTE (CORRIGÉ POUR SUPPRIMER L'ESPACE) -->
+::: {.grid}
+<!-- J'ai mis padding-bottom à 10px et margin-bottom à 0 -->
+::: {.g-col-12 .text-center style="background-color: white; padding: 40px 20px 10px 20px; border-top: 1px solid #eee; margin-bottom: 0;"}
+<h1 style="color: #2c3e50; margin-bottom: 5px;">Carte du Monde Interactive</h1>
+<p style="font-size: 1.2em; color: #666; max-width: 800px; margin: 0 auto; margin-bottom: 0;">
+Visualisation des courbes d'évolution (CO₂, Pollution, Santé) pour chaque pays.<br>
+<strong>Cliquez sur un pays pour afficher son bilan détaillé.</strong>
+</p>
+:::
+:::
+
+<!-- PETIT CSS HACK POUR COLLER LA CARTE AU TEXTE -->
+<style>
+.cell-output-display {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+</style>
 
 ```{python}
 #| echo: false
 #| warning: false
 #| output: false
 
-# --- BLOC 1 : CALCULS (Caché pour éviter les textes parasites) ---
+# --- BLOC 1 : CALCULS (Caché) ---
 import folium
 import requests
 import matplotlib.pyplot as plt
@@ -31,26 +81,20 @@ import pandas as pd
 import json
 from health4earth.data_ingest import load_merged_data
 
-# On empêche l'affichage intempestif des graphiques matplotlib
 plt.ioff()
-
-# Chargement des données
 df = load_merged_data()
 
-# Fonction de génération du graphique popup
 def get_graph_b64(iso_code, country_name):
     data = df[df['iso_code'] == iso_code]
     if len(data) < 5: return None
     
     fig, ax1 = plt.subplots(figsize=(5, 3))
     
-    # Axe Gauche
     l1, = ax1.plot(data['year'], data['co2'], color='grey', label='CO2', linewidth=2)
     l2, = ax1.plot(data['year'], data['pollution_deaths'], color='red', linestyle='--', label='Décès')
     ax1.set_ylabel('Volume', fontsize=8)
     ax1.tick_params(axis='y', labelsize=8)
     
-    # Axe Droit
     ax2 = ax1.twinx()
     l3, = ax2.plot(data['year'], data['life_expectancy'], color='green', linewidth=2, label='Vie')
     l4, = ax2.plot(data['year'], data['pollution_concentration'], color='orange', linestyle=':', label='Poll.')
@@ -58,7 +102,6 @@ def get_graph_b64(iso_code, country_name):
     ax2.tick_params(axis='y', labelsize=8)
     
     plt.title(f"Bilan : {country_name}", fontsize=10, fontweight='bold')
-    
     lines = [l1, l2, l3, l4]
     labels = [l.get_label() for l in lines]
     ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=4, fontsize=7, frameon=False)
@@ -70,7 +113,6 @@ def get_graph_b64(iso_code, country_name):
     plt.close(fig)
     return base64.b64encode(img.getvalue()).decode()
 
-# Récupération GeoJSON
 geo_url = "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json"
 geo_data = requests.get(geo_url).json()
 ```
@@ -80,9 +122,7 @@ geo_data = requests.get(geo_url).json()
 #| warning: false
 #| output: true
 
-# --- BLOC 2 : AFFICHAGE CARTE (Visible) ---
-
-# Configuration de la carte statique
+# --- BLOC 2 : AFFICHAGE CARTE ---
 m = folium.Map(
     location=[25, 0], 
     zoom_start=2, 
@@ -96,10 +136,7 @@ m = folium.Map(
     boxZoom=False
 )
 
-# Liste des pays disponibles dans nos données
 available_isos = df['iso_code'].unique()
-
-# Styles
 style_invisible = {'fillColor': '#3388ff', 'color': '#3388ff', 'weight': 1, 'fillOpacity': 0.0}
 style_highlight = {'fillColor': '#3388ff', 'color': 'black', 'weight': 2, 'fillOpacity': 0.4}
 
@@ -107,10 +144,8 @@ for feature in geo_data['features']:
     country_iso = feature['id']
     country_name = feature['properties']['name']
     
-    # On ajoute uniquement les pays qu'on connaît
     if country_iso in available_isos:
         b64 = get_graph_b64(country_iso, country_name)
-        
         if b64:
             html = f"""
             <div style="text-align:center; width: 400px;">
@@ -125,7 +160,7 @@ for feature in geo_data['features']:
                 style_function=lambda x: style_invisible,
                 highlight_function=lambda x: style_highlight,
                 popup=popup,
-                tooltip=f"📊 {country_name}"
+                tooltip=f"{country_name}"
             ).add_to(m)
 
 m

@@ -1,4 +1,4 @@
-# 🌍 Health4Earth
+# HEALTH4EARTH
 
 ![CI Status](https://github.com/JulienOllier/Health4Earth/actions/workflows/publish.yml/badge.svg)
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
@@ -13,6 +13,7 @@
 Le déploiement automatique (GitHub Pages) nécessitant des droits d'administration spécifiques sur ce dépôt, nous avons mis en place un **Fork de démonstration** pour valider le fonctionnement de notre pipeline CI/CD et du site web.
 
 **Le site est pleinement fonctionnel et accessible ici :**
+
 **[🔗 https://modestedvlr.github.io/Health4Earth/](https://modestedvlr.github.io/Health4Earth/)**
 
 *(Ce lien démontre la génération automatique du rapport Quarto, de la documentation Sphinx et des cartes interactives).*
@@ -57,6 +58,11 @@ Pour tester ce projet sur votre machine locale :
 3.  **Slides de presentation :**
    ```bash
    quarto preview slides/presentation.qmd
+   ```
+
+4. **Rapport de performance**
+   ```bash
+   python health4earth/perf.py
    ```
 ---
 
