@@ -1,8 +1,6 @@
 # Health4Earth
 
-![CI Status](https://github.com/[PSEUDO_DU_PROPRIETAIRE]/[NOM_DU_DEPO]/actions/workflows/publish.yml/badge.svg)
-![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![CI Status](https://github.com/JulienOllier/Health4Earth/actions/workflows/publish.yml/badge.svg)
 
 > **Analyse des liens entre les émissions de CO₂, la pollution atmosphérique et la santé publique à l’échelle mondiale.**
 
