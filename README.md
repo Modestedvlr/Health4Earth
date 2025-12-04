@@ -27,8 +27,8 @@ Pour tester ce projet sur votre machine locale :
 
 1.  **Cloner le dépôt :**
     ```bash
-    git clone https://github.com/[PSEUDO_DU_PROPRIETAIRE]/[NOM_DU_DEPO].git
-    cd [NOM_DU_DEPO]
+    git clone https://github.com/JulienOllier/Health4Earth.git
+    cd Health4Earth
     ```
 
 2.  **Installer les dépendances :**
