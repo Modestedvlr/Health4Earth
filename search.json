@@ -1,0 +1,163 @@
+[
+  {
+    "objectID": "map.html",
+    "href": "map.html",
+    "title": "Carte Interactive",
+    "section": "",
+    "text": "Visualisation géolocalisée des indicateurs clés (Données les plus récentes).\n#| echo: false #| warning: false\nimport folium from health4earth.data_ingest import load_merged_data\ndf = load_merged_data() # On prend 2019 car c’est l’année la plus complète pour la pollution df_recent = df[df[‘year’] == 2019]\n\nListe des pays à afficher\ncapitals = { ‘France’: [48.85, 2.35], ‘United States’: [38.90, -77.03], ‘China’: [39.90, 116.40], ‘India’: [28.61, 77.20], ‘Brazil’: [-15.78, -47.92], ‘Germany’: [52.52, 13.40] }\nm = folium.Map(location=[25, 0], zoom_start=2, tiles=“CartoDB positron”)\nfor country, coords in capitals.items(): row = df_recent[df_recent[‘country’] == country]\nif not row.empty:\n    co2 = row['co2'].values[0]\n    life = row['life_expectancy'].values[0]\n    deaths = int(row['pollution_deaths'].values[0])\n    \n    # Code HTML pour le popup interactif\n    html = f\"\"\"\n    &lt;div style=\"font-family:sans-serif; width:180px\"&gt;\n        &lt;h4&gt;{country}&lt;/h4&gt;\n        &lt;hr&gt;\n        &lt;b&gt;CO2:&lt;/b&gt; {co2:.0f} Mt&lt;br&gt;\n        &lt;b&gt;Vie:&lt;/b&gt; {life:.1f} ans&lt;br&gt;\n        &lt;b&gt;Décès (Air):&lt;/b&gt; {deaths:,}&lt;br&gt;\n        &lt;br&gt;\n        &lt;a href=\"index.html\" target=\"_top\" style=\"color:blue\"&gt;Voir Analyse 📈&lt;/a&gt;\n    &lt;/div&gt;\n    \"\"\"\n    \n    # Couleur selon le CO2\n    color = 'red' if co2 &gt; 1000 else 'orange' if co2 &gt; 300 else 'green'\n    \n    folium.Marker(\n        location=coords,\n        popup=folium.Popup(html, max_width=250),\n        icon=folium.Icon(color=color, icon=\"info-sign\")\n    ).add_to(m)\nm"
+  },
+  {
+    "objectID": "dashboard.html",
+    "href": "dashboard.html",
+    "title": "Analyse & Prédictions",
+    "section": "",
+    "text": "Analyse de l’impact du CO2 sur l’espérance de vie mondiale."
+  },
+  {
+    "objectID": "dashboard.html#corrélations-santé-environnement",
+    "href": "dashboard.html#corrélations-santé-environnement",
+    "title": "Analyse & Prédictions",
+    "section": "",
+    "text": "Analyse de l’impact du CO2 sur l’espérance de vie mondiale."
+  },
+  {
+    "objectID": "dashboard.html#prédictions-france-2030",
+    "href": "dashboard.html#prédictions-france-2030",
+    "title": "Analyse & Prédictions",
+    "section": "2. Prédictions France 2030",
+    "text": "2. Prédictions France 2030\nUtilisation de l’IA pour projeter les tendances."
+  },
+  {
+    "objectID": "code.html",
+    "href": "code.html",
+    "title": "Exploration du Code Source",
+    "section": "",
+    "text": "Voici les modules principaux développés pour le package health4earth."
+  },
+  {
+    "objectID": "code.html#ingestion-des-données-data_ingest.py",
+    "href": "code.html#ingestion-des-données-data_ingest.py",
+    "title": "Exploration du Code Source",
+    "section": "1. Ingestion des Données (data_ingest.py)",
+    "text": "1. Ingestion des Données (data_ingest.py)\nCe module gère le téléchargement sécurisé et la fusion des datasets.\n\n\nCode\n# Contenu de la fonction principale\ndef load_merged_data():\n    # ... (Voir fichier source)\n    path_co2 = pooch.retrieve(URL_CO2, ...)\n    # Fusion des données\n    df_merged = pd.merge(df_co2, df_pol, ...)\n    return df_merged"
+  },
+  {
+    "objectID": "code.html#analyse-et-ia-analytics.py",
+    "href": "code.html#analyse-et-ia-analytics.py",
+    "title": "Exploration du Code Source",
+    "section": "2. Analyse et IA (analytics.py)",
+    "text": "2. Analyse et IA (analytics.py)\nCe module contient la classe HealthAnalyzer et la logique de prédiction.\n\n\nCode\nclass HealthAnalyzer:\n    def predict_evolution(self, country, target_col, year_horizon=2030):\n        # Entraînement du modèle (Régression Linéaire)\n        model = LinearRegression()\n        model.fit(X, y)\n        # Prédiction future\n        future_preds = model.predict(future_years)\n        return pd.concat([history, prediction])"
+  },
+  {
+    "objectID": "analysis.html",
+    "href": "analysis.html",
+    "title": "Analyse Exploratoire Mondiale",
+    "section": "",
+    "text": "Cette section permet d’explorer dynamiquement les tendances historiques mondiales. Mode d’emploi : Les graphiques sont interactifs. Vous pouvez zoomer, et cliquer sur les noms des pays dans la légende à droite pour les masquer ou les isoler (double-clic)."
+  },
+  {
+    "objectID": "analysis.html#évolution-des-émissions-de-co₂",
+    "href": "analysis.html#évolution-des-émissions-de-co₂",
+    "title": "Analyse Exploratoire Mondiale",
+    "section": "1. Évolution des Émissions de CO₂",
+    "text": "1. Évolution des Émissions de CO₂\nAnalyse de la trajectoire carbone des grandes puissances industrielles.\n\n\n                            \n                                            \n\n\n\nAnalyse Structurée :\nTendance : On observe une divergence nette. Les pays de l’OCDE (USA, France, Allemagne) ont amorcé une décrue de leurs émissions. À l’inverse, les économies émergentes (Chine, Inde) montrent une croissance exponentielle liée à leur industrialisation. Points de rupture : Notez l’impact visible de la crise de 2008 et du Covid-19 (2020) sur les courbes."
+  },
+  {
+    "objectID": "analysis.html#pollution-atmosphérique",
+    "href": "analysis.html#pollution-atmosphérique",
+    "title": "Analyse Exploratoire Mondiale",
+    "section": "2. Pollution Atmosphérique",
+    "text": "2. Pollution Atmosphérique\nNombre total de décès attribués à la pollution de l’air (extérieure et domestique).\n\n\n                            \n                                            \n\n\n\nAnalyse Structurée :\nCorrélation : Bien que la Chine émette le plus de CO2, sa courbe de mortalité liée à la pollution commence à stagner, signe de politiques sanitaires efficaces. Paradoxe : L’Inde voit sa mortalité augmenter, corrélée à son développement urbain rapide et l’usage persistant de combustibles solides."
+  },
+  {
+    "objectID": "analysis.html#mortalité-respiratoire-focus",
+    "href": "analysis.html#mortalité-respiratoire-focus",
+    "title": "Analyse Exploratoire Mondiale",
+    "section": "3. Mortalité Respiratoire (Focus)",
+    "text": "3. Mortalité Respiratoire (Focus)\nVisualisation spécifique de l’impact sur la santé respiratoire.\n\n\n                            \n                                            \n\n\n\nAnalyse Structurée :\nCe graphique en aires empilées montre le poids relatif de chaque pays dans le bilan mondial. L’Asie représente aujourd’hui la majeure partie du fardeau sanitaire environnemental."
+  },
+  {
+    "objectID": "analysis.html#espérance-de-vie",
+    "href": "analysis.html#espérance-de-vie",
+    "title": "Analyse Exploratoire Mondiale",
+    "section": "4. Espérance de Vie",
+    "text": "4. Espérance de Vie\nL’indicateur synthétique de santé publique.\n\n\n                            \n                                            \n\n\n\nAnalyse Structurée :\nConvergence : On note un rattrapage progressif des pays émergents vers les standards occidentaux (environ 80 ans). Résilience : Malgré la pollution, l’espérance de vie augmente globalement grâce aux progrès médicaux, prouvant que la technologie compense en partie les dégradations environnementales."
+  },
+  {
+    "objectID": "analysis.html#annexe-code-source",
+    "href": "analysis.html#annexe-code-source",
+    "title": "Analyse Exploratoire Mondiale",
+    "section": "Annexe : Code Source",
+    "text": "Annexe : Code Source\nLe code ayant généré ces graphiques est disponible ci-dessous."
+  },
+  {
+    "objectID": "capitales.html",
+    "href": "capitales.html",
+    "title": "Analyse par capitale — HEALTH4EARTH",
+    "section": "",
+    "text": "🏙️ Analyse interactive par capitale\n\nChoisir une capitale :"
+  },
+  {
+    "objectID": "methods.html",
+    "href": "methods.html",
+    "title": "Méthodologie & Outils",
+    "section": "",
+    "text": "Notre projet repose sur une chaîne d’outils modernes de Data Science :\n\nPython 3.10 : Langage principal.\nPandas & NumPy : Manipulation et nettoyage des données massives.\nPooch : Gestionnaire de téléchargement et de cache (garantit la reproductibilité).\nScikit-Learn : Algorithmes de Régression Linéaire pour les prédictions 2030.\nFolium : Cartographie interactive (Leaflet.js).\nQuarto : Génération du site web et des rapports."
+  },
+  {
+    "objectID": "methods.html#stack-technique",
+    "href": "methods.html#stack-technique",
+    "title": "Méthodologie & Outils",
+    "section": "",
+    "text": "Notre projet repose sur une chaîne d’outils modernes de Data Science :\n\nPython 3.10 : Langage principal.\nPandas & NumPy : Manipulation et nettoyage des données massives.\nPooch : Gestionnaire de téléchargement et de cache (garantit la reproductibilité).\nScikit-Learn : Algorithmes de Régression Linéaire pour les prédictions 2030.\nFolium : Cartographie interactive (Leaflet.js).\nQuarto : Génération du site web et des rapports."
+  },
+  {
+    "objectID": "methods.html#méthodologie-devops",
+    "href": "methods.html#méthodologie-devops",
+    "title": "Méthodologie & Outils",
+    "section": "Méthodologie DevOps",
+    "text": "Méthodologie DevOps\nNous avons appliqué les bonnes pratiques du développement logiciel :\n\nVersionning : Git & GitHub (Branches, Pull Requests).\nCI/CD : GitHub Actions lance les tests et déploie le site à chaque modification.\nQualité : Tests unitaires (pytest) et documentation automatique (Sphinx)."
+  },
+  {
+    "objectID": "predictions_france.html",
+    "href": "predictions_france.html",
+    "title": "France 2025-2050",
+    "section": "",
+    "text": "Pour anticiper l’avenir climatique et sanitaire de la France, nous avons développé un modèle de Machine Learning (Régression Linéaire supervisée via scikit-learn). Le modèle est entraîné sur les données historiques réelles (2000-2024) pour projeter les tendances jusqu’en 2050."
+  },
+  {
+    "objectID": "predictions_france.html#introduction",
+    "href": "predictions_france.html#introduction",
+    "title": "France 2025-2050",
+    "section": "",
+    "text": "Pour anticiper l’avenir climatique et sanitaire de la France, nous avons développé un modèle de Machine Learning (Régression Linéaire supervisée via scikit-learn). Le modèle est entraîné sur les données historiques réelles (2000-2024) pour projeter les tendances jusqu’en 2050."
+  },
+  {
+    "objectID": "predictions_france.html#trajectoire-des-émissions-de-co₂",
+    "href": "predictions_france.html#trajectoire-des-émissions-de-co₂",
+    "title": "France 2025-2050",
+    "section": "1. Trajectoire des Émissions de CO₂",
+    "text": "1. Trajectoire des Émissions de CO₂\n\n\n\n\n\n\n\n\n\n\nInterprétation :\nLa France suit une trajectoire de décroissance structurelle. Le modèle prévoit une baisse continue, passant sous la barre des 250 Mt d’ici 2040. Cela valide l’efficacité des politiques de transition énergétique, bien que des efforts supplémentaires soient requis pour la neutralité carbone totale."
+  },
+  {
+    "objectID": "predictions_france.html#pollution-atmosphérique",
+    "href": "predictions_france.html#pollution-atmosphérique",
+    "title": "France 2025-2050",
+    "section": "2. Pollution Atmosphérique",
+    "text": "2. Pollution Atmosphérique\n\n\n\n\n\n\n\n\n\n\nInterprétation :\nLa mortalité liée aux particules fines devrait continuer de chuter. Cette baisse est plus rapide que celle du CO2, ce qui s’explique par l’amélioration des normes EURO sur les véhicules et la fin progressive du chauffage au fioul/charbon."
+  },
+  {
+    "objectID": "predictions_france.html#espérance-de-vie",
+    "href": "predictions_france.html#espérance-de-vie",
+    "title": "France 2025-2050",
+    "section": "3. Espérance de Vie",
+    "text": "3. Espérance de Vie\n\n\n\n\n\n\n\n\n\n\nInterprétation :\nLe modèle est optimiste et projette un gain continu, dépassant potentiellement les 84 ans de moyenne d’ici 2040. Cependant, cette courbe pourrait s’aplatir (effet de plateau biologique) non pris en compte par une régression linéaire simple."
+  },
+  {
+    "objectID": "predictions_france.html#conclusion",
+    "href": "predictions_france.html#conclusion",
+    "title": "France 2025-2050",
+    "section": "Conclusion :",
+    "text": "Conclusion :\nL’amélioration de la qualité de l’air est directement corrélée à l’augmentation de l’espérance de vie, validant l’efficacité des politiques publiques actuelles."
+  }
+]
