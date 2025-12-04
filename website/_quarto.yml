@@ -1,20 +1,34 @@
 project:
   type: website
   output-dir: _site
+  resources:
+    - "api/**"
 
 website:
   title: "Health4Earth"
   navbar:
+    background: primary
     left:
       - href: index.qmd
         text: Accueil
-      - href: map.qmd
-        text: Carte Interactive
-      - href: api/index.html
-        text: Doc Technique
-        
+      - href: analysis.qmd
+        text: Analyse Globale
+      - href: predictions_france.qmd
+        text: Prédictions France
+      - href: documentation.qmd
+        text: Documentation
+  
+  # Ajout du pied de page professionnel
+  page-footer: 
+    center: "Projet Master HAX712X - Développement Logiciel | Université de Montpellier | 2025"
+    background: "#2c3e50"
+    foreground: "#ffffff"
+
 format:
   html:
-    theme: cosmo
+    theme: flatly      # Thème moderne et plat
+    css: styles.css    # NOTRE FICHIER CSS PERSO
     toc: true
     code-fold: true
+    page-layout: article
+    mainfont: "Inter"

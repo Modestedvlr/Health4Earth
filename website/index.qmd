@@ -1,138 +1,134 @@
 ---
-title: "Analyse Globale : CO₂, Pollution et Santé"
-author: "Équipe Health4Earth"
+title: "Tableau de Bord Environnemental"
 format: 
   html:
-    code-fold: true
-    toc: true
-    theme: cosmo
+    page-layout: full
+    toc: false
 jupyter: python3
 ---
 
-## Introduction et Contexte
+::: {.grid}
+::: {.g-col-12 .text-center style="background-color: white; padding: 40px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px;"}
+# Observatoire Health4Earth
+<p style="font-size: 1.2em; color: #666;">
+Visualisation et Prédiction de l'Impact Environnemental sur la Santé Publique
+</p>
+:::
+:::
 
-Le changement climatique et la pollution atmosphérique représentent deux des plus grands défis sanitaires du XXIe siècle. Ce projet, **Health4Earth**, vise à explorer les corrélations potentielles entre les émissions industrielles (CO₂) et les indicateurs de santé publique.
-
-Dans ce rapport, nous utilisons des données ouvertes provenant de *Our World in Data* (OWID), téléchargées et traitées automatiquement via notre package Python dédié.
+<!-- LE RESTE DE VOTRE CODE PYTHON NE CHANGE PAS -->
 
 ```{python}
-#| label: setup
 #| echo: false
 #| warning: false
+#| output: false
 
-import sys
-import os
-import pandas as pd
+# --- BLOC 1 : CALCULS (Caché pour éviter les textes parasites) ---
+import folium
+import requests
 import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
+import io
+import base64
+import pandas as pd
+import json
+from health4earth.data_ingest import load_merged_data
 
-# Configuration esthétique des graphiques
-sns.set_theme(style="whitegrid")
-plt.rcParams['figure.figsize'] = [10, 6]
+# On empêche l'affichage intempestif des graphiques matplotlib
+plt.ioff()
 
-# Import du package Health4Earth
-# (Assurez-vous d'avoir fait pip install -e . au préalable)
-from health4earth.data_ingest import load_co2_data
-from health4earth.analytics import HealthAnalyzer
+# Chargement des données
+df = load_merged_data()
+
+# Fonction de génération du graphique popup
+def get_graph_b64(iso_code, country_name):
+    data = df[df['iso_code'] == iso_code]
+    if len(data) < 5: return None
+    
+    fig, ax1 = plt.subplots(figsize=(5, 3))
+    
+    # Axe Gauche
+    l1, = ax1.plot(data['year'], data['co2'], color='grey', label='CO2', linewidth=2)
+    l2, = ax1.plot(data['year'], data['pollution_deaths'], color='red', linestyle='--', label='Décès')
+    ax1.set_ylabel('Volume', fontsize=8)
+    ax1.tick_params(axis='y', labelsize=8)
+    
+    # Axe Droit
+    ax2 = ax1.twinx()
+    l3, = ax2.plot(data['year'], data['life_expectancy'], color='green', linewidth=2, label='Vie')
+    l4, = ax2.plot(data['year'], data['pollution_concentration'], color='orange', linestyle=':', label='Poll.')
+    ax2.set_ylabel('Indices', fontsize=8)
+    ax2.tick_params(axis='y', labelsize=8)
+    
+    plt.title(f"Bilan : {country_name}", fontsize=10, fontweight='bold')
+    
+    lines = [l1, l2, l3, l4]
+    labels = [l.get_label() for l in lines]
+    ax1.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=4, fontsize=7, frameon=False)
+    
+    plt.tight_layout()
+    img = io.BytesIO()
+    plt.savefig(img, format='png', bbox_inches='tight')
+    img.seek(0)
+    plt.close(fig)
+    return base64.b64encode(img.getvalue()).decode()
+
+# Récupération GeoJSON
+geo_url = "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json"
+geo_data = requests.get(geo_url).json()
 ```
-
-## 2. Ingestion des Données
-Nous utilisons le module data_ingest pour récupérer les dernières données disponibles. La bibliothèque Pooch assure la mise en cache pour éviter les téléchargements répétitifs.
 
 ```{python}
-#| label: load-data
+#| echo: false
+#| warning: false
+#| output: true
 
-# Chargement automatique
-df = load_co2_data()
+# --- BLOC 2 : AFFICHAGE CARTE (Visible) ---
 
-# --- Préparation des données pour la démonstration ---
-# Le dataset CO2 seul ne contient pas toujours 'pollution' ou 'life_expectancy'.
-# Pour que la classe HealthAnalyzer fonctionne dans cette démo, nous assurons la présence des colonnes.
-if 'pollution' not in df.columns:
-    # Proxy simplifié : CO2 par habitant (si dispo) ou CO2 brut
-    if 'population' in df.columns:
-        df['pollution'] = df['co2'] / df['population'] * 1e6
-    else:
-        df['pollution'] = df['co2']
+# Configuration de la carte statique
+m = folium.Map(
+    location=[25, 0], 
+    zoom_start=2, 
+    tiles="CartoDB positron", 
+    height="85vh", 
+    width="100%",
+    zoom_control=False,
+    scrollWheelZoom=False,
+    dragging=False,
+    doubleClickZoom=False,
+    boxZoom=False
+)
 
-if 'life_expectancy' not in df.columns:
-    # Valeur par défaut pour permettre l'instanciation technique de la classe
-    df['life_expectancy'] = 70.0
+# Liste des pays disponibles dans nos données
+available_isos = df['iso_code'].unique()
 
-# Instanciation de notre classe d'analyse (Programmation Orientée Objet)
-analyzer = HealthAnalyzer(df)
+# Styles
+style_invisible = {'fillColor': '#3388ff', 'color': '#3388ff', 'weight': 1, 'fillOpacity': 0.0}
+style_highlight = {'fillColor': '#3388ff', 'color': 'black', 'weight': 2, 'fillOpacity': 0.4}
 
-print(f"Dataset chargé avec succès : {df.shape[0]} lignes.")
-print(f"Période couverte : {df['year'].min()} - {df['year'].max()}")
+for feature in geo_data['features']:
+    country_iso = feature['id']
+    country_name = feature['properties']['name']
+    
+    # On ajoute uniquement les pays qu'on connaît
+    if country_iso in available_isos:
+        b64 = get_graph_b64(country_iso, country_name)
+        
+        if b64:
+            html = f"""
+            <div style="text-align:center; width: 400px;">
+                <img src="data:image/png;base64,{b64}" width="100%">
+            </div>
+            """
+            iframe = folium.IFrame(html, width=420, height=320)
+            popup = folium.Popup(iframe, max_width=450)
+            
+            folium.GeoJson(
+                feature,
+                style_function=lambda x: style_invisible,
+                highlight_function=lambda x: style_highlight,
+                popup=popup,
+                tooltip=f"📊 {country_name}"
+            ).add_to(m)
+
+m
 ```
-
-## 3. Analyse Temporelle des Émissions
-Comment les émissions mondiales ont-elles évolué au cours du dernier siècle ?
-
-```{python}
-#| label: global-trend
-#| fig-cap: "Évolution des émissions mondiales de CO2 (1900-2022)"
-
-# Filtrage : On garde uniquement les données 'World'
-df_world = df[df['country'] == 'World']
-# On se concentre sur l'ère industrielle moderne
-df_world = df_world[df_world['year'] >= 1900]
-
-plt.figure(figsize=(10, 5))
-sns.lineplot(data=df_world, x='year', y='co2', linewidth=2.5, color='darkred')
-
-plt.title("Explosion des émissions de CO2 depuis 1900")
-plt.ylabel("CO2 (Millions de tonnes)")
-plt.xlabel("Année")
-plt.axvline(x=2020, color='gray', linestyle='--', label='Année 2020 (Covid)')
-plt.legend()
-plt.show()
-```
-
-## 4. Les Grands Émetteurs : Comparaison
-Quels sont les pays qui contribuent le plus aux émissions actuelles ? Nous comparons ici les principales puissances économiques.
-
-```{python}
-#| label: country-comparison
-#| fig-cap: "Comparaison des émissions de CO2 : Chine, USA, Inde, Europe, France"
-
-# Sélection des pays d'intérêt
-countries = ['China', 'United States', 'India', 'France', 'Germany']
-df_countries = df[(df['country'].isin(countries)) & (df['year'] >= 1990)]
-
-plt.figure(figsize=(10, 6))
-sns.lineplot(data=df_countries, x='year', y='co2', hue='country', palette='tab10', linewidth=2)
-
-plt.title("Trajectoires d'émissions (1990 - Aujourd'hui)")
-plt.ylabel("CO2 (Millions de tonnes)")
-plt.xlabel("Année")
-plt.legend(title="Pays")
-plt.show()
-```
-
-L'analyse montre clairement la montée en puissance de la Chine (courbe montante) face à une stabilisation, voire une baisse, des émissions en Europe et aux États-Unis.
-
-
-## 5. Analyse des Seuils Critiques (POO)
-Grâce à la méthode get_polluted_years de notre classe HealthAnalyzer, nous pouvons extraire automatiquement les années où la pollution a dépassé un seuil critique.
-
-```{python}
-#| label: critical-years
-
-# Focus sur la France
-df_france = df[df['country'] == 'France']
-analyzer_france = HealthAnalyzer(df_france)
-
-# Appel de la méthode POO : Années où la France a émis plus de 400 Mt de CO2
-high_emission_years = analyzer_france.get_polluted_years(threshold=400.0)
-
-print(f"La France a dépassé 400 Mt de CO2 pendant {len(high_emission_years)} années.")
-
-# Affichage des 5 années les plus polluantes
-display_cols = ['country', 'year', 'co2']
-print(high_emission_years[display_cols].sort_values(by='co2', ascending=False).head(5))
-```
-
-## Conclusion
-Ce tableau de bord démontre la capacité du package Health4Earth à ingérer, traiter et visualiser des données complexes. La structure modulaire du code permet d'ajouter facilement de nouvelles sources de données (santé, hôpitaux) pour affiner l'analyse des corrélations.

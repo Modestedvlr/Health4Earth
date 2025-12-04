@@ -1,0 +1,35 @@
+---
+title: "Exploration du Code Source"
+format: html
+---
+
+Voici les modules principaux développés pour le package `health4earth`.
+
+## 1. Ingestion des Données (`data_ingest.py`)
+
+Ce module gère le téléchargement sécurisé et la fusion des datasets.
+
+```{python}
+# Contenu de la fonction principale
+def load_merged_data():
+    # ... (Voir fichier source)
+    path_co2 = pooch.retrieve(URL_CO2, ...)
+    # Fusion des données
+    df_merged = pd.merge(df_co2, df_pol, ...)
+    return df_merged
+```
+
+## 2. Analyse et IA (analytics.py)
+
+Ce module contient la classe HealthAnalyzer et la logique de prédiction.
+
+```{python}
+class HealthAnalyzer:
+    def predict_evolution(self, country, target_col, year_horizon=2030):
+        # Entraînement du modèle (Régression Linéaire)
+        model = LinearRegression()
+        model.fit(X, y)
+        # Prédiction future
+        future_preds = model.predict(future_years)
+        return pd.concat([history, prediction])
+```

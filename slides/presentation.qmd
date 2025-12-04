@@ -1,90 +1,82 @@
 ---
 title: "Health4Earth"
-subtitle: "Analyse de l'impact des émissions de CO₂ sur la santé publique"
-author: "Équipe H4E"
+subtitle: "Data Science & Environnement"
+author: "Master HAX712X"
 format:
   revealjs:
     theme: league
     transition: slide
     slide-number: true
     logo: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
-    footer: "Master HAX712X - Développement Logiciel"
 jupyter: python3
 ---
 
-## 1. Le Projet Health4Earth
+## 1. Le Projet
 
-**Objectif :**
-Explorer les corrélations entre activités industrielles et indicateurs de santé.
+**Problématique :**
+Comment corréler les données massives de pollution (CO₂) avec la santé publique ?
 
-**Données utilisées :**
-*   *Our World in Data (OWID)* : Émissions de CO₂ (1750-2024).
-*   *OMS (WHO)* : Indicateurs de qualité de l'air.
-
-**Approche Technique :**
-Développement d'un package Python modulaire, testé et documenté.
+**Stack Technique :**
+*   **Python 3.10** (Package structuré)
+*   **Scikit-Learn** (Prédictions IA)
+*   **Folium** (Cartographie)
+*   **GitHub Actions** (CI/CD)
 
 ---
 
-## 2. Architecture Logicielle
-
-Nous avons conçu une architecture robuste pour assurer la **reproductibilité**.
+## 2. Architecture & Données
 
 ::: {.mermaid}
 flowchart LR
-    A[Données Brutes\n(Web)] -->|Pooch| B(Cache Local)
-    B -->|Ingest| C{Nettoyage}
-    C -->|Pandas| D[Classe HealthAnalyzer]
-    D --> E[Statistiques]
-    D --> F[Visualisation]
-    E & F --> G[Rapport Quarto]
+    A[OWID / WHO\n(Cloud)] -->|Pooch| B(Cache Local)
+    B -->|Ingest| C{Fusion & Nettoyage}
+    C -->|Pandas| D[HealthAnalyzer]
+    D --> E[Régression Linéaire]
+    E --> F[Dashboard Quarto]
 :::
 
-*   **Ingestion :** Automatique avec gestion de cache.
-*   **Analyse :** Orientée Objet.
-*   **Qualité :** CI/CD (GitHub Actions) + Tests (Pytest).
+*   **Robustesse :** Système de "Fallback" si les API échouent.
+*   **Performance :** Cache système pour éviter la latence.
 
 ---
 
-## 3. Démonstration Technique
+## 3. Démo : Prédiction IA
 
-Chargement des données en temps réel via le package `health4earth`.
+Code réel exécuté dans ces slides :
 
 ```{python}
 #| echo: true
-#| eval: true
+import sys, os
+sys.path.append(os.path.abspath(".."))
+from health4earth.data_ingest import load_merged_data
+from health4earth.analytics import HealthAnalyzer
 
-import sys
-import os
+# 1. Chargement
+df = load_merged_data()
+analyzer = HealthAnalyzer(df)
+
+# 2. Prédiction France 2030
+pred = analyzer.predict_evolution("France", "co2", 2030)
+print(pred.tail(3)) # Affiche les 3 dernières années prédites
+```
+
+
+## 4. Résultats Visuels
+
+Trajectoire prédite pour la France (CO₂) :
+
+```{python}
+#| echo: false
+#| fig-align: center
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Ajout du chemin pour trouver le package
-sys.path.append(os.path.abspath(".."))
+plt.figure(figsize=(10, 4))
+sns.lineplot(data=pred, x='year', y='co2', hue='type', palette=['blue', 'red'])
+plt.title("Projection 2030 (Régression Linéaire)")
+plt.show()
+```
 
-from health4earth.data_ingest import load_co2_data
-
-# Chargement (depuis le cache ou internet)
-df = load_co2_data()
-print(f"Données chargées : {df.shape[0]} lignes")
-print(f"Colonnes : {list(df.columns[:3])}...")
-
-## 4. Visualisation des Résultats
-Analyse de l'évolution des émissions en Europe vs Asie.
-
-
-
-## 5. Bilan & Perspectives
-Ce que nous avons réalisé :
-✅ Package Python installable (pip install .).
-✅ Pipeline CI/CD complet (Tests + Deploy).
-✅ Documentation Sphinx automatique.
-✅ Site Web interactif.
-
-Améliorations futures :
-* Intégration de l'API temps réel de l'OMS.
-* Modèle de prédiction (Machine Learning) pour 2030.
-
-
-## Merci de votre attention !
-Lien vers le projet : https://github.com/JulienOllier/Health4Earth
+Merci !
+Site Web & Documentation :
+github.com/PSEUDO/Health4Earth

@@ -1,0 +1,38 @@
+---
+title: "Documentation Technique"
+format: 
+  html:
+    page-layout: custom
+    toc: false
+---
+
+```{=html}
+<style>
+    /* Supprime les marges et la barre de défilement de la page principale */
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-y: hidden;
+    }
+    
+    /* Conteneur qui prend toute la hauteur moins la barre de navigation (env 60px) */
+    .iframe-container {
+        position: absolute;
+        top: 60px; /* Ajustez si la barre bleue cache le haut */
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 60px);
+        z-index: 1;
+    }
+    
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
+
+<div class="iframe-container">
+    <iframe src="api/index.html" title="Documentation Sphinx"></iframe>
+</div>
+```

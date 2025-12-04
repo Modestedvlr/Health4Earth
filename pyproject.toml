@@ -24,7 +24,9 @@ dependencies = [
     "openpyxl",
     "requests",
     "tqdm",
-    "folium"
+    "folium",
+    "scikit-learn",
+    "plotly"
 ]
 
 [project.optional-dependencies]
