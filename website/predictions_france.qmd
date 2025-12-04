@@ -1,5 +1,5 @@
 ---
-title: "Modélisation : France 2025-2050"
+title: "France 2025-2050"
 format:
   html:
     code-fold: true
@@ -7,7 +7,7 @@ format:
 jupyter: python3
 ---
 
-## Méthodologie Prédictive
+## Introduction
 
 Pour anticiper l'avenir climatique et sanitaire de la France, nous avons développé un modèle de **Machine Learning** (Régression Linéaire supervisée via `scikit-learn`).
 Le modèle est entraîné sur les données historiques réelles (2000-2024) pour projeter les tendances jusqu'en **2050**.
@@ -15,6 +15,8 @@ Le modèle est entraîné sur les données historiques réelles (2000-2024) pour
 ```{python}
 #| echo: false
 #| warning: false
+#| output: false
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 from health4earth.data_ingest import load_merged_data
@@ -29,7 +31,6 @@ country = "France"
 ```
 
 ## 1. Trajectoire des Émissions de CO₂
-Analyse de la décarbonation.
 
 ```{python}
 #| echo: false
@@ -47,13 +48,15 @@ if pred is not None:
     plt.fill_between(pred['year'], pred['co2']*0.95, pred['co2']*1.05, color='blue', alpha=0.1)
     
     plt.axvline(x=2024, color='red', linestyle=':', label="Aujourd'hui")
-    plt.title(f"Projection CO2 France (Horizon 2050)")
+    plt.title(f"Projection CO2")
     plt.ylabel("Millions de Tonnes")
     plt.legend()
     plt.show()
 ```
 
-### Interprétation : La France suit une trajectoire de décroissance structurelle. Le modèle prévoit une baisse continue, passant sous la barre des 250 Mt d'ici 2040. Cela valide l'efficacité des politiques de transition énergétique, bien que des efforts supplémentaires soient requis pour la neutralité carbone totale.
+### Interprétation :
+
+La France suit une trajectoire de décroissance structurelle. Le modèle prévoit une baisse continue, passant sous la barre des 250 Mt d'ici 2040. Cela valide l'efficacité des politiques de transition énergétique, bien que des efforts supplémentaires soient requis pour la neutralité carbone totale.
 
 
 ## 2. Pollution Atmosphérique
@@ -67,12 +70,14 @@ pred_pol = analyzer.predict_evolution(country, "pollution_deaths", year_end=2050
 if pred_pol is not None:
     plt.figure()
     sns.lineplot(data=pred_pol, x='year', y='pollution_deaths', hue='type', palette=['grey', 'orange'], linewidth=2.5)
-    plt.title("Projection : Décès liés à la pollution")
+    plt.title("Projection Décès liés à la pollution")
     plt.ylabel("Nombre de décès annuels")
     plt.axvline(x=2024, color='red', linestyle=':')
     plt.show()
 ```
-### Interprétation : La mortalité liée aux particules fines devrait continuer de chuter. Cette baisse est plus rapide que celle du CO2, ce qui s'explique par l'amélioration des normes EURO sur les véhicules et la fin progressive du chauffage au fioul/charbon.
+### Interprétation :
+
+La mortalité liée aux particules fines devrait continuer de chuter. Cette baisse est plus rapide que celle du CO2, ce qui s'explique par l'amélioration des normes EURO sur les véhicules et la fin progressive du chauffage au fioul/charbon.
 
 
 
@@ -92,11 +97,14 @@ if pred_life is not None:
     plt.show()
 ```
 
-### Interprétation : Le modèle est optimiste et projette un gain continu, dépassant potentiellement les 84 ans de moyenne d'ici 2040. Cependant, cette courbe pourrait s'aplatir (effet de plateau biologique) non pris en compte par une régression linéaire simple.
+### Interprétation :
+
+Le modèle est optimiste et projette un gain continu, dépassant potentiellement les 84 ans de moyenne d'ici 2040. Cependant, cette courbe pourrait s'aplatir (effet de plateau biologique) non pris en compte par une régression linéaire simple.
 
 
 
-# Conclusion : L'amélioration de la qualité de l'air est directement corrélée à l'augmentation de l'espérance de vie, validant l'efficacité des politiques publiques actuelles.
+## Conclusion : 
+L'amélioration de la qualité de l'air est directement corrélée à l'augmentation de l'espérance de vie, validant l'efficacité des politiques publiques actuelles.
 
 
 

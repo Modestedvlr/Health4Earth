@@ -1,0 +1,16 @@
+/* slides/custom_slides.css */
+.reveal {
+  /* Dégradé Bleu Nuit -> Noir */
+  background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  color: #00d4ff; /* Titres en cyan néon pour le contraste */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Code blocks plus lisibles */
+code {
+  color: #ff9f43;
+}
