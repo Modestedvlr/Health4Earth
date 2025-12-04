@@ -21,3 +21,8 @@ exclude_patterns = []
 
 html_theme = 'sphinx_rtd_theme'  # <--- Le thème qu'on veut
 html_static_path = ['_static']
+
+# --- Configuration CSS Personnalisée ---
+# Pour que la doc prenne toute la largeur de l'écran
+def setup(app):
+    app.add_css_file('custom.css')

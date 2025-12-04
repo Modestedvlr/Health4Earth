@@ -1,18 +1,22 @@
 ---
-title: "Accueil"
+title: "Tableau de Bord Environnemental"
 format: 
   html:
-    page-layout: custom
+    page-layout: full
     toc: false
 jupyter: python3
 ---
 
 ::: {.grid}
-::: {.g-col-12 .text-center style="background-color: #f8f9fa; padding: 15px; border-bottom: 1px solid #ddd;"}
-### Observatoire Health4Earth
-**Cliquez sur un pays pour visualiser son Bilan Santé & Climat**
+::: {.g-col-12 .text-center style="background-color: white; padding: 40px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px;"}
+# Observatoire Health4Earth
+<p style="font-size: 1.2em; color: #666;">
+Visualisation et Prédiction de l'Impact Environnemental sur la Santé Publique
+</p>
 :::
 :::
+
+<!-- LE RESTE DE VOTRE CODE PYTHON NE CHANGE PAS -->
 
 ```{python}
 #| echo: false
