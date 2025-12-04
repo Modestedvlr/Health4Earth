@@ -34,17 +34,25 @@ jobs:
         with:
           path: website/
 
-      # 2. Construire la doc Sphinx
-      - name: Build Sphinx Documentation
+      # 2. Construire la doc Sphinx et préparer le déploiement
+      - name: Build Sphinx Documentation & Fix Jekyll
         run: |
+          # Génération Sphinx
           python -m sphinx.cmd.build -b html docs/source docs/build/html
+          
+          # Intégration dans le site
           mkdir -p website/_site/api
           cp -r docs/build/html/* website/_site/api/
+          
+          # --- LA CORRECTION MAGIQUE ---
+          # On crée un fichier vide .nojekyll à la racine du site
+          # Cela force GitHub Pages à tout afficher, même les dossiers '_'
+          touch website/_site/.nojekyll
 
-      # 3. Publier avec la méthode ROBUSTE (Peaceiris)
-      # Cette action va créer la branche gh-pages de force si elle n'existe pas
+      # 3. Publier avec la méthode ROBUSTE
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: website/_site
+          force_orphan: true  # Force une mise à jour propre

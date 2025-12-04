@@ -11,12 +11,10 @@ jupyter: python3
 ::: {.g-col-12 .text-center style="background-color: white; padding: 40px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px;"}
 # Observatoire Health4Earth
 <p style="font-size: 1.2em; color: #666;">
-Visualisation et Prédiction de l'Impact Environnemental sur la Santé Publique
+Analyse et Visualisation de l'Impact Environnemental sur la Santé Publique
 </p>
 :::
 :::
-
-<!-- LE RESTE DE VOTRE CODE PYTHON NE CHANGE PAS -->
 
 ```{python}
 #| echo: false
