@@ -59,6 +59,11 @@ Pour tester ce projet sur votre machine locale :
    ```bash
    quarto preview slides/presentation.qmd
    ```
+
+4. **Rapport de performance**
+   ```bash
+   python health4earth/perf.py
+   ```
 ---
 
 ## Exemple d'utilisation
