@@ -26,11 +26,11 @@ Ce projet a été réalisé dans le cadre du cours **HAX712X - Développement Lo
 ## Fonctionnalités Clés
 
 *   **Ingestion Automatique :** Téléchargement des données (OWID) avec gestion de cache système via `pooch` (reproductibilité garantie).
-*   
+    
 *   **Analyses Statistiques :** Calculs de corrélations et tendances via une architecture Orientée Objet (`HealthAnalyzer`).
-*   
+    
 *   **Visualisation Interactive :** Cartes dynamiques (`folium`) et graphiques interactifs (`plotly`) intégrés dans un rapport Web.
-*   
+   
 *   **Qualité Logicielle :** Tests unitaires automatisés (`pytest`), Intégration Continue (GitHub Actions) et documentation technique (`Sphinx`).
 
 ---
@@ -103,7 +103,9 @@ python -m sphinx.cmd.build -b html source build/html
 Projet réalisé par les étudiants du Master SSD :
 
 Dossou AGOSSOU
+
 Firdaousse KARIMOU
+
 Julien OLLIER
 
 ---
