@@ -1,39 +1,45 @@
-.. HEALTH4EARTH documentation master file, created by
-   sphinx-quickstart on Sat Nov 29 13:27:35 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. Documentation principale de Health4Earth
+   Générée avec sphinx-quickstart – personnalisée pour une présentation claire et soignée.
 
 Documentation Health4Earth
 ==========================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
+Bienvenue dans la documentation technique du projet **Health4Earth**, une plateforme dédiée à l'analyse de l’impact des émissions de CO₂ sur la santé humaine.
 
-Bienvenue sur la documentation technique du projet Health4Earth.
+Cette documentation a pour objectif de guider les utilisateurs, contributeurs et développeurs à travers les différentes fonctionnalités du projet : traitement des données, visualisations, modules utilisés, installation et bonnes pratiques.
 
+Utilisez la syntaxe ``reStructuredText`` pour rédiger ou améliorer les pages.
+Pour plus de détails, consultez la `documentation officielle <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_.
+
+---
+
+Navigation
+----------
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Sections principales
 
    introduction
    traitement_donnees
    installation
-   usage
    modules
+   usage
 
+---
 
-Index et Tables
-===============
+Index et ressources
+===================
 
 Pour commencer
 --------------
 
-Si vous découvrez le projet, consultez d'abord la section :doc:`introduction`.
+- Si vous découvrez le projet, commencez par :doc:`introduction`.
+- Pour comprendre comment les données sont traitées :doc:`traitement_donnees`.
 
-Pour comprendre comment nos données sont traitées, rendez-vous dans :doc:`traitement_donnees`.
+Ressources techniques
+---------------------
 
+* :ref:`genindex` — Index général  
+* :ref:`modindex` — Index des modules
 
-
-* :ref:`genindex`
-* :ref:`modindex`
