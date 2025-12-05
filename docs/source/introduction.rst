@@ -17,9 +17,6 @@ Notre travail se concentre sur l’étude de plusieurs indicateurs essentiels te
 Objectifs principaux
 --------------------
 
-Objectifs principaux
---------------------
-
 - **Analyse historique et actuelle**  
   Étudier l’évolution des émissions de CO₂ et leurs effets mesurables sur la santé humaine à travers différents indicateurs (espérance de vie, taux de mortalité, population, etc.).
 - **Prédiction des impacts sanitaires**  
