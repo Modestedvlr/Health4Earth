@@ -6,37 +6,51 @@ Introduction
 Présentation du projet
 ----------------------
 
-**Health4Earth** est une plateforme web développée dans le cadre d'un projet scolaire, visant à analyser et prédire l'impact des facteurs environnementaux sur la santé publique en France.
 
-Notre objectif est de fournir aux citoyens, chercheurs et décideurs des outils de visualisation et d'analyse accessibles pour comprendre les corrélations entre environnement et santé.
+
+**Health4Earth** est une plateforme web développée dans le cadre d’un projet universitaire, dont l’objectif est d’analyser l’impact des émissions de CO₂ sur la santé humaine.
+
+Notre travail se concentre sur l’étude de plusieurs indicateurs essentiels tels que l’espérance de vie, le taux de mortalité, ou encore certains facteurs démographiques, afin de mettre en évidence les conséquences mesurables de la pollution sur les populations.
+
+À travers une interface cartographique et des visualisations interactives, la plateforme permet d’explorer les données au fil des années, de comparer plusieurs pays et de comprendre comment la hausse des émissions influence concrètement la santé publique.
 
 Objectifs principaux
 --------------------
 
-1. **Analyse en temps réel** des données environnementales
-2. **Prédiction** des risques sanitaires par région
-3. **Visualisation interactive** via des cartes et graphiques
-4. **Sensibilisation** du public aux enjeux santé-environnement
+Objectifs principaux
+--------------------
+
+- **Analyse historique et actuelle**  
+  Étudier l’évolution des émissions de CO₂ et leurs effets mesurables sur la santé humaine à travers différents indicateurs (espérance de vie, taux de mortalité, population, etc.).
+- **Prédiction des impacts sanitaires**  
+  Fournir des estimations par pays et par année pour comprendre comment les variations des émissions influencent la santé publique.
+- **Visualisation interactive**  
+  Offrir des graphiques et cartes interactifs permettant de comparer pays et tendances dans le temps, pour une exploration intuitive des données.
+- **Sensibilisation et communication**  
+  Rendre accessibles les informations clés aux citoyens, chercheurs et décideurs afin de mettre en lumière les enjeux santé-environnement.
+
 
 Technologies utilisées
 ----------------------
 
 .. list-table::
-   :widths: 30 70
+   :widths: 25 75
    :header-rows: 1
-   
+   :stub-columns: 1
+
    * - Domaine
      - Technologies
    * - Backend & Analyse
      - Python 3.9+, Pandas, NumPy, Scikit-learn, Matplotlib
    * - Visualisation web
-     - **Quarto** (framework principal), Plotly, D3.js
+     - **Quarto**, le framework principal, Plotly
    * - Documentation
-     - **Sphinx** (cette documentation), reStructuredText
+     - **Sphinx**, la documentation actuelle
    * - Gestion de code
      - Git, GitHub, Visual Studio Code
    * - Déploiement
-     - GitHub Pages / Netlify
+     - GitHub Pages, Netlify
+
 
 Structure du projet
 -------------------
@@ -73,9 +87,9 @@ Structure du projet
 Équipe projet
 -------------
 
-* **Étudiants en [ta formation]** - [Nom de ton école/université]
-* **Encadré par** : [Nom du professeur]
-* **Période** : [Date de début] - [Date de fin]
+* **Étudiants en M1 SSD** - Université de Montpellier
+* **Encadré par** : Bensaid Bilel
+* **projet** : 2025 - 2026
 
 .. note::
    Cette documentation est technique et s'adresse aux développeurs, contributeurs
