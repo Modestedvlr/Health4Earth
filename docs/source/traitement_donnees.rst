@@ -25,8 +25,7 @@ Sources de données
    * - **INSEE**
      - Données démographiques par région
      - Annuelle
-   * - **OurworldInData**
-
+   
 
 Nettoyage des données
 ---------------------

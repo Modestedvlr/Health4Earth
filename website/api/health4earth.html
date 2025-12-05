@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>health4earth package &mdash; Health4Earth 0.1 documentation</title>
+  <title>Health4Earth - Documentation des modules &mdash; Health4Earth 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=1aa8269c" />
@@ -44,65 +44,19 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="traitement_donnees.html">Traitement des données</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Guide d’Utilisation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">health4earth</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">health4earth package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.analytics">health4earth.analytics module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.analytics.HealthAnalyzer"><code class="docutils literal notranslate"><span class="pre">HealthAnalyzer</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Health4Earth - Documentation des modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#apercu-du-package">Aperçu du package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules-de-donnees">Modules de données</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-health4earth.data_capitales">health4earth.data_capitales module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-health4earth.data_co2">health4earth.data_co2 module</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.data_capitales">health4earth.data_capitales module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_capitales.build_json"><code class="docutils literal notranslate"><span class="pre">build_json()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_capitales.load_capitales"><code class="docutils literal notranslate"><span class="pre">load_capitales()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_capitales.load_indicateurs"><code class="docutils literal notranslate"><span class="pre">load_indicateurs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.data_clean">health4earth.data_clean module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_clean.clean_co2"><code class="docutils literal notranslate"><span class="pre">clean_co2()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_clean.clean_life"><code class="docutils literal notranslate"><span class="pre">clean_life()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_clean.clean_pollution"><code class="docutils literal notranslate"><span class="pre">clean_pollution()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.data_co2">health4earth.data_co2 module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_co2.build_co2_json"><code class="docutils literal notranslate"><span class="pre">build_co2_json()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.data_ingest">health4earth.data_ingest module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_ingest.load_merged_data"><code class="docutils literal notranslate"><span class="pre">load_merged_data()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.data_life">health4earth.data_life module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_life.build_life_json"><code class="docutils literal notranslate"><span class="pre">build_life_json()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.data_pollution">health4earth.data_pollution module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_pollution.build_pollution_json"><code class="docutils literal notranslate"><span class="pre">build_pollution_json()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.data_transform">health4earth.data_transform module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.data_transform.export_web_ready"><code class="docutils literal notranslate"><span class="pre">export_web_ready()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.explorer">health4earth.explorer module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.explorer.Health4EarthExplorer"><code class="docutils literal notranslate"><span class="pre">Health4EarthExplorer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.geo">health4earth.geo module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.geo.add_capitals"><code class="docutils literal notranslate"><span class="pre">add_capitals()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#health4earth-perf-module">health4earth.perf module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.utils">health4earth.utils module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.utils.hello"><code class="docutils literal notranslate"><span class="pre">hello()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth.viz">health4earth.viz module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#health4earth.viz.plot_time_series"><code class="docutils literal notranslate"><span class="pre">plot_time_series()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-health4earth">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-health4earth">Module principal</a></li>
 </ul>
 </li>
 </ul>
@@ -124,7 +78,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html">health4earth</a></li>
-      <li class="breadcrumb-item active">health4earth package</li>
+      <li class="breadcrumb-item active">Health4Earth - Documentation des modules</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/health4earth.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -134,167 +88,64 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="health4earth-package">
-<h1>health4earth package<a class="headerlink" href="#health4earth-package" title="Link to this heading"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+  <section id="health4earth-documentation-des-modules">
+<h1>Health4Earth - Documentation des modules<a class="headerlink" href="#health4earth-documentation-des-modules" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cette documentation est <strong>générée automatiquement</strong> à partir des
+docstrings Python du code source.</p>
+</div>
+<section id="apercu-du-package">
+<h2>Aperçu du package<a class="headerlink" href="#apercu-du-package" title="Link to this heading"></a></h2>
+<p><strong>Health4Earth</strong> est organisé en plusieurs modules spécialisés :</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Modules principaux</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Module</strong></p></th>
+<th class="head"><p><strong>Responsabilité</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">data_ingest</span></code></p></td>
+<td><p>Collecte et chargement des données</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">data_clean</span></code></p></td>
+<td><p>Nettoyage et prétraitement</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">data_transform</span></code></p></td>
+<td><p>Transformations des données</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">analytics</span></code></p></td>
+<td><p>Analyses statistiques</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">viz</span></code></p></td>
+<td><p>Visualisations</p></td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="module-health4earth.analytics">
-<span id="health4earth-analytics-module"></span><h2>health4earth.analytics module<a class="headerlink" href="#module-health4earth.analytics" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">health4earth.analytics.</span></span><span class="sig-name descname"><span class="pre">HealthAnalyzer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Moteur d’analyse statistique et prédictive Health4Earth.
-Gère les régressions linéaires pour les projections 2025-2050.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer.get_country_data">
-<span class="sig-name descname"><span class="pre">get_country_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer.get_country_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.get_country_data" title="Link to this definition"></a></dt>
-<dd><p>Extrait les données spécifiques à un pays.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="health4earth.analytics.HealthAnalyzer.predict_evolution">
-<span class="sig-name descname"><span class="pre">predict_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_start_pred</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2024</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2050</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/analytics.html#HealthAnalyzer.predict_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.analytics.HealthAnalyzer.predict_evolution" title="Link to this definition"></a></dt>
-<dd><p>Prédit l’évolution future d’un indicateur.
-Utilise les données depuis 2000 pour entraîner le modèle.</p>
-</dd></dl>
-
-</dd></dl>
-
-</section>
+<section id="modules-de-donnees">
+<h2>Modules de données<a class="headerlink" href="#modules-de-donnees" title="Link to this heading"></a></h2>
+<p>Ces modules gèrent les sources de données spécifiques :</p>
 <section id="module-health4earth.data_capitales">
-<span id="health4earth-data-capitales-module"></span><h2>health4earth.data_capitales module<a class="headerlink" href="#module-health4earth.data_capitales" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_capitales.build_json">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_capitales.</span></span><span class="sig-name descname"><span class="pre">build_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/data_capitales.html#build_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_capitales.build_json" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_capitales.load_capitales">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_capitales.</span></span><span class="sig-name descname"><span class="pre">load_capitales</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/data_capitales.html#load_capitales"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_capitales.load_capitales" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_capitales.load_indicateurs">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_capitales.</span></span><span class="sig-name descname"><span class="pre">load_indicateurs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/data_capitales.html#load_indicateurs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_capitales.load_indicateurs" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="module-health4earth.data_clean">
-<span id="health4earth-data-clean-module"></span><h2>health4earth.data_clean module<a class="headerlink" href="#module-health4earth.data_clean" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_clean.clean_co2">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_clean.</span></span><span class="sig-name descname"><span class="pre">clean_co2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/data_clean.html#clean_co2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_clean.clean_co2" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_clean.clean_life">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_clean.</span></span><span class="sig-name descname"><span class="pre">clean_life</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/data_clean.html#clean_life"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_clean.clean_life" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_clean.clean_pollution">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_clean.</span></span><span class="sig-name descname"><span class="pre">clean_pollution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/data_clean.html#clean_pollution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_clean.clean_pollution" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
+<span id="health4earth-data-capitales-module"></span><h3>health4earth.data_capitales module<a class="headerlink" href="#module-health4earth.data_capitales" title="Link to this heading"></a></h3>
+<p><strong>Description :</strong> Gestion des données des capitales et villes principales.</p>
 </section>
 <section id="module-health4earth.data_co2">
-<span id="health4earth-data-co2-module"></span><h2>health4earth.data_co2 module<a class="headerlink" href="#module-health4earth.data_co2" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_co2.build_co2_json">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_co2.</span></span><span class="sig-name descname"><span class="pre">build_co2_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/data_co2.html#build_co2_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_co2.build_co2_json" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
+<span id="health4earth-data-co2-module"></span><h3>health4earth.data_co2 module<a class="headerlink" href="#module-health4earth.data_co2" title="Link to this heading"></a></h3>
+<p><strong>Description :</strong> Données d’émissions CO₂.</p>
 </section>
-<section id="module-health4earth.data_ingest">
-<span id="health4earth-data-ingest-module"></span><h2>health4earth.data_ingest module<a class="headerlink" href="#module-health4earth.data_ingest" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_ingest.load_merged_data">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_ingest.</span></span><span class="sig-name descname"><span class="pre">load_merged_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/health4earth/data_ingest.html#load_merged_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_ingest.load_merged_data" title="Link to this definition"></a></dt>
-<dd><p>Charge les données. Si les sources externes échouent, génère un dataset
-mathématiquement réaliste pour garantir le fonctionnement du site.</p>
-</dd></dl>
-
-</section>
-<section id="module-health4earth.data_life">
-<span id="health4earth-data-life-module"></span><h2>health4earth.data_life module<a class="headerlink" href="#module-health4earth.data_life" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_life.build_life_json">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_life.</span></span><span class="sig-name descname"><span class="pre">build_life_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/data_life.html#build_life_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_life.build_life_json" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="module-health4earth.data_pollution">
-<span id="health4earth-data-pollution-module"></span><h2>health4earth.data_pollution module<a class="headerlink" href="#module-health4earth.data_pollution" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_pollution.build_pollution_json">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_pollution.</span></span><span class="sig-name descname"><span class="pre">build_pollution_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/data_pollution.html#build_pollution_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_pollution.build_pollution_json" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="module-health4earth.data_transform">
-<span id="health4earth-data-transform-module"></span><h2>health4earth.data_transform module<a class="headerlink" href="#module-health4earth.data_transform" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.data_transform.export_web_ready">
-<span class="sig-prename descclassname"><span class="pre">health4earth.data_transform.</span></span><span class="sig-name descname"><span class="pre">export_web_ready</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">WindowsPath('data/processed')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/data_transform.html#export_web_ready"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.data_transform.export_web_ready" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="module-health4earth.explorer">
-<span id="health4earth-explorer-module"></span><h2>health4earth.explorer module<a class="headerlink" href="#module-health4earth.explorer" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="health4earth.explorer.Health4EarthExplorer">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">health4earth.explorer.</span></span><span class="sig-name descname"><span class="pre">Health4EarthExplorer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">WindowsPath('data')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/explorer.html#Health4EarthExplorer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.explorer.Health4EarthExplorer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="health4earth.explorer.Health4EarthExplorer.export_web">
-<span class="sig-name descname"><span class="pre">export_web</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/explorer.html#Health4EarthExplorer.export_web"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.explorer.Health4EarthExplorer.export_web" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="health4earth.explorer.Health4EarthExplorer.load_data">
-<span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/explorer.html#Health4EarthExplorer.load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.explorer.Health4EarthExplorer.load_data" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</section>
-<section id="module-health4earth.geo">
-<span id="health4earth-geo-module"></span><h2>health4earth.geo module<a class="headerlink" href="#module-health4earth.geo" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.geo.add_capitals">
-<span class="sig-prename descclassname"><span class="pre">health4earth.geo.</span></span><span class="sig-name descname"><span class="pre">add_capitals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capitals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/health4earth/geo.html#add_capitals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.geo.add_capitals" title="Link to this definition"></a></dt>
-<dd><p>Ajoute les capitales et coordonnées géographiques au dataset principal.</p>
-</dd></dl>
-
-</section>
-<section id="health4earth-perf-module">
-<h2>health4earth.perf module<a class="headerlink" href="#health4earth-perf-module" title="Link to this heading"></a></h2>
-</section>
-<section id="module-health4earth.utils">
-<span id="health4earth-utils-module"></span><h2>health4earth.utils module<a class="headerlink" href="#module-health4earth.utils" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.utils.hello">
-<span class="sig-prename descclassname"><span class="pre">health4earth.utils.</span></span><span class="sig-name descname"><span class="pre">hello</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/utils.html#hello"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.utils.hello" title="Link to this definition"></a></dt>
-<dd><p>Fonction utilitaire de test.</p>
-</dd></dl>
-
-</section>
-<section id="module-health4earth.viz">
-<span id="health4earth-viz-module"></span><h2>health4earth.viz module<a class="headerlink" href="#module-health4earth.viz" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="health4earth.viz.plot_time_series">
-<span class="sig-prename descclassname"><span class="pre">health4earth.viz.</span></span><span class="sig-name descname"><span class="pre">plot_time_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">country</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/health4earth/viz.html#plot_time_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#health4earth.viz.plot_time_series" title="Link to this definition"></a></dt>
-<dd><p>Trace les séries CO2, pollution et espérance de vie pour un pays donné.</p>
-</dd></dl>
-
 </section>
 <section id="module-health4earth">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-health4earth" title="Link to this heading"></a></h2>
+<span id="module-principal"></span><h2>Module principal<a class="headerlink" href="#module-health4earth" title="Link to this heading"></a></h2>
 <p>HEALTH4EARTH package
 Ce module regroupe les fonctions principales pour l’analyse des données
 CO2, pollution atmosphérique et santé publique.</p>
+<p><strong>Description :</strong> Point d’entrée principal du package.</p>
 </section>
 </section>
 
