@@ -42,10 +42,10 @@ Technologies utilisées
      - Technologies
    * - Backend & Analyse
      - Python 3.9+, Pandas, NumPy, Scikit-learn, Matplotlib
-   * - Visualisation web
+   * - Visualisation du site web
      - **Quarto**, le framework principal, Plotly
    * - Documentation
-     - **Sphinx**, la documentation actuelle
+     - **Sphinx**, la documentation actuelle 
    * - Gestion de code
      - Git, GitHub, Visual Studio Code
    * - Déploiement
@@ -69,9 +69,9 @@ Structure du projet
    │   ├── source/
    │   │   ├── conf.py
    │   │   ├── index.rst
-   │   │   ├── introduction.rst      # (ce fichier)
+   │   │   ├── introduction.rst    
    │   │   └── traitement_donnees.rst
-   │   └── _build/           # Documentation générée
+   │   └── build/           # Documentation générée
    │
    ├── src/                  # Code source Python
    │   ├── data_processing/
