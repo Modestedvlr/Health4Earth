@@ -30,7 +30,8 @@ Avant de commencer, assurez-vous d'avoir :
 Installation via Git
 --------------------
 
-### 1. Cloner le dépôt
+1. **Cloner le dépôt**
+
 Récupérez le code source depuis GitHub :
 
 .. code-block:: bash
@@ -39,7 +40,8 @@ Récupérez le code source depuis GitHub :
 
 **Explication :** Cette commande télécharge l'intégralité du projet sur votre machine.
 
-### 2. Accéder au dossier
+2. **Accéder au dossier**
+
 Déplacez-vous dans le dossier du projet :
 
 .. code-block:: bash
@@ -48,7 +50,8 @@ Déplacez-vous dans le dossier du projet :
 
 **Explication :** Toutes les commandes suivantes doivent être exécutées depuis ce dossier.
 
-### 3. Créer un environnement virtuel (recommandé)
+3. **Créer un environnement virtuel**
+
 Isolez les dépendances du projet :
 
 .. code-block:: bash
@@ -57,7 +60,8 @@ Isolez les dépendances du projet :
 
 **Explication :** Crée un environnement Python isolé nommé "venv".
 
-### 4. Activer l'environnement
+4. **Activer l'environnement**
+
 Activez l'environnement selon votre système :
 
 .. code-block:: bash
@@ -72,7 +76,8 @@ Activez l'environnement selon votre système :
 
 **Explication :** Votre terminal est maintenant dans l'environnement virtuel.
 
-### 5. Installer le package
+ 5. **Installer le package**
+
 Installez Health4Earth en mode développement :
 
 .. code-block:: bash
@@ -81,7 +86,8 @@ Installez Health4Earth en mode développement :
 
 **Explication :** Le point `.` signifie "dossier courant". Le mode `-e` permet des modifications sans réinstallation.
 
-### 6. Installer les dépendances de développement (optionnel)
+6. **Installer les dépendances de développement**
+
 Pour contribuer au code ou à la documentation :
 
 .. code-block:: bash
@@ -93,7 +99,7 @@ Pour contribuer au code ou à la documentation :
 Vérification
 ------------
 
-### Test d'import
+**Test d'import**
 Vérifiez que l'installation a réussi :
 
 .. code-block:: python
@@ -103,7 +109,8 @@ Vérifiez que l'installation a réussi :
 
 **Explication :** Si aucun message d'erreur n'apparaît, l'installation est réussie.
 
-### Vérification de version
+**Vérification de version**
+
 Affichez la version installée :
 
 .. code-block:: bash
@@ -130,13 +137,15 @@ Après installation, votre projet aura cette structure :
 Dépannage rapide
 ----------------
 
-### "Command not found: python"
+**"Command not found: python"**
+
 Utilisez `python3` ou installez Python.
 
-### "ModuleNotFoundError"
+** "ModuleNotFoundError"**
+
 Vérifiez que vous êtes dans l'environnement virtuel (vous devriez voir `(venv)` devant votre prompt).
 
-### Problèmes de permissions sur Windows
+**Problèmes de permissions sur Windows**
 Ajoutez `--user` à la commande pip : `pip install --user -e .`
 
 .. important::
