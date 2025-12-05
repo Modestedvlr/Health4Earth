@@ -105,7 +105,7 @@ Vérifiez que l'installation a réussi :
 .. code-block:: python
 
    import health4earth
-   print("✅ Health4Earth est correctement installé !")
+   print("Health4Earth est correctement installé !")
 
 **Explication :** Si aucun message d'erreur n'apparaît, l'installation est réussie.
 
@@ -141,7 +141,7 @@ Dépannage rapide
 
 Utilisez `python3` ou installez Python.
 
-** "ModuleNotFoundError"**
+**"ModuleNotFoundError"**
 
 Vérifiez que vous êtes dans l'environnement virtuel (vous devriez voir `(venv)` devant votre prompt).
 
