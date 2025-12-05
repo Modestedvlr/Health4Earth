@@ -59,23 +59,3 @@ Module principal
 
 **Description :** Point d'entrée principal du package.
 
-Guide d'utilisation
--------------------
-
-**Exemple d'import :**
-
-.. code-block:: python
-
-   from health4earth import data_clean
-   from health4earth.viz import plot_map
-
-**Vérification :**
-
-.. code-block:: python
-
-   import health4earth
-   print("Version :", health4earth.__version__)
-
-.. important::
-   Toutes les fonctions doivent avoir des **docstrings** complètes
-   pour une documentation automatique de qualité.
