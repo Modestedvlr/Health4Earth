@@ -25,9 +25,7 @@ Sources de données
    * - **INSEE**
      - Données démographiques par région
      - Annuelle
-
-Workflow de traitement
-----------------------
+   * - **OurworldInData**
 
 
 Nettoyage des données
@@ -52,11 +50,7 @@ Nettoyage des données
    - Moyenne par région pour données spatiales
    - Suppression si >30% manquants
 
-3. **Normalisation**
-   
-   .. math::
-      
-      x_{\text{norm}} = \frac{x - \min(x)}{\max(x) - \min(x)}
+
 
 Structure des données traitées
 ------------------------------
@@ -134,8 +128,7 @@ Exemple complet de pipeline
        
        # ... autres méthodes
 
-Visualisation des données traitées
-----------------------------------
+
 
 
 Formats de sortie
