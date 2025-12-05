@@ -16,12 +16,24 @@ Bienvenue sur la documentation technique du projet Health4Earth.
    :maxdepth: 2
    :caption: Contents:
 
+   introduction
+   traitement_donnees
    installation
    usage
    modules
 
+
 Index et Tables
 ===============
+
+Pour commencer
+--------------
+
+Si vous découvrez le projet, consultez d'abord la section :doc:`introduction`.
+
+Pour comprendre comment nos données sont traitées, rendez-vous dans :doc:`traitement_donnees`.
+
+
 
 * :ref:`genindex`
 * :ref:`modindex`

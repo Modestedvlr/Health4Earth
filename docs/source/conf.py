@@ -13,7 +13,9 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
-    'sphinx_rtd_theme',    # <--- Important de l'ajouter ici
+    'sphinx_rtd_theme',
+    'sphinx.ext.imgmath',
+    'sphinx.ext.todo',    # <--- Important de l'ajouter ici
 ]
 
 templates_path = ['_templates']
@@ -21,6 +23,11 @@ exclude_patterns = []
 
 html_theme = 'sphinx_rtd_theme'  # <--- Le thème qu'on veut
 html_static_path = ['_static']
+
+html_sidebars = {
+    '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html']
+}
+
 
 # --- Configuration CSS Personnalisée ---
 # Pour que la doc prenne toute la largeur de l'écran
