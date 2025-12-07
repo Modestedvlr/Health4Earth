@@ -1,117 +1,61 @@
-health4earth package
-====================
+Health4Earth - Documentation des modules
+========================================
 
-Submodules
-----------
+.. note::
+   Cette documentation est **générée automatiquement** à partir des
+   docstrings Python du code source.
 
-health4earth.analytics module
------------------------------
+Aperçu du package
+-----------------
 
-.. automodule:: health4earth.analytics
-   :members:
-   :show-inheritance:
-   :undoc-members:
+**Health4Earth** est organisé en plusieurs modules spécialisés :
 
-health4earth.data\_capitales module
------------------------------------
+.. list-table:: Modules principaux
+   :widths: 30 70
+   :header-rows: 1
+   
+   * - **Module**
+     - **Responsabilité**
+   * - ``data_ingest``
+     - Collecte et chargement des données
+   * - ``data_clean``
+     - Nettoyage et prétraitement
+   * - ``data_transform``
+     - Transformations des données
+   * - ``analytics``
+     - Analyses statistiques
+   * - ``viz``
+     - Visualisations
+
+Modules de données
+------------------
+
+Ces modules gèrent les sources de données spécifiques :
+
+health4earth.data_capitales module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: health4earth.data_capitales
    :members:
    :show-inheritance:
-   :undoc-members:
 
-health4earth.data\_clean module
--------------------------------
+**Description :** Gestion des données des capitales et villes principales.
 
-.. automodule:: health4earth.data_clean
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-health4earth.data\_co2 module
------------------------------
+health4earth.data_co2 module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: health4earth.data_co2
    :members:
    :show-inheritance:
-   :undoc-members:
 
-health4earth.data\_ingest module
---------------------------------
+**Description :** Données d'émissions CO₂.
 
-.. automodule:: health4earth.data_ingest
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-health4earth.data\_life module
-------------------------------
-
-.. automodule:: health4earth.data_life
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-health4earth.data\_pollution module
------------------------------------
-
-.. automodule:: health4earth.data_pollution
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-health4earth.data\_transform module
------------------------------------
-
-.. automodule:: health4earth.data_transform
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-health4earth.explorer module
-----------------------------
-
-.. automodule:: health4earth.explorer
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-health4earth.geo module
------------------------
-
-.. automodule:: health4earth.geo
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-health4earth.perf module
-------------------------
-
-.. automodule:: health4earth.perf
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-health4earth.utils module
--------------------------
-
-.. automodule:: health4earth.utils
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-health4earth.viz module
------------------------
-
-.. automodule:: health4earth.viz
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-Module contents
----------------
+Module principal
+----------------
 
 .. automodule:: health4earth
    :members:
    :show-inheritance:
-   :undoc-members:
+
+**Description :** Point d'entrée principal du package.
+
