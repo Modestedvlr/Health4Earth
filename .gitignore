@@ -18,3 +18,10 @@ __pycache__/
 
 # Build site
 _site/
+
+# Documentation Sphinx
+docs/build/
+docs/_build/
+
+# Documentation API générée
+website/api/
