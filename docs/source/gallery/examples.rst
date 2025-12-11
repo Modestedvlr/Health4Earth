@@ -120,4 +120,4 @@ Ce script identifie les années où la mortalité liée à la pollution a été 
 Aller plus loin
 ---------------
 
-Pour intégrer ces graphiques dans une page web interactive, consultez le code source de notre site web dans le dossier ``website/`` du dépôt GitHub.
+Pour intégrer ces graphiques dans une page web interactive, consultez le code source de notre site web dans le dossier `website/ <https://github.com/modestedvlr/Health4Earth/tree/main/website>`_ du dépôt GitHub.
