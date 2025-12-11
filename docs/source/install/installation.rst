@@ -36,7 +36,7 @@ Récupérez le code source depuis GitHub :
 
 .. code-block:: bash
 
-   git clone https://github.com/JulienOllier/Health4Earth.git
+   git clone https://github.com/Modestedvlr/Health4Earth.git
 
 **Explication :** Cette commande télécharge l'intégralité du projet sur votre machine.
 
