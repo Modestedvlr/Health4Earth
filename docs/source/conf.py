@@ -1,35 +1,32 @@
 import os
 import sys
-import sphinx_rtd_theme  # <--- Important d'importer le module
-
+# On ajoute le chemin vers le code source
 sys.path.insert(0, os.path.abspath('../../'))
 
+# -- Project information -----------------------------------------------------
 project = 'Health4Earth'
-copyright = '2025, Health4Earth Team'
-author = 'Health4Earth Team'
-release = '0.1'
+copyright = '2025, Master SSD Team'
+author = 'Dossou Modeste AGOSSOU, Firdaousse KARIMOU, Julien OLLIER'
+release = '1.0'
 
+# -- General configuration ---------------------------------------------------
+# L'ajout clé ici est 'sphinx.ext.napoleon' pour lire les docstrings complexes
+# et 'sphinx.ext.viewcode' pour voir le code source sur le site.
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
-    'sphinx_rtd_theme',
-    'sphinx.ext.imgmath',
-    'sphinx.ext.todo',    # <--- Important de l'ajouter ici
+    'sphinx.ext.githubpages',
+    'sphinx_rtd_theme'
 ]
 
 templates_path = ['_templates']
 exclude_patterns = []
 
-html_theme = 'sphinx_rtd_theme'  # <--- Le thème qu'on veut
+# -- Options for HTML output -------------------------------------------------
+html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
-html_sidebars = {
-    '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html']
-}
-
-
-# --- Configuration CSS Personnalisée ---
-# Pour que la doc prenne toute la largeur de l'écran
+# Configuration CSS pour le plein écran (ce qu'on a fait avant)
 def setup(app):
     app.add_css_file('custom.css')
