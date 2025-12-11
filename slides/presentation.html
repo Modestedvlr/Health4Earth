@@ -9,7 +9,7 @@
 <link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.25">
 
-  <meta name="author" content="Équipe Projet Health4Earth - Master 1 SSD">
+  <meta name="author" content="Projet Développement Logiciel - Master 1 SSD">
   <title>Health4Earth</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -28,72 +28,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #f8f8f2;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #f8f8f2; } /* Normal */
-    code span.al { color: #f07178; } /* Alert */
-    code span.an { color: #d4d0ab; } /* Annotation */
-    code span.at { color: #00e0e0; } /* Attribute */
-    code span.bn { color: #d4d0ab; } /* BaseN */
-    code span.bu { color: #abe338; } /* BuiltIn */
-    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #abe338; } /* Char */
-    code span.cn { color: #ffd700; } /* Constant */
-    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
-    code span.cv { color: #ffd700; } /* CommentVar */
-    code span.do { color: #f8f8f2; } /* Documentation */
-    code span.dt { color: #ffa07a; } /* DataType */
-    code span.dv { color: #d4d0ab; } /* DecVal */
-    code span.er { color: #f07178; text-decoration: underline; } /* Error */
-    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
-    code span.fl { color: #d4d0ab; } /* Float */
-    code span.fu { color: #ffa07a; } /* Function */
-    code span.im { color: #abe338; } /* Import */
-    code span.in { color: #d4d0ab; } /* Information */
-    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
-    code span.op { color: #ffa07a; } /* Operator */
-    code span.ot { color: #00e0e0; } /* Other */
-    code span.pp { color: #dcc6e0; } /* Preprocessor */
-    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
-    code span.sc { color: #abe338; } /* SpecialChar */
-    code span.ss { color: #abe338; } /* SpecialString */
-    code span.st { color: #abe338; } /* String */
-    code span.va { color: #00e0e0; } /* Variable */
-    code span.vs { color: #abe338; } /* VerbatimString */
-    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/theme/quarto-2fb0d90a38a25fbe926e47e932da790e.css">
   <link rel="stylesheet" href="custom_slides.css">
@@ -198,12 +132,12 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Health4Earth</h1>
-  <p class="subtitle">Analyse et Visualisation de Données de l’Impact Environnemental sur la Santé</p>
+  <p class="subtitle">Analyse et visualisation interactive de l’impact environnemental sur la santé publique</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Équipe Projet Health4Earth - Master 1 SSD 
+Projet Développement Logiciel - Master 1 SSD 
 </div>
 </div>
 </div>
@@ -218,14 +152,14 @@
 <h2>La Problématique</h2>
 <div class="fragment fade-up">
 <blockquote>
-<p><em>Dans quelle mesure le développement industriel et les émissions de CO₂ impactent-ils la santé publique mondiale ?</em></p>
+<p><em>Dans quelle mesure le développement industriel et les émissions de CO₂ impactent-ils réellement la santé publique mondiale aujourd’hui, et surtout, demain ?</em></p>
 </blockquote>
 </div>
 <p><strong>Nos Objectifs :</strong></p>
 <ol type="1">
-<li><p><strong>Agrégation</strong> de données hétérogènes (Climat vs Santé).</p></li>
-<li><p><strong>Visualisation</strong> des disparités mondiales.</p></li>
-<li><p><strong>Prédiction</strong> des trajectoires à l’horizon 2050.</p></li>
+<li><p><strong>Agrégation</strong> de sources de données hétérogènes (Climat et Santé).</p></li>
+<li><p><strong>Visualisation</strong> des disparités mondiales via une cartographie interactive.</p></li>
+<li><p><strong>Prédiction</strong> des trajectoires futures grâce à des modèles de Machine Learning à l’horizon 2050.</p></li>
 </ol>
 </section>
 <section class="slide level2">
@@ -244,13 +178,13 @@
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '32px', 'fontFamily': 'Helvetica', 'darkMode': true }}}%%
+<pre class="mermaid mermaid-js">%%{init: {'theme': 'dark', 'themeVariables': { 'fontSize': '18px', 'fontFamily': 'Helvetica' }}}%%
 flowchart LR
-    A(Sources Web) --&gt;|Pooch| B(Cache Local)
+    A[Sources Web] --&gt;|Pooch| B(Cache Local)
     B --&gt;|Nettoyage| C{Dataset Fusionné}
     C --&gt;|Pandas| D[Classe HealthAnalyzer]
     D --&gt;|Scikit-Learn| E[Modèle IA]
-    E &amp; D --&gt;|Quarto| F(Dashboard Web)
+    E &amp; D --&gt;|Quarto| F[Dashboard Web]
 
     style A fill:#e74c3c,stroke:#fff,stroke-width:2px,color:white
     style B fill:#e67e22,stroke:#fff,stroke-width:2px,color:white
@@ -264,14 +198,15 @@ flowchart LR
 </div>
 </div>
 </div>
-<div style="font-size: 0.8em; margin-top: 30px;">
-<ul>
-<li class="fragment"><p>Ingestion : Téléchargement sécurisé et mise en cache (pooch).</p></li>
-<li class="fragment"><p>Traitement : Fusion des sources hétérogènes (Climat + Santé).</p></li>
-<li class="fragment"><p>Analyse : Structure Orientée Objet (class HealthAnalyzer).</p></li>
-<li class="fragment"><p>IA : Calcul des prédictions 2050 sur les données nettoyées.</p></li>
-<li class="fragment"><p>Rendu : Génération du site statique interactif.</p></li>
-</ul>
+<!-- J'ai réduit la taille de police (0.65em) et la marge (0px) pour que ça ne coupe plus en bas -->
+<div style="font-size: 0.65em; margin-top: 0px;">
+<ol type="1">
+<li class="fragment">Ingestion : Téléchargement sécurisé et mise en cache (pooch).</li>
+<li class="fragment">Traitement : Fusion des sources hétérogènes (Climat + Santé).</li>
+<li class="fragment">Analyse : Structure Orientée Objet (class HealthAnalyzer).</li>
+<li class="fragment">IA : Calcul des prédictions 2050 sur les données nettoyées.</li>
+<li class="fragment">Rendu : Génération du site statique interactif.</li>
+</ol>
 </div>
 </section>
 <section id="focus-robustesse-ingestion" class="slide level2">
@@ -300,35 +235,12 @@ flowchart LR
 <li><p><strong>Cibles :</strong> CO₂, Espérance de vie, Mortalité liée à la pollution.</p></li>
 </ul>
 </section>
-<section id="démonstration-du-code-live" class="slide level2">
-<h2>Démonstration du Code (Live)</h2>
-<p>Exécution réelle du package <code>health4earth</code> :</p>
-<div id="d4dddc19" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> sys</span>
-<span id="cb1-2"><a href=""></a><span class="im">import</span> os</span>
-<span id="cb1-3"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a href=""></a><span class="co"># Import du package développé</span></span>
-<span id="cb1-5"><a href=""></a>sys.path.append(os.path.abspath(<span class="st">".."</span>))</span>
-<span id="cb1-6"><a href=""></a><span class="im">from</span> health4earth.analytics <span class="im">import</span> HealthAnalyzer</span>
-<span id="cb1-7"><a href=""></a></span>
-<span id="cb1-8"><a href=""></a><span class="co"># Simulation de données pour l'exemple</span></span>
-<span id="cb1-9"><a href=""></a>data <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb1-10"><a href=""></a>    <span class="st">'country'</span>: [<span class="st">'France'</span>] <span class="op">*</span> <span class="dv">20</span>,</span>
-<span id="cb1-11"><a href=""></a>    <span class="st">'year'</span>: <span class="bu">range</span>(<span class="dv">2000</span>, <span class="dv">2020</span>),</span>
-<span id="cb1-12"><a href=""></a>    <span class="st">'co2'</span>: [<span class="dv">400</span> <span class="op">-</span> i<span class="op">*</span><span class="dv">5</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>)] <span class="co"># Tendance baissière</span></span>
-<span id="cb1-13"><a href=""></a>})</span>
-<span id="cb1-14"><a href=""></a></span>
-<span id="cb1-15"><a href=""></a><span class="co"># Initialisation de notre classe</span></span>
-<span id="cb1-16"><a href=""></a>analyzer <span class="op">=</span> HealthAnalyzer(data)</span>
-<span id="cb1-17"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Classe HealthAnalyzer instanciée avec succès."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Classe HealthAnalyzer instanciée avec succès.</code></pre>
-</div>
-</div>
+<section class="slide level2">
+
 </section></section>
 <section>
-<section id="interface-visualisation" class="title-slide slide level1 center" data-background-color="#533483">
-<h1>4. Interface &amp; Visualisation</h1>
+<section id="interface-et-visualisation" class="title-slide slide level1 center" data-background-color="#533483">
+<h1>4. Interface et Visualisation</h1>
 
 </section>
 <section id="le-dashboard-web" class="slide level2">
@@ -336,7 +248,7 @@ flowchart LR
 <p>Déploiement automatisé sur <strong>GitHub Pages</strong>.</p>
 <p><strong>Fonctionnalités clés :</strong></p>
 <ul>
-<li><p><strong>Carte Choroplèthe :</strong> Vue mondiale des émissions et indicateurs.</p></li>
+<li><p><strong>Carte interactive :</strong> Vue mondiale des émissions, de la pollution, de la mortalité liée à la pollution de l’air et de l’espérance de vie.</p></li>
 <li><p><strong>Popups Intelligents :</strong> Graphiques générés en Python (Matplotlib) et encodés en Base64 directement dans les marqueurs.</p></li>
 <li><p><strong>Exploration Plotly :</strong> Sélecteurs interactifs pour comparer les courbes des pays.</p></li>
 </ul>
@@ -345,8 +257,8 @@ flowchart LR
 
 </section></section>
 <section>
-<section id="qualité-logicielle-bilan" class="title-slide slide level1 center" data-background-color="#e94560">
-<h1>5. Qualité Logicielle &amp; Bilan</h1>
+<section id="qualité-logicielle-et-bilan" class="title-slide slide level1 center" data-background-color="#e94560">
+<h1>5. Qualité Logicielle et Bilan</h1>
 
 </section>
 <section id="pratiques-devops-cicd" class="slide level2">
@@ -359,8 +271,8 @@ flowchart LR
 <li><p><strong>Packaging :</strong> Installation standard via <code>pip install .</code> (<code>pyproject.toml</code>).</p></li>
 </ul>
 </section>
-<section id="auto-critique-perspectives" class="slide level2">
-<h2>Auto-Critique &amp; Perspectives</h2>
+<section id="auto-critique-et-perspectives" class="slide level2">
+<h2>Auto-Critique et Perspectives</h2>
 <p><strong>Difficultés rencontrées :</strong></p>
 <ul>
 <li><p>Intégration hybride Quarto / Sphinx (résolu via Iframe CSS).</p></li>
@@ -386,7 +298,7 @@ flowchart LR
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="slide-logo"></p>
 <div class="footer footer-default">
-<p>Université de Montpellier - 2025</p>
+<p>Université de Montpellier - 2025-2026</p>
 </div>
 </div></div>
 

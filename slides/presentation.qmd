@@ -1,14 +1,14 @@
 ---
 title: "Health4Earth"
-subtitle: "Analyse et Visualisation de Données de l'Impact Environnemental sur la Santé"
-author: "Équipe Projet Health4Earth - Master 1 SSD"
+subtitle: "Analyse et visualisation interactive de l'impact environnemental sur la santé publique"
+author: "Projet Développement Logiciel - Master 1 SSD"
 format:
   revealjs:
     theme: night
     transition: concave
     slide-number: true
     logo: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
-    footer: "Université de Montpellier - 2025"
+    footer: "Université de Montpellier - 2025-2026"
     code-overflow: wrap
     css: custom_slides.css
 jupyter: python3
@@ -19,16 +19,18 @@ jupyter: python3
 ---
 
 ## La Problématique
+
 ::: {.fragment .fade-up}
-> *Dans quelle mesure le développement industriel et les émissions de CO₂ impactent-ils la santé publique mondiale ?*
+> *Dans quelle mesure le développement industriel et les émissions de CO₂ impactent-ils réellement la santé publique mondiale aujourd'hui, et surtout, demain ?*
 :::
+
 **Nos Objectifs :**
 
-1.  **Agrégation** de données hétérogènes (Climat vs Santé).
+1.  **Agrégation** de sources de données hétérogènes (Climat et Santé).
 
-2.  **Visualisation** des disparités mondiales.
+2.  **Visualisation** des disparités mondiales via une cartographie interactive.
 
-3.  **Prédiction** des trajectoires à l'horizon 2050.
+3.  **Prédiction** des trajectoires futures grâce à des modèles de Machine Learning à l'horizon 2050.
 
 ---
 
@@ -41,13 +43,13 @@ jupyter: python3
 Une architecture modulaire et automatisée :
 
 ```{mermaid}
-%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '32px', 'fontFamily': 'Helvetica', 'darkMode': true }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': { 'fontSize': '18px', 'fontFamily': 'Helvetica' }}}%%
 flowchart LR
-    A(Sources Web) -->|Pooch| B(Cache Local)
+    A[Sources Web] -->|Pooch| B(Cache Local)
     B -->|Nettoyage| C{Dataset Fusionné}
     C -->|Pandas| D[Classe HealthAnalyzer]
     D -->|Scikit-Learn| E[Modèle IA]
-    E & D -->|Quarto| F(Dashboard Web)
+    E & D -->|Quarto| F[Dashboard Web]
 
     style A fill:#e74c3c,stroke:#fff,stroke-width:2px,color:white
     style B fill:#e67e22,stroke:#fff,stroke-width:2px,color:white
@@ -57,17 +59,15 @@ flowchart LR
     style F fill:#2ecc71,stroke:#fff,stroke-width:2px,color:white
 ```
 
-::: {.incremental style="font-size: 0.8em; margin-top: 30px;"}
+<!-- J'ai réduit la taille de police (0.65em) et la marge (0px) pour que ça ne coupe plus en bas -->
 
-* Ingestion : Téléchargement sécurisé et mise en cache (pooch).
+::: {.incremental style="font-size: 0.65em; margin-top: 0px;"}
 
-* Traitement : Fusion des sources hétérogènes (Climat + Santé).
-
-* Analyse : Structure Orientée Objet (class HealthAnalyzer).
-
-* IA : Calcul des prédictions 2050 sur les données nettoyées.
-
-* Rendu : Génération du site statique interactif.
+1. Ingestion : Téléchargement sécurisé et mise en cache (pooch).
+2. Traitement : Fusion des sources hétérogènes (Climat + Santé).
+3. Analyse : Structure Orientée Objet (class HealthAnalyzer).
+4. IA : Calcul des prédictions 2050 sur les données nettoyées.
+5. Rendu : Génération du site statique interactif.
 :::
 
 ---
@@ -100,34 +100,7 @@ Nous utilisons le **Machine Learning** pour projeter les tendances.
 
 ---
 
-## Démonstration du Code (Live)
-
-Exécution réelle du package `health4earth` :
-
-```{python}
-#| echo: true
-#| eval: true
-
-import sys
-import os
-import pandas as pd
-# Import du package développé
-sys.path.append(os.path.abspath(".."))
-from health4earth.analytics import HealthAnalyzer
-
-# Simulation de données pour l'exemple
-data = pd.DataFrame({
-    'country': ['France'] * 20,
-    'year': range(2000, 2020),
-    'co2': [400 - i*5 for i in range(20)] # Tendance baissière
-})
-
-# Initialisation de notre classe
-analyzer = HealthAnalyzer(data)
-print(f"Classe HealthAnalyzer instanciée avec succès.")
-```
-
-# 4. Interface & Visualisation {background-color="#533483"}
+# 4. Interface et Visualisation {background-color="#533483"}
 
 ---
 
@@ -137,7 +110,7 @@ Déploiement automatisé sur **GitHub Pages**.
 
 **Fonctionnalités clés :**
 
-*   **Carte Choroplèthe :** Vue mondiale des émissions et indicateurs.
+*   **Carte interactive :** Vue mondiale des émissions, de la pollution, de la mortalité liée à la pollution de l'air et de l'espérance de vie.
 
 *   **Popups Intelligents :** Graphiques générés en Python (Matplotlib) et encodés en Base64 directement dans les marqueurs.
 
@@ -145,7 +118,7 @@ Déploiement automatisé sur **GitHub Pages**.
 
 ---
 
-# 5. Qualité Logicielle & Bilan {background-color="#e94560"}
+# 5. Qualité Logicielle et Bilan {background-color="#e94560"}
 
 ---
 
@@ -163,7 +136,7 @@ Le projet respecte les standards industriels :
 
 ---
 
-## Auto-Critique & Perspectives
+## Auto-Critique et Perspectives
 
 **Difficultés rencontrées :**
 
