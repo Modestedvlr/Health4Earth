@@ -42,7 +42,7 @@ Pour tester ce projet sur votre machine locale :
 
 1.  **Cloner le dépôt :**
     ```bash
-    git clone https://github.com/JulienOllier/Health4Earth.git
+    git clone https://github.com/Modestedvlr/Health4Earth.git
     cd Health4Earth
     ```
 
