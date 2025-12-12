@@ -11,7 +11,6 @@ Pour anticiper l'avenir climatique et sanitaire de la France, nous avons dévelo
 Le modèle est entraîné sur les données historiques réelles (2000-2024) pour projeter les tendances jusqu'en 2050.
 
 
----
 ```{python}
 #| echo: false
 #| warning: false
@@ -31,7 +30,6 @@ country = "France"
 ```
 
 
----
 ## 1. Trajectoire des Émissions de CO₂
 
 ```{python}
@@ -56,11 +54,10 @@ if pred is not None:
     plt.show()
 ```
 
-#### Interprétation :
+* Interprétation :
 La France suit une trajectoire de décroissance structurelle. Le modèle prévoit une baisse continue, passant sous la barre des 250 Mt d'ici 2040. Cela valide l'efficacité des politiques de transition énergétique, bien que des efforts supplémentaires soient requis pour la neutralité carbone totale.
 
 
----
 ## 2. Pollution Atmosphérique
 
 ```{python}
@@ -78,11 +75,10 @@ if pred_pol is not None:
     plt.show()
 ```
 
-#### Interprétation :
+* Interprétation :
 La mortalité liée aux particules fines devrait continuer de chuter. Cette baisse est plus rapide que celle du CO2, ce qui s'explique par l'amélioration des normes EURO sur les véhicules et la fin progressive du chauffage au fioul/charbon.
 
 
----
 ## 3. Espérance de Vie
 
 ```{python}
@@ -99,11 +95,10 @@ if pred_life is not None:
     plt.show()
 ```
 
-#### Interprétation :
+* Interprétation :
 Le modèle est optimiste et projette un gain continu, dépassant potentiellement les 84 ans de moyenne d'ici 2040. Cependant, cette courbe pourrait s'aplatir (effet de plateau biologique) non pris en compte par une régression linéaire simple.
 
 
----
 ## Conclusion : 
 
 L'amélioration de la qualité de l'air est directement corrélée à l'augmentation de l'espérance de vie, validant l'efficacité des politiques publiques actuelles.
