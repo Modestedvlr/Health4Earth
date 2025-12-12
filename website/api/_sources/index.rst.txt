@@ -1,12 +1,9 @@
-Documentation Health4Earth
-==========================
-
 Bienvenue sur la documentation officielle du projet **Health4Earth**.
 
 Ce package a été développé dans le cadre du cours HAX712X - Développement Logiciel.
 L'objectif est d'analyser l'impact environnemental (CO2) sur la santé publique via des outils de Data Science modernes.
 
-Guide de Démarrage
+
 ^^^^^^^^^^^^^^^^^^
 
 .. toctree::
@@ -16,7 +13,7 @@ Guide de Démarrage
    install/installation
    install/contacts
 
-Modules Principaux
+
 ^^^^^^^^^^^^^^^^^^
 
 .. toctree::
@@ -31,7 +28,7 @@ Modules Principaux
 
    modules/analytics
 
-Galerie & Exemples
+
 ^^^^^^^^^^^^^^^^^^
 
 .. toctree::
@@ -40,8 +37,8 @@ Galerie & Exemples
 
    gallery/examples
 
-Index et Tables
-===============
+Index
+======
 
 * :ref:`genindex`
 * :ref:`modindex`

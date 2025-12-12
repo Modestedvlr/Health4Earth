@@ -147,6 +147,3 @@ Vérifiez que vous êtes dans l'environnement virtuel (vous devriez voir `(venv)
 
 **Problèmes de permissions sur Windows**
 Ajoutez `--user` à la commande pip : `pip install --user -e .`
-
-.. important::
-   En cas de problème, consultez la section complète de dépannage dans la documentation.
