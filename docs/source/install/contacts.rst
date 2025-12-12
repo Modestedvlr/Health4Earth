@@ -1,11 +1,14 @@
 Contacts et Auteurs
-==================
+===================
 
 Ce projet est maintenu par un groupe d'étudiants du Master 1 Statistique et Science des Données de la Faculté des Sciences de l'Université de Montpellier :
 
-* **Dossou AGOSSOU**       'Email : dmagossou12@gmail.com   -    LinkedIn : www.linkedin.com/in/dossou-modeste-agossou-357001284'
+* **Dossou AGOSSOU**
+    * Email : dmagossou12@gmail.com
+    * LinkedIn : https://www.linkedin.com/in/dossou-modeste-agossou-357001284
 
-* **Firdaousse KARIMOU**   'firdakarimou2@gmail.com'
+* **Firdaousse KARIMOU**
+    * Email : firdakarimou2@gmail.com
 
 * **Julien OLLIER**
 
