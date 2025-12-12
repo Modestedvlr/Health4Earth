@@ -117,8 +117,6 @@ Ce script identifie les années où la mortalité liée à la pollution a été 
 
 --------------------------------------------------------------------------------
 
-Aller plus loin
----------------
 
 Aller plus loin
 ---------------

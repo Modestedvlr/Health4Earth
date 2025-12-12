@@ -1,5 +1,5 @@
-Module d'Analyse (IA)
-=====================
+Module d'Analyse
+=================
 
 Ce module contient la classe principale pour les prédictions.
 
