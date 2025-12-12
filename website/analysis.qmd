@@ -46,7 +46,6 @@ fig.show()
 ```
 
 * Tendance :
-
 On observe une divergence nette. Les pays de l'OCDE (USA, France, Allemagne) ont amorcé une décrue de leurs émissions. À l'inverse, les économies émergentes (Chine, Inde) montrent une croissance exponentielle liée à leur industrialisation.
 Points de rupture : Notez l'impact visible de la crise de 2008 et du Covid-19 (2020) sur les courbes.
 
@@ -66,7 +65,6 @@ fig.show()
 ```
 
 * Corrélation :
-
 Bien que la Chine émette le plus de CO2, sa courbe de mortalité liée à la pollution commence à stagner, signe de politiques sanitaires efficaces.
 Paradoxe : L'Inde voit sa mortalité augmenter, corrélée à son développement urbain rapide et l'usage persistant de combustibles solides.
 
@@ -85,7 +83,6 @@ fig.show()
 ```
 
 * Analyse :
-
 Ce graphique en aires empilées montre le poids relatif de chaque pays dans le bilan mondial. L'Asie représente aujourd'hui la majeure partie du fardeau sanitaire environnemental.
 
 
@@ -104,7 +101,6 @@ fig.show()
 ```
 
 * Convergence :
-
 On note un rattrapage progressif des pays émergents vers les standards occidentaux (environ 80 ans).
 
 * Résilience :
