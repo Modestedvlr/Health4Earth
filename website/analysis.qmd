@@ -1,5 +1,5 @@
 ---
-title: "Analyse Exploratoire Mondiale"
+title: "Analyse Exploratoire"
 format:
   html:
     toc: true
@@ -8,8 +8,9 @@ format:
 jupyter: python3
 ---
 
-Cette section permet d'explorer dynamiquement les tendances historiques mondiales.
-**Mode d'emploi :** Les graphiques sont interactifs. Vous pouvez zoomer, et **cliquer sur les noms des pays dans la légende** à droite pour les masquer ou les isoler (double-clic).
+Cette section permet d'explorer dynamiquement les tendances historiques de quelques pays du monde.
+
+Les graphiques sont interactifs. Vous pouvez zoomer, et cliquer sur les noms des pays dans la légende à droite pour les masquer ou les isoler (double-clic).
 
 ```{python}
 #| echo: false
@@ -29,6 +30,8 @@ if 'France' not in top_pop: top_pop.append('France')
 df_viz = df[df['country'].isin(top_pop) & (df['year'] >= 1990)].copy()
 ```
 
+
+---
 ## 1. Évolution des Émissions de CO₂
 Analyse de la trajectoire carbone des grandes puissances industrielles.
 
@@ -43,11 +46,13 @@ fig.update_layout(hovermode="x unified")
 fig.show()
 ```
 
-### Analyse Structurée :
-Tendance : On observe une divergence nette. Les pays de l'OCDE (USA, France, Allemagne) ont amorcé une décrue de leurs émissions. À l'inverse, les économies émergentes (Chine, Inde) montrent une croissance exponentielle liée à leur industrialisation.
+#### Tendance :
+
+On observe une divergence nette. Les pays de l'OCDE (USA, France, Allemagne) ont amorcé une décrue de leurs émissions. À l'inverse, les économies émergentes (Chine, Inde) montrent une croissance exponentielle liée à leur industrialisation.
 Points de rupture : Notez l'impact visible de la crise de 2008 et du Covid-19 (2020) sur les courbes.
 
 
+---
 ## 2. Pollution Atmosphérique
 Nombre total de décès attribués à la pollution de l'air (extérieure et domestique).
 
@@ -62,12 +67,14 @@ fig.update_layout(hovermode="x unified")
 fig.show()
 ```
 
-### Analyse Structurée :
-Corrélation : Bien que la Chine émette le plus de CO2, sa courbe de mortalité liée à la pollution commence à stagner, signe de politiques sanitaires efficaces.
+#### Corrélation :
+
+Bien que la Chine émette le plus de CO2, sa courbe de mortalité liée à la pollution commence à stagner, signe de politiques sanitaires efficaces.
 Paradoxe : L'Inde voit sa mortalité augmenter, corrélée à son développement urbain rapide et l'usage persistant de combustibles solides.
 
 
-## 3. Mortalité Respiratoire (Focus)
+---
+## 3. Mortalité Respiratoire
 Visualisation spécifique de l'impact sur la santé respiratoire.
 
 ```{python}
@@ -80,10 +87,12 @@ fig = px.area(df_viz, x="year", y="pollution_deaths", color="country",
 fig.show()
 ```
 
-### Analyse Structurée :
+#### Analyse :
+
 Ce graphique en aires empilées montre le poids relatif de chaque pays dans le bilan mondial. L'Asie représente aujourd'hui la majeure partie du fardeau sanitaire environnemental.
 
 
+---
 ## 4. Espérance de Vie
 L'indicateur synthétique de santé publique.
 
@@ -98,11 +107,15 @@ fig.update_yaxes(range=[50, 90]) # Zoom sur la plage utile
 fig.show()
 ```
 
-### Analyse Structurée :
-Convergence : On note un rattrapage progressif des pays émergents vers les standards occidentaux (environ 80 ans).
-Résilience : Malgré la pollution, l'espérance de vie augmente globalement grâce aux progrès médicaux, prouvant que la technologie compense en partie les dégradations environnementales.
+#### Convergence :
+
+On note un rattrapage progressif des pays émergents vers les standards occidentaux (environ 80 ans).
+
+#### Résilience :
+
+Malgré la pollution, l'espérance de vie augmente globalement grâce aux progrès médicaux, prouvant que la technologie compense en partie les dégradations environnementales.
 
 
-
-## Annexe : Code Source
-Le code ayant généré ces graphiques est disponible ci-dessous.
+---
+## Code Source :
+Le code ayant généré ces graphiques est disponible dans l'onglet *Documentation*.
