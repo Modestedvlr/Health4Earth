@@ -1,0 +1,6 @@
+/* docs/source/_static/custom.css */
+
+/* Force le contenu à prendre toute la largeur disponible */
+.wy-nav-content {
+    max-width: none !important;
+}

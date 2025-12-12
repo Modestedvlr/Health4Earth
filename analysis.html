@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Analyse Exploratoire – Health4Earth</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-725465af2631f9691bf1e5d4ad82c4f4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.3.0.min"</script>
+
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Health4Earth</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./analysis.html" aria-current="page"> 
+<span class="menu-text">Analyse Globale</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./predictions_france.html"> 
+<span class="menu-text">Prédictions France</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./documentation.html"> 
+<span class="menu-text">Documentation</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#évolution-des-émissions-de-co₂" id="toc-évolution-des-émissions-de-co₂" class="nav-link active" data-scroll-target="#évolution-des-émissions-de-co₂">1. Évolution des Émissions de CO₂</a></li>
+  <li><a href="#pollution-atmosphérique" id="toc-pollution-atmosphérique" class="nav-link" data-scroll-target="#pollution-atmosphérique">2. Pollution Atmosphérique</a></li>
+  <li><a href="#mortalité-respiratoire" id="toc-mortalité-respiratoire" class="nav-link" data-scroll-target="#mortalité-respiratoire">3. Mortalité Respiratoire</a></li>
+  <li><a href="#espérance-de-vie" id="toc-espérance-de-vie" class="nav-link" data-scroll-target="#espérance-de-vie">4. Espérance de Vie</a></li>
+  <li><a href="#code-source" id="toc-code-source" class="nav-link" data-scroll-target="#code-source">Code Source :</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analyse Exploratoire</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Cette section permet d’explorer dynamiquement les tendances historiques de quelques pays du monde.</p>
+<p>Les graphiques sont interactifs. Vous pouvez zoomer, et cliquer sur les noms des pays dans la légende à droite pour les masquer ou les isoler (double-clic).</p>
+<section id="évolution-des-émissions-de-co₂" class="level2">
+<h2 class="anchored" data-anchor-id="évolution-des-émissions-de-co₂">1. Évolution des Émissions de CO₂</h2>
+<p>Analyse de la trajectoire carbone des grandes puissances industrielles.</p>
+<div id="59b56adf" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.0.min.js" integrity="sha256-bO3dS6yCpk9aK4gUpNELtCiDeSYvGYnK7jFI58NQnHI=" crossorigin="anonymous"></script>                <div id="853d24ed-03d0-4e46-9784-9988961a924d" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("853d24ed-03d0-4e46-9784-9988961a924d")) {                    Plotly.newPlot(                        "853d24ed-03d0-4e46-9784-9988961a924d",                        [{"hovertemplate":"Pays=France\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"France","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"France","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"UL0dzxt3f0CF\u002fYK7wbF\u002fQI0EfSA9HIBAQKZ1L85MgEBuhvnC2NKAQF7wNRkYaYBAQ6M4DUv\u002fgEDo7IuYiyiBQEILNoBd9YBAXsml8LQ5gUAqOw5yEBCBQNyiidXWS4FAkcjmguNQgUBaDsQYJ+uAQDHhS9YI3IBAfKOSPOcTgUAWAZAZlsOAQMJglliXlIBAoun4r8pPgED\u002fWTo5e6J\u002fQFYpenxxZn9AKm7kaj8Af0CuOYxJOwB+QCSGwBw8FH1AgIFnfnlkfEDsAbIRSAZ7QFQgTqsxfnpAcQPvLxu+eUDTpWILgAl4QOotZQU0NHdAaxFcW\u002fI7dUBoyUSvrYN0QBicvzBdLHNAWmMKugJ4cUAORNHFRlVwQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Pays=United States\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"United States","line":{"color":"#EF553B","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"United States","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"zF3UppmDf0DW9z8SEJN\u002fQJmB7fkcEIBAwzM1oiKVgED4hG+DPc+AQBzdS64an4BAySVo4NzvgECsDtIc6EiBQERpo0lh\u002fYBAwCZAL9U9gUBvZLEA+HSBQGXOXqfeG4FAx4DW+tUugUCRJnfOFvaAQJdZ1sDD3YBA8Yo1vmw3gUATxB7Af26AQBnW\u002fPWwX4BAV4raxkJGgECEHyz2EieAQJZ0byIPS39A1h5jpQ8Gf0CTERXpLOd9QCOySHOeO31AverMGCZIfEDxhGBahyh7QEUIsCBXcXpAU+R1933TeEB8m8HZd9x3QPDdcSIgWnZAFpdHZoK9dUBgVPrLD3l0QNjdCMzTRHNAW\u002fbdilURckCo5emgbUVwQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Pays=China\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"China","line":{"color":"#00cc96","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"China","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"S91K\u002f+VMaEBAnwFkM1NpQEmjpQxcxWlAiDc5PebrbEAPI0E97u1qQCZ6XsVfLG9AiNjcDcmlbkDb+7oth1pwQO16pBeQ+nBAZojca1mjcUAcMpJWM\u002fRzQG9H928baHVACtGBOZHIdUCGT\u002fr2Irp5QJ43VbDlnXtAIVm5io2VfEDiErZjoHJ\u002fQIBU4q1x239Ax7hOeWDFgUAcT126zHeCQJAIb\u002fYLK4NA7ieXm3ynhEDHYs4uckOGQI5lvRai\u002fodAfxCRVypJiUAkhH5OYDCLQOwIkUDxIYxAagWFpR32jUCNqe6misOPQPW4EBeBh5BAept0Cj1okUCooyIF4SOSQG\u002fuJYsrHZNArfUZMRDnk0DHOUqNwQiVQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Pays=India\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"India","line":{"color":"#ab63fa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"India","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"3PbiK2plZ0DPwUpbenppQCV\u002fuwG7OGlAh\u002foD6mI4aUDQLSnVX2pqQAmlHIBEj21AnPzpqqJcbkDnzibsM0ZxQKRLCKwsPXFAzIsBu4gsc0BDyqYu+Gp0QM9Io9IqQ3ZA6Mo4tDjhd0DOpesEL4J4QOUDU4efoHpAbHtSs8B9fUCc7cIstIl\u002fQFI4bXEtJYFAHfq2+S+kgUDZgv9BeTODQFHh\u002fsYTZYRAnmDBWxx3hUCbfsUu9WOGQIoXGoC19YdAX\u002fh0Yc68iUAeZpoHMRSLQAxSZhiqA4xA3khcifvCjUAWfkDUjomPQHRebOcmkJBAVVrtcv6SkUBJxtxYJxaSQAhqHrxQCZNAxazimDD8k0AlXsd7Se+UQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Pays=Brazil\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Brazil","line":{"color":"#FFA15A","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Brazil","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"LMyXHL02aECkMdWB7WppQBhD9LXDT2xA0kU\u002fh86yaUDOgiCFBrxrQKBpIwK+gWxAm671soCVb0CgTPIZWf5wQCgzTo0+r3FAIhUxAQl5c0BQ6Yf26O9zQIXLZ53UqHZAS3ygTjh7d0C8H50T0CZ5QKvz9br0inpApxgYh5dTfECl1p2mGXt\u002fQOQhLaxeFYBADlVcCCZvgUBBgAQq1WuCQDzlW2neOoRAJ3O+pQgphUBhxAxcUSCGQEZqiONgR4hARMMdQRyXiUC3i8axmNWKQEMDnikDTYxAgpUeGU60jUDydQIq+WqPQC9Ri9aIX5BAovjO7VJ8kUAWwDtBEJ+SQGh+OzgaC5NAeC3JgWTUk0Ct+sH6iu6UQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Pays=Germany\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Germany","line":{"color":"#19d3f3","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Germany","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"dspwcpN6f0DyKUFfsKF\u002fQEnWIedxAIBAQbQBcl9ggEBW9Awzq3uAQIvWAGK534BAdGZAbPVXgUByZct38BeBQOUzGTb1FIFAlC8dkSuEgUBK4ASKfl+BQMJ8B1mY04BAT203LoIhgUBiAvzNAKWAQBTrUXQTxYBAuuH3t9XAgEAzY\u002f7\u002fGJKAQHOpBInuY4BAnHTfFawmgED\u002fIS+uWMd\u002fQB32DSJylH9AYdMJwJvpfkAuApOszp19QJbZVEu5XX1A4W5+K4nle0C87yj9ETt7QGFLj2RlDXpAL8qiVDRleUCjCf21O3R4QCczHR6mWHdAdD+Gi233dUAR3HETFZd0QPBqzItB+XJALMqLvL6bckDsOnXmDCdwQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Pays=Japan\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Japan","line":{"color":"#FF6692","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Japan","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"sogsvDwPf0CWl73ZjQaAQHnVWSHgNIBAEbq1bQZDgEASdZUQ89OAQCbvn8Qs5oBAMCgjJS\u002f+gEBuSVIhXdOAQNazsSDdboFAMLRACilfgUDvMnTmljeBQEG8vuCjQIFApUv0MVLsgEBWtjGzDgmBQNNhIwm8soBATU0ZIvLLgEBLchf4yYGAQIqqIemQDYBAtnm8RqU3gEBRvvYxtwCAQKSDmkX9KH9A7t98vSemfkBZwKEALl99QGYQ4wO7CX1AYoV4JiFZfEDSh9l7kFt7QJa+fMhLlXpASZ9MIGdUeUAcPJe82Fx4QGm0F5daOXdA4XaqQacPdkARQv+oadV0QGdpMVfCxHNAemTq6bYzckBsHkwxOUxwQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Pays=Russia\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Russia","line":{"color":"#B6E880","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Russia","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"\u002fl0i\u002fGaraEAfjtCkVMdpQNLhWUisB2lAyIMYWkKva0BDc20ZHdJrQAQMR0jf1HBA2C\u002fvRtY1bkBrEzx7hixwQNiCInH6qW5AJ\u002fViZyPlckBwVLS\u002foAx2QFssXDmWS3ZAbz+1KpTfdkDVbNT4O4l3QDeC6ImSQnxAmXWBaDv2e0ClNoeIs6p+QGorx6fwVYBAij0icCVDgUDOIhDFzwODQOs87DfcToRAA60876UShUDZd1yZoxuGQAqSC0i3P4dAP7oI1Xs1iUADSREPFtOKQATKM\u002fi7c4xATknLXBSVjUCvQEaOY6uOQK3uzUQPfpBAZQF4nHhbkUDc55EptT2SQBWU3fE6V5NAIHjW8lbdk0Ah2bzHNL2UQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Pays=South Africa\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"South Africa","line":{"color":"#FF97FF","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"South Africa","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"Szy\u002fVczKaEDQ6H+a9tFnQDHfsX2pYGhAwqTRwA95aUBwEQ9uxxZuQFDDcb2Uxm5AcLFA8G2kcEBEMnII0BtwQLzrHBC7tnFA8NC\u002fy91Ic0C4e2Vf08p0QCrkWi3xnXZARHmDlTz3dkDCMmajtqR5QBRjiE3M6HpA5VlCxZYWfEBuqF9XTC1+QD9lWSwaq4BADytsAzf8gUDMgHjV+tmCQOjoBSisUoRAjc7bxetkhUBaG2NN\u002ffuFQELHBXEynIdAsn9I7h84iUCavIfX7OqKQDNQiPhaaoxALhvegVCcjUC1Ns4bb+WOQMBg+6juupBABc0eKh2CkUD8jZyhrkGSQK4MgGurHZNA\u002ffunyvpklECS\u002f5onoP6UQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Pays=Nigeria\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Nigeria","line":{"color":"#FECB52","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Nigeria","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"wcb1bwziakBfFIAAuZ1pQPepce4kqmhAjPQ0xaQAa0BRaii8KolrQE9hOc4vl21AxjXpWfhVbUD\u002fnUGvkaVwQJ3xo4jrL3NAqQh8vyUYdEAmLAcpTTt1QNnzi5cQTXVAkWTryVUld0CZDyqev8x4QEZ\u002fzRkkT3tA5z2XJxBofEDcPTLmCDx\u002fQNJ\u002feIlc94BAlfYh9tWKgUC19Rrk3O6CQGCAqUNin4NA7AkgH45hhUAQqpwOt\u002fqFQCinsVQ4SIdAlxEEGU4\u002fiUD0dxI5kuuKQAqPrbc\u002fcoxAGhC0pubJjUBgb8Pa7VePQPIoDtoaepBAoBoHjI2gkUBP92vGLC2SQLeUs\u002fLbX5NA768KeVlOlEAlotqwy6eUQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Pays=Australia\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eCO2 (Mt)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Australia","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Australia","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"p0jwS\u002fMGf0AzEhDyAe1\u002fQPOKgp3QJ4BAufbys1amgEDEdxK1i5GAQD66Oqjl5IBAexmrQevtgEAFeXZnAhaBQED+zdDjV4FAxHC5O+xEgUBil6u7OSiBQH+oH8zTAIFAeCy\u002fpDA3gUDAIt+e9TKBQCvQZBGtDoFAcyo+5vIDgUAFxUiPp3WAQJreBpHSTYBAuGlKdOgvgEBw9SKdiqt\u002fQH808HWUW39AL02EqZWCfkCvf3lB3bh9QLLoAwdBrHxAdBeQJ1cQfEB6jc+vVvd7QDtU2xfIMHpAG6MTTaDmeEBSypTg9xl4QMpi8L4Q\u002fHZAtxS84k3ZdUCdt6F1IuB0QNDpLeNYRHNAuRJ7fpNScUAa6H2p++5vQA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Ann\u00e9e"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"CO2 (Mt)"}},"legend":{"title":{"text":"Pays"},"tracegroupgap":0},"title":{"text":"\u00c9missions de CO2 (Millions de Tonnes)"},"height":500,"hovermode":"x unified"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('853d24ed-03d0-4e46-9784-9988961a924d');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+</div>
+<ul>
+<li>Tendance : On observe une divergence nette. Les pays de l’OCDE (USA, France, Allemagne) ont amorcé une décrue de leurs émissions. À l’inverse, les économies émergentes (Chine, Inde) montrent une croissance exponentielle liée à leur industrialisation. Points de rupture : Notez l’impact visible de la crise de 2008 et du Covid-19 (2020) sur les courbes.</li>
+</ul>
+</section>
+<section id="pollution-atmosphérique" class="level2">
+<h2 class="anchored" data-anchor-id="pollution-atmosphérique">2. Pollution Atmosphérique</h2>
+<p>Nombre total de décès attribués à la pollution de l’air (extérieure et domestique).</p>
+<div id="02793654" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.0.min.js" integrity="sha256-bO3dS6yCpk9aK4gUpNELtCiDeSYvGYnK7jFI58NQnHI=" crossorigin="anonymous"></script>                <div id="9be0a51f-0b6d-40e1-a385-49449dcf79ab" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("9be0a51f-0b6d-40e1-a385-49449dcf79ab")) {                    Plotly.newPlot(                        "9be0a51f-0b6d-40e1-a385-49449dcf79ab",                        [{"hovertemplate":"country=France\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"France","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"France","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"4g68is1to0B1xS0RMyGkQI\u002fZ1JtJsKNASE8yIZYro0DfVJRrVRqjQBM6\u002fAIVsKJAr9AN7YoZo0CRkkUpEMihQMo2vf4ubaJAgketLUHpoED8oPlAgm6hQOxNVRjmdaFAWAwhfEEBoUBGRwgy\u002fw2gQLF9TGlfAaBAEYmgio9fn0BRfyUpnQqgQO9\u002fB89L5pxAWOFtEpbYnEBTl4+nljubQHLJ6sBVhZlAXEcNZ0c8mkDvVNmiNlCYQCDK24mSbZdAktyRO21IlkB8mqT4gj+UQA9\u002fqMnMZZVAGDEq30h6kkCqEQDjUiqQQMMqKh9IcI9AjKKFOcOdkED8d+Vve7+LQAy4G9Xd+otAhJx4+\u002fmlhUDY4CsSFkGDQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=United States\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"United States","line":{"color":"#EF553B","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"United States","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"eL7JsQO4o0Al1lj73qWjQBbV\u002f1xSX6NAz2ruEdZ\u002fo0AtlePMuQyjQOtC6hPz66JAJCGZdUCKokDBjDbFHK+iQLJlJ3JTFqJAUS7XiZJhokAUFZ4NQ0miQJUPxwy3paFARxSsOkFuoEA\u002fNeFeRNGeQAZ0iplyzZ5AtB81Tn5CoED4tTFmcoGdQK17L5\u002fAFp1Ax4LkFUXknUAwaUEEtZqbQM1fFvBKbptARPwiuZPLmUC5jQCx2iuYQHp0msgz3pVAuEFi2GfHlkATgklrEo+UQDpjh4r8fpNAdQuqU9qokkB1C2ri\u002ffqRQEUGeE54Q4xAXiieFGRCjEBygp9qx+iIQDaHJTYHuolA\u002flZo790xhkCT+O2an5+FQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=China\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"China","line":{"color":"#00cc96","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"China","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"9Tz3vbNJi0AXHS8Jqw+MQMyhGBsr1YxAIDRStWiCkECj+fthXJSOQDETpfFpMZJAUHEQiWcMkEAAy+7gLCiRQHYdYR+zM5JAs5Fv7raokkDNi9kl74+UQH\u002fcaVzwN5RA99nYbfiIlEB3utWLDmCYQC\u002f467PKf5lAw3PPxxQlm0DC6d0obcacQFJnpFQ7mJxApk0yUeEjn0CRzVCT6CigQIsULx\u002fiAKBAVH0+Srb\u002foECEphEl3SWiQFlzzOHmIKNAy5hvGLB+o0BFyBs\u002fXdGjQF6LJF9566NAZ1G\u002feylcpUDFW4qVpqKmQLQJNnXpQ6dA+TQebczMp0C\u002f+vmXV0uoQBvotAG6hKlASEZSisF2qUAOtpFPQLSqQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=India\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"India","line":{"color":"#ab63fa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"India","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"k\u002f1dMGXTi0C4MDcxyE+OQIhTpPu4G45AxQmqzbPUi0C91Ldu3AiOQGbWNM+EmJBA9s3t+6yhj0DSouMeZpWTQPGOBrae8ZFAaihAkOnglEA8cxgLUYeVQOKCg4bJxJVALyv32Cv8l0Aa6x3fejiYQOZMdio5MpdAxwxVqVXimUAARClmYuqdQLag+WXr151A8SIrsWDrnUBlNiYrBCGgQABXGinIw6BAbSdqefy0oUAoM\u002fmBKnGiQI0ELKXgvKJA6vJ\u002f7xlHpEBxJRNy7oKkQMomyypTd6RAtq5jZ9x5pUCoW3LCwHqmQPPmQgivdKZAroKAgb67p0Buqru2UTuoQGP+1H+t3qhAuM0\u002f\u002f0hwqUCssKNS9wGqQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Brazil\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Brazil","line":{"color":"#FFA15A","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Brazil","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"uov7Zetqj0DiOLofF7yMQCKql7zSEZFAhsmYj9KNjUB9MUbiOsSQQIfpBkOf4JBAq5TAOcf0kUCLTsWgd4uSQK+E25FOKZJAGlVYtOhwk0AswzbsOjyUQCyMf9F0gJZAspQ5bNMVl0C\u002figjZb+2XQMqiMWYV0ZhAUitkH3Y9mUDnX\u002fl0WSOcQO9j916wRZxAko6IuSp3nkCH3y2ut\u002fefQJ4DeZnihqBAPn5BN2M3oUBD9\u002fX1rkCiQKOjiOsJS6NAGpJtyjTTo0AbAPGVW9ujQLmZEOYo5qRAojgx9waHpUDmhlLdslamQKiS3B5526ZAH9CRLyA9qEDBhJACXYeoQOO3X8KUZqlA99k0B\u002f6tqUBlyMgj8D+pQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Germany\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Germany","line":{"color":"#19d3f3","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Germany","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"0ddI7fD7okDZAC2YDxujQBAUyh\u002fQdqNAIEa+w1tSo0Bx097VwMeiQNAIkdvkzKJAC2tL4JBDo0CtAssdvnKiQFCRYe4B1KJAUh9M5s2gokDHN8\u002fY6FmiQGSUyaXJMaFAsLXganG1oEB0Fa13SX+gQKdca9lUxZ9Adj\u002f5ZRl7nUDv0rBRSQudQGJgADU+bJxAbwbnblmOm0Anjj531QuaQBJsnWaQDZpAy2rrfbnomEBYU9W11j6WQKFQSBXn7JZApdBRZfvqlUAbv8+ZaIGTQKbdPE9ZcpRAuP8JbgZhkkDEK2cmaE+RQARYCLlGaZBAhxbE3XRHjkAlEirazvKMQFSb6JDS8IlAe13\u002fm+9phUDqX3z6izaEQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Japan\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Japan","line":{"color":"#FF6692","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Japan","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"4s14zwlxo0CbFgxpEeyjQO3ENc7Rq6JA7MCz4faHo0A6CRxZfxijQElHze0lf6NAMCP239d8okClMf6G5tShQG80wdvSB6NA5Kceh26EokAV26\u002fPpNihQF\u002fIouG2XqFASGQaDdZloUD9rinIRz+gQKhDLV7ebaBALJrdgZ+\u002fn0DL0dp0JP6cQE65vloe5ZtA7dx5xpiSm0BLNHVuXLqZQE4XuWtLM5tAE7HeQi7ymECADO9YzC6WQEiEkvmw35ZAy1fRADzWlkC9WjGxAK+TQB9mWVVohJRAX7Xf8BerkUBAvg8DqbKQQMHxoZYxv5BArtKvPm0NjUB92a6k8NeHQCXwsXVeuopA93MhIGodh0DmPYT4FDSDQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Russia\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Russia","line":{"color":"#B6E880","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Russia","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"CxG8OuzRi0BP7bNfoaaPQPXpSnWBg41A9Asxn3NjkEAe\u002fofUb5uQQCM1AO84ZpFAPufcAT1pkEBtx1cHZHeRQOef7V4R+JBA4eR+IczblECB+gODL0OXQJaLkRY+vpdAIXCF3+DnlkB4JumMS0uWQD6UFzBTJJpAqhj0gPlymkBE3vssgwGbQAoGEXu+HZxAy+a0AoGBnUCZ7gXOTVCgQPvSNdYAi6BAos0\u002fWgYeoUD2ZH+sB5ihQG9f71g5A6FA46n9AeWho0DVH\u002fBBqHykQHoh9G7TyaRAP3TSdWPMpUBHiUYi\u002fMWlQK+AmR51zKZAwaaNpzN8qEBOwzbXAW6oQN1A2hB97ahArGKCvYLBqEA2xKoyVhGqQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=South Africa\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"South Africa","line":{"color":"#FF97FF","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"South Africa","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"e7Hdwq8Qj0D2WPPAb86MQNjCVdTEJo1A0f9BCMawjUDIMKYB4BCTQC0KCD\u002fgr5BAOjJjNVCIkkD+U1l6bQeSQE+QXGFpzJFASCJguTRKlECPX6PjJ7+VQMsOStcT6JZAqwtkaGfnlkDn0oZ7YZyYQE1xi8JKRZlAAkkx\u002fL4QmkDxMES94iKbQFTnZNHSV51A2OBMimLlnkBlW9umximfQI+YNDKzn6BAoz410LMfoUBouOXfJ8+hQI+7QbcM7aJAJGEhIEDEo0Ctuj+SWWqkQCJz\u002fmNmy6RA7u\u002fy5XP4pUDubxfcX9mlQDO8bFaZAqdAQaqIE5ktp0CH26Z+cXeoQDZp0R1n76hAUnGsjiy8qkC5Cjno7CiqQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Nigeria\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Nigeria","line":{"color":"#FECB52","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Nigeria","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"zz\u002fYVt56kECyL7ogQy2LQMpkiYLsUYxALwMC5ZiCj0B32AjaLgiOQIHhIs+nn5FABKVY1flNkEBsUpk6dM+RQFztuG+\u002foJRAC53QVAIulUDDCL5cl0uVQJUEDeAADpZA6sASMXAclkBj2bmd89SXQFONgYf0dJpAL3zxJcA7mkAqClY2kXSdQBXsjknmKp5AgJC4UEIQnkBIlwiktDigQEpZaTj3y6BAcAtlBM+foUDcyKeWAOuhQBtqDRBXMqJAMjDPXMVbpEDNpPmlN1GkQMDS7jDvXaRAhSXQTEzwpEBaimbSAdGmQKCClZBYaKZA\u002f5TYDUUKqECuP54JVcOnQGi\u002fqbQ9oalA9r5quYLrqUBcZL3IUD2qQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Australia\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003eD\u00e9c\u00e8s (Total)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Australia","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Australia","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"fZGEC86zo0BHiSO5Q4qjQO9qaKkUi6NAaRYwlJZno0AYB8CB0\u002fuiQAveILQD06JA1TC9Ivs6o0Bcf50wOLqiQNXT5JmfzKFArfqLi3DeoUAVgf+XMwCiQA5aECe3o6FAzdx54nREoUBkic\u002fOSTOgQGc5SShw7J9AWgh6kM85oEB02RpLK9ycQNV52QqYR51AuM+335+Mm0AdhI\u002f87A6bQFYudsfD8JlA+bmmjk\u002f3mEC69AM90zKYQNUQFunPPZZApAPqOifvlEDLbCsZSE+WQOJRz9D5MZNAgYmQGn2qkUBLpWFTHNSQQA1EY5LZCI9AhPLkyw6ej0BqJ+UlmAWMQDQwfgo9D4hAscyqDczChUBE\u002fxHFozaFQA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Ann\u00e9e"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"D\u00e9c\u00e8s (Total)"}},"legend":{"title":{"text":"country"},"tracegroupgap":0},"title":{"text":"Mortalit\u00e9 annuelle li\u00e9e \u00e0 la Pollution"},"height":500,"hovermode":"x unified"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('9be0a51f-0b6d-40e1-a385-49449dcf79ab');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+</div>
+<ul>
+<li>Corrélation : Bien que la Chine émette le plus de CO2, sa courbe de mortalité liée à la pollution commence à stagner, signe de politiques sanitaires efficaces. Paradoxe : L’Inde voit sa mortalité augmenter, corrélée à son développement urbain rapide et l’usage persistant de combustibles solides.</li>
+</ul>
+</section>
+<section id="mortalité-respiratoire" class="level2">
+<h2 class="anchored" data-anchor-id="mortalité-respiratoire">3. Mortalité Respiratoire</h2>
+<p>Visualisation spécifique de l’impact sur la santé respiratoire.</p>
+<div id="070e4bc1" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.0.min.js" integrity="sha256-bO3dS6yCpk9aK4gUpNELtCiDeSYvGYnK7jFI58NQnHI=" crossorigin="anonymous"></script>                <div id="28e0e095-ebb2-49c3-bd5e-d22546a844e5" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("28e0e095-ebb2-49c3-bd5e-d22546a844e5")) {                    Plotly.newPlot(                        "28e0e095-ebb2-49c3-bd5e-d22546a844e5",                        [{"fillpattern":{"shape":""},"hovertemplate":"country=France\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"France","line":{"color":"#636efa"},"marker":{"symbol":"circle"},"mode":"lines","name":"France","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"4g68is1to0B1xS0RMyGkQI\u002fZ1JtJsKNASE8yIZYro0DfVJRrVRqjQBM6\u002fAIVsKJAr9AN7YoZo0CRkkUpEMihQMo2vf4ubaJAgketLUHpoED8oPlAgm6hQOxNVRjmdaFAWAwhfEEBoUBGRwgy\u002fw2gQLF9TGlfAaBAEYmgio9fn0BRfyUpnQqgQO9\u002fB89L5pxAWOFtEpbYnEBTl4+nljubQHLJ6sBVhZlAXEcNZ0c8mkDvVNmiNlCYQCDK24mSbZdAktyRO21IlkB8mqT4gj+UQA9\u002fqMnMZZVAGDEq30h6kkCqEQDjUiqQQMMqKh9IcI9AjKKFOcOdkED8d+Vve7+LQAy4G9Xd+otAhJx4+\u002fmlhUDY4CsSFkGDQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"country=United States\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"United States","line":{"color":"#EF553B"},"marker":{"symbol":"circle"},"mode":"lines","name":"United States","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"eL7JsQO4o0Al1lj73qWjQBbV\u002f1xSX6NAz2ruEdZ\u002fo0AtlePMuQyjQOtC6hPz66JAJCGZdUCKokDBjDbFHK+iQLJlJ3JTFqJAUS7XiZJhokAUFZ4NQ0miQJUPxwy3paFARxSsOkFuoEA\u002fNeFeRNGeQAZ0iplyzZ5AtB81Tn5CoED4tTFmcoGdQK17L5\u002fAFp1Ax4LkFUXknUAwaUEEtZqbQM1fFvBKbptARPwiuZPLmUC5jQCx2iuYQHp0msgz3pVAuEFi2GfHlkATgklrEo+UQDpjh4r8fpNAdQuqU9qokkB1C2ri\u002ffqRQEUGeE54Q4xAXiieFGRCjEBygp9qx+iIQDaHJTYHuolA\u002flZo790xhkCT+O2an5+FQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"country=China\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"China","line":{"color":"#00cc96"},"marker":{"symbol":"circle"},"mode":"lines","name":"China","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"9Tz3vbNJi0AXHS8Jqw+MQMyhGBsr1YxAIDRStWiCkECj+fthXJSOQDETpfFpMZJAUHEQiWcMkEAAy+7gLCiRQHYdYR+zM5JAs5Fv7raokkDNi9kl74+UQH\u002fcaVzwN5RA99nYbfiIlEB3utWLDmCYQC\u002f467PKf5lAw3PPxxQlm0DC6d0obcacQFJnpFQ7mJxApk0yUeEjn0CRzVCT6CigQIsULx\u002fiAKBAVH0+Srb\u002foECEphEl3SWiQFlzzOHmIKNAy5hvGLB+o0BFyBs\u002fXdGjQF6LJF9566NAZ1G\u002feylcpUDFW4qVpqKmQLQJNnXpQ6dA+TQebczMp0C\u002f+vmXV0uoQBvotAG6hKlASEZSisF2qUAOtpFPQLSqQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"country=India\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"India","line":{"color":"#ab63fa"},"marker":{"symbol":"circle"},"mode":"lines","name":"India","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"k\u002f1dMGXTi0C4MDcxyE+OQIhTpPu4G45AxQmqzbPUi0C91Ldu3AiOQGbWNM+EmJBA9s3t+6yhj0DSouMeZpWTQPGOBrae8ZFAaihAkOnglEA8cxgLUYeVQOKCg4bJxJVALyv32Cv8l0Aa6x3fejiYQOZMdio5MpdAxwxVqVXimUAARClmYuqdQLag+WXr151A8SIrsWDrnUBlNiYrBCGgQABXGinIw6BAbSdqefy0oUAoM\u002fmBKnGiQI0ELKXgvKJA6vJ\u002f7xlHpEBxJRNy7oKkQMomyypTd6RAtq5jZ9x5pUCoW3LCwHqmQPPmQgivdKZAroKAgb67p0Buqru2UTuoQGP+1H+t3qhAuM0\u002f\u002f0hwqUCssKNS9wGqQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"country=Brazil\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Brazil","line":{"color":"#FFA15A"},"marker":{"symbol":"circle"},"mode":"lines","name":"Brazil","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"uov7Zetqj0DiOLofF7yMQCKql7zSEZFAhsmYj9KNjUB9MUbiOsSQQIfpBkOf4JBAq5TAOcf0kUCLTsWgd4uSQK+E25FOKZJAGlVYtOhwk0AswzbsOjyUQCyMf9F0gJZAspQ5bNMVl0C\u002figjZb+2XQMqiMWYV0ZhAUitkH3Y9mUDnX\u002fl0WSOcQO9j916wRZxAko6IuSp3nkCH3y2ut\u002fefQJ4DeZnihqBAPn5BN2M3oUBD9\u002fX1rkCiQKOjiOsJS6NAGpJtyjTTo0AbAPGVW9ujQLmZEOYo5qRAojgx9waHpUDmhlLdslamQKiS3B5526ZAH9CRLyA9qEDBhJACXYeoQOO3X8KUZqlA99k0B\u002f6tqUBlyMgj8D+pQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"country=Germany\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Germany","line":{"color":"#19d3f3"},"marker":{"symbol":"circle"},"mode":"lines","name":"Germany","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"0ddI7fD7okDZAC2YDxujQBAUyh\u002fQdqNAIEa+w1tSo0Bx097VwMeiQNAIkdvkzKJAC2tL4JBDo0CtAssdvnKiQFCRYe4B1KJAUh9M5s2gokDHN8\u002fY6FmiQGSUyaXJMaFAsLXganG1oEB0Fa13SX+gQKdca9lUxZ9Adj\u002f5ZRl7nUDv0rBRSQudQGJgADU+bJxAbwbnblmOm0Anjj531QuaQBJsnWaQDZpAy2rrfbnomEBYU9W11j6WQKFQSBXn7JZApdBRZfvqlUAbv8+ZaIGTQKbdPE9ZcpRAuP8JbgZhkkDEK2cmaE+RQARYCLlGaZBAhxbE3XRHjkAlEirazvKMQFSb6JDS8IlAe13\u002fm+9phUDqX3z6izaEQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"country=Japan\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Japan","line":{"color":"#FF6692"},"marker":{"symbol":"circle"},"mode":"lines","name":"Japan","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"4s14zwlxo0CbFgxpEeyjQO3ENc7Rq6JA7MCz4faHo0A6CRxZfxijQElHze0lf6NAMCP239d8okClMf6G5tShQG80wdvSB6NA5Kceh26EokAV26\u002fPpNihQF\u002fIouG2XqFASGQaDdZloUD9rinIRz+gQKhDLV7ebaBALJrdgZ+\u002fn0DL0dp0JP6cQE65vloe5ZtA7dx5xpiSm0BLNHVuXLqZQE4XuWtLM5tAE7HeQi7ymECADO9YzC6WQEiEkvmw35ZAy1fRADzWlkC9WjGxAK+TQB9mWVVohJRAX7Xf8BerkUBAvg8DqbKQQMHxoZYxv5BArtKvPm0NjUB92a6k8NeHQCXwsXVeuopA93MhIGodh0DmPYT4FDSDQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"country=Russia\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Russia","line":{"color":"#B6E880"},"marker":{"symbol":"circle"},"mode":"lines","name":"Russia","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"CxG8OuzRi0BP7bNfoaaPQPXpSnWBg41A9Asxn3NjkEAe\u002fofUb5uQQCM1AO84ZpFAPufcAT1pkEBtx1cHZHeRQOef7V4R+JBA4eR+IczblECB+gODL0OXQJaLkRY+vpdAIXCF3+DnlkB4JumMS0uWQD6UFzBTJJpAqhj0gPlymkBE3vssgwGbQAoGEXu+HZxAy+a0AoGBnUCZ7gXOTVCgQPvSNdYAi6BAos0\u002fWgYeoUD2ZH+sB5ihQG9f71g5A6FA46n9AeWho0DVH\u002fBBqHykQHoh9G7TyaRAP3TSdWPMpUBHiUYi\u002fMWlQK+AmR51zKZAwaaNpzN8qEBOwzbXAW6oQN1A2hB97ahArGKCvYLBqEA2xKoyVhGqQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"country=South Africa\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"South Africa","line":{"color":"#FF97FF"},"marker":{"symbol":"circle"},"mode":"lines","name":"South Africa","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"e7Hdwq8Qj0D2WPPAb86MQNjCVdTEJo1A0f9BCMawjUDIMKYB4BCTQC0KCD\u002fgr5BAOjJjNVCIkkD+U1l6bQeSQE+QXGFpzJFASCJguTRKlECPX6PjJ7+VQMsOStcT6JZAqwtkaGfnlkDn0oZ7YZyYQE1xi8JKRZlAAkkx\u002fL4QmkDxMES94iKbQFTnZNHSV51A2OBMimLlnkBlW9umximfQI+YNDKzn6BAoz410LMfoUBouOXfJ8+hQI+7QbcM7aJAJGEhIEDEo0Ctuj+SWWqkQCJz\u002fmNmy6RA7u\u002fy5XP4pUDubxfcX9mlQDO8bFaZAqdAQaqIE5ktp0CH26Z+cXeoQDZp0R1n76hAUnGsjiy8qkC5Cjno7CiqQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"country=Nigeria\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Nigeria","line":{"color":"#FECB52"},"marker":{"symbol":"circle"},"mode":"lines","name":"Nigeria","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"zz\u002fYVt56kECyL7ogQy2LQMpkiYLsUYxALwMC5ZiCj0B32AjaLgiOQIHhIs+nn5FABKVY1flNkEBsUpk6dM+RQFztuG+\u002foJRAC53QVAIulUDDCL5cl0uVQJUEDeAADpZA6sASMXAclkBj2bmd89SXQFONgYf0dJpAL3zxJcA7mkAqClY2kXSdQBXsjknmKp5AgJC4UEIQnkBIlwiktDigQEpZaTj3y6BAcAtlBM+foUDcyKeWAOuhQBtqDRBXMqJAMjDPXMVbpEDNpPmlN1GkQMDS7jDvXaRAhSXQTEzwpEBaimbSAdGmQKCClZBYaKZA\u002f5TYDUUKqECuP54JVcOnQGi\u002fqbQ9oalA9r5quYLrqUBcZL3IUD2qQA=="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"country=Australia\u003cbr\u003eyear=%{x}\u003cbr\u003epollution_deaths=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Australia","line":{"color":"#636efa"},"marker":{"symbol":"circle"},"mode":"lines","name":"Australia","orientation":"v","showlegend":true,"stackgroup":"1","x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"fZGEC86zo0BHiSO5Q4qjQO9qaKkUi6NAaRYwlJZno0AYB8CB0\u002fuiQAveILQD06JA1TC9Ivs6o0Bcf50wOLqiQNXT5JmfzKFArfqLi3DeoUAVgf+XMwCiQA5aECe3o6FAzdx54nREoUBkic\u002fOSTOgQGc5SShw7J9AWgh6kM85oEB02RpLK9ycQNV52QqYR51AuM+335+Mm0AdhI\u002f87A6bQFYudsfD8JlA+bmmjk\u002f3mEC69AM90zKYQNUQFunPPZZApAPqOifvlEDLbCsZSE+WQOJRz9D5MZNAgYmQGn2qkUBLpWFTHNSQQA1EY5LZCI9AhPLkyw6ej0BqJ+UlmAWMQDQwfgo9D4hAscyqDczChUBE\u002fxHFozaFQA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"year"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"pollution_deaths"}},"legend":{"title":{"text":"country"},"tracegroupgap":0},"title":{"text":"Volume cumul\u00e9 des d\u00e9c\u00e8s (Pollution)"},"height":500},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('28e0e095-ebb2-49c3-bd5e-d22546a844e5');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+</div>
+<ul>
+<li>Analyse : Ce graphique en aires empilées montre le poids relatif de chaque pays dans le bilan mondial. L’Asie représente aujourd’hui la majeure partie du fardeau sanitaire environnemental.</li>
+</ul>
+</section>
+<section id="espérance-de-vie" class="level2">
+<h2 class="anchored" data-anchor-id="espérance-de-vie">4. Espérance de Vie</h2>
+<p>L’indicateur synthétique de santé publique.</p>
+<div id="1221f844" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.0.min.js" integrity="sha256-bO3dS6yCpk9aK4gUpNELtCiDeSYvGYnK7jFI58NQnHI=" crossorigin="anonymous"></script>                <div id="7b34050f-ef7d-4d83-857d-7829e8ce47f1" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("7b34050f-ef7d-4d83-857d-7829e8ce47f1")) {                    Plotly.newPlot(                        "7b34050f-ef7d-4d83-857d-7829e8ce47f1",                        [{"hovertemplate":"country=France\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"France","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"France","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"yfsPZaHUUkDSzJ03Zp5TQAeene+SKFRARumlsTpwVEC0GwmgL7VUQNen3Y53DVVAZKtsk6kzVUDfdJZLLFNVQGeFkWDkhlVAMx+9jE+iVUBFhMs3\u002fL1VQPrGcsFa21VA1xJFlGTzVUD+jTXhrv9VQK9o1sH2EVZAb97fGHssVkBRTindsltWQJ1gEKzMTFZAa+kdRl5xVkCKgbGLlmBWQAAAAAAAgFZAAAAAAACAVkAAAAAAAIBWQAAAAAAAgFZAAAAAAACAVkAAAAAAAIBWQAAAAAAAgFZAAAAAAACAVkAAAAAAAIBWQAAAAAAAgFZAAAAAAACAVkAAAAAAAIBWQAAAAAAAgFZAAAAAAACAVkAAAAAAAIBWQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=United States\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"United States","line":{"color":"#EF553B","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"United States","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"YV\u002f56zjFUkCEgpdPLJ9TQPhLP2qIPFRAi+W31zODVEBeTTatVLpUQEor3OHY+lRAduxct7IxVUCvc8uS4kNVQBrX4OSMgFVA+SlfcK6nVUAdiBKqepRVQIBj874E21VAy7XWOtb3VUAZ2v2xuBdWQJxD\u002fH3mG1ZAvXnbyxwuVkDDi0\u002fnSlpWQA2ctBTDYlZAtBWR1bN+VkAAAAAAAIBWQAAAAAAAgFZAAAAAAACAVkAAAAAAAIBWQAAAAAAAgFZAAAAAAACAVkAAAAAAAIBWQAAAAAAAgFZAAAAAAACAVkAAAAAAAIBWQAAAAAAAgFZAAAAAAACAVkAAAAAAAIBWQAAAAAAAgFZAAAAAAACAVkAAAAAAAIBWQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=China\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"China","line":{"color":"#00cc96","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"China","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"WnE5ZuIoTkBEp4fhI8NPQEQb11u9YlBAvuERI9e7UEA2Gx1TLwtRQJOpxKH9KVFACKyr1NZ2UUCQhf\u002fh+IFRQF6hxJLPoFFAde+l1XziUUAB7jN2OPNRQFQ36hy4GVJAOQX+smovUkCbX6rFc0xSQO14KV\u002fLYlJAdhFTBn+CUkAs+5kBWJVSQBMWL8jUmlJAMchgV9uPUkBTv6IlNqVSQJz8cIxZ0lJAL30AMUHaUkANgcRjt\u002flSQEVlcg3t\u002fFJAIMOenU4JU0BW+E9e3ARTQH5TpoUCHVNAvwddL5QjU0AkDmEhJzpTQGkV9iBSQ1NA0lPmX5JLU0DS58nWDE1TQObhfjaiWFNAymqNgxJcU0Auusq3gldTQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=India\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"India","line":{"color":"#ab63fa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"India","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"vau7uHQITkBZBKK4lMxPQGBUgHywQ1BAf0XPnru5UED1ocvtB+pQQBdZeb59NVFA74gtuBVmUUD+jTBm4qpRQKDlKjsy01FA8iOTqRTkUUBFdxnRBg9SQPHQMiHpGFJA2EBRnzw0UkA0xvczUEpSQI\u002fDcInBWlJAGRuTdlJ1UkCldCgWkaNSQFONxSx6mVJAfoaY1MGbUkBhXQ19A7dSQD+Xj1dvyFJAAKwo8d3RUkC5PuBowPNSQFGByBkO71JAoP1aFCr\u002fUkB3djlwrRRTQAmIG886PVNAXYM\u002f8XMzU0CamkyWcyxTQK9LHJE4NVNA6qWSjcFDU0CKK35yp2hTQOgLMPHkU1NAexZh\u002fIVfU0DcWNMOVnhTQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Brazil\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Brazil","line":{"color":"#FFA15A","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Brazil","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"x9PVZ9b1TUCcUHsAMKlPQBFqmMwrXVBAkpGFVe7AUEDx+tF37hdRQAgbocXBQFFAkbSJsq99UUBkXVszgpZRQIVNgmwdzFFASVgHEHfwUUCoODgPavxRQGBJBuotE1JAJPkxIykoUkC8vKB6+FBSQIpykPV0e1JAbzMpDJGDUkBXKDkEe3lSQGMic076m1JALC3Fgd3LUkCdei69I8VSQIHkUZAe21JAxLDMlW7SUkB4rwxfKvhSQDpDMni09lJAlD9kHZ0gU0AokBoilghTQNo+VzTGHFNAcIVixn4RU0B38noGsyVTQP\u002fXyVh\u002fSFNAtrfWXZpPU0CBPvhmPWdTQNw98WmUbVNANywYSL9bU0Auh4SZs2hTQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Germany\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Germany","line":{"color":"#19d3f3","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Germany","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"ie0W5foSTkB\u002fxQzzXalPQD6N0R5rUlBA\u002f6NpQcDFUED12Rxh+ABRQCsQlux1Q1FA2vwRwmxgUUAZYYj5zHxRQKA0hrpItFFAWWcVO+3NUUBVDDErFvhRQBydk5gzBVJApF+CCH5CUkDy3gikmVNSQCZBzW7DYVJAXhwo499uUkBDR0pjs6BSQNs6df+ljFJAxYLQcLOhUkBt\u002feyav7BSQEk5228111JA8PNJdVjbUkCwo3qwoO1SQCvYxrApD1NAmYbQN1cTU0A7eKURWw5TQFS41mA\u002fHVNA3M1GfqcoU0BUKNs6LyRTQFO\u002fq7WkVVNAfvBCTvc\u002fU0AGnqfHd05TQLIDNi\u002fEXVNASXXk3d1cU0BGH776koJTQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Japan\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Japan","line":{"color":"#FF6692","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Japan","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"FHnSofooTkCKwXjddqpPQAal9Kc7a1BAYW62HYOwUEA+RzwYCv1QQI7WoLiuMVFAx0VbVOpoUUBhGJgSpIxRQH25eiDbu1FACA8YG1ngUUAgUrxzRhlSQH9ZkW+XEVJARo6gse48UkAffiKT2FVSQB\u002fScMtgdlJAj7aiAZtyUkDPptqYx31SQC6Xt1rSp1JAVX7YTMe2UkDEh4kaYa9SQAm9eCx+vVJArb3rvPbZUkCdq9AFjuxSQNyFd0cS8FJAKO7ysscOU0Do7qxdGCxTQIaYFs4YEFNAJu0nWGoyU0CDcx+CQzBTQLpBpdd1SlNAP7IgL9tIU0AMCa8+yGVTQH\u002fGBSU9W1NAwz\u002fwza9tU0CH\u002faStDHZTQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Russia\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Russia","line":{"color":"#B6E880","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Russia","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"KpEQMmntTUDGTDSeoLZPQB2RSQvNY1BA03eo4n7GUEBHgzWd4wlRQCgpNZC6UFFARQabEYmAUUAEAWM0P6JRQMP4z9ietFFAd61USb30UUC1YNygOwlSQJwFfuijHVJAgobQih4wUkCo56+pckhSQOT474nLY1JARrmyfSNkUkDTuXcjsJxSQPAGF\u002fYRn1JAWekaHt\u002fAUkDCus2z\u002f7dSQOn6yAxn61JAHIs9MVTfUkCx25qKcOZSQCsYuxq+JFNAHfnXDNn2UkAS4dOnCjdTQH04kImbHlNABzzO4bIqU0Dh8xNUiC1TQJT20SkRPVNAWD8MkrVOU0DPGFcPG1ZTQP2rCdUbXlNAuJxIN1x8U0CEApYDHXVTQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=South Africa\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"South Africa","line":{"color":"#FF97FF","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"South Africa","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"6lzKxUf8TUC+oa9m7ZtPQM4w9uoKT1BAo8AYOrTDUEBYePu5wAtRQNmAxIPYMVFAEa0ahUFvUUCYbljqlKFRQIn6du1Us1FAJgEWtXziUUBGEMfBxf9RQEO04277FVJAq335x88hUkBdeMsmfktSQBddNVT+alJACaKLxUCBUkA3dTdnrItSQEqrbz5pllJA1JWpMbDSUkDPFPshbrxSQFTfPYxh11JAcYgJyWzyUkCeEQGQwfJSQHhck8EO71JAC6g3wlTwUkBUdgw+wBVTQH81T3cbJ1NACx24uqkoU0A02\u002fi0oylTQKErtQ8YMlNACipNeu1JU0AUwbF9mlFTQHk7\u002feCdblNAsDbKuhRzU0AzwXNV92dTQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Nigeria\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Nigeria","line":{"color":"#FECB52","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Nigeria","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"XtyGDrP8TUB9jl5qssxPQOvZFkHAZFBAISC+6UO9UEACJ6TdogRRQHsvK7lrOlFAY8rJ+nNyUUBxUBdmpJBRQNhpfIOYu1FAk18aHAr2UUApOgPcRP9RQGylzQvbDVJAzLW6shQtUkDWtX0gAjVSQEjcpkEae1JAxlBL6IFyUkDkSSr6BYVSQLmNNzZArlJAMP9LnBmsUkDHynWnQ9NSQNMsOtrm1FJA6DCgoGvRUkAtwNQOteNSQCjYfWZ471JAGpEcJhv2UkCv1FMxBhNTQFn1HrUED1NAlNCOBOAsU0Bc+OIBxzdTQIw9Qdh0TFNA21J1qLBIU0AXO0kKxEtTQEbqbYnNYlNAfjMqUHBcU0BIBpSlEHxTQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"country=Australia\u003cbr\u003eAnn\u00e9e=%{x}\u003cbr\u003e\u00c2ge (Ann\u00e9es)=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Australia","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"Australia","orientation":"v","showlegend":true,"x":{"dtype":"i2","bdata":"xgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoBw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"By6YTmwCTkChA1NTaLZPQDp1\u002fhiBUVBAubq3B2rMUEDFs93qUA5RQLLDnMavMlFAMZsfUoB6UUB1uhIag5pRQJmX7HHoylFA288D2TXcUUDUgiKj\u002ffVRQCBnnAPQJVJArbvD\u002f+sVUkCZ3V7yoVZSQKS3s9dYYFJA3EpcFFR7UkB\u002f6rqDQ3lSQDKV3pRJolJAUTaB8tyZUkA4KAswF7tSQGBiUNdiwlJAZRZ6GivMUkDtqTWnxt9SQM1z1ieG9lJASy+qH0kRU0BHtEPimAJTQBxq6reqJlNAtNhr2XIRU0ChHAtR3iVTQDOpfk+OTVNAqft9XuhXU0C142Uo5lRTQMxgAO1PZlNAxq9jbiltU0B7Y2nI3H9TQA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Ann\u00e9e"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"\u00c2ge (Ann\u00e9es)"},"range":[50,90]},"legend":{"title":{"text":"country"},"tracegroupgap":0},"title":{"text":"Esp\u00e9rance de Vie \u00e0 la naissance"},"height":500},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('7b34050f-ef7d-4d83-857d-7829e8ce47f1');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+</div>
+<ul>
+<li><p>Convergence : On note un rattrapage progressif des pays émergents vers les standards occidentaux (environ 80 ans).</p></li>
+<li><p>Résilience : Malgré la pollution, l’espérance de vie augmente globalement grâce aux progrès médicaux, prouvant que la technologie compense en partie les dégradations environnementales.</p></li>
+</ul>
+</section>
+<section id="code-source" class="level2">
+<h2 class="anchored" data-anchor-id="code-source">Code Source :</h2>
+<p>Le code ayant généré ces graphiques est disponible dans l’onglet <em>Documentation</em>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Projet Master HAX712X - Développement Logiciel | Université de Montpellier | 2025</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
