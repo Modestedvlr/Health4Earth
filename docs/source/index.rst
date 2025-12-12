@@ -1,6 +1,3 @@
-Documentation Health4Earth
-==========================
-
 Bienvenue sur la documentation officielle du projet **Health4Earth**.
 
 Ce package a été développé dans le cadre du cours HAX712X - Développement Logiciel.
