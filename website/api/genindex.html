@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; Health4Earth 0.1 documentation</title>
+  <title>Index &mdash; Health4Earth 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=1aa8269c" />
@@ -13,7 +13,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -40,13 +40,22 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Sections principales</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Installation et Contact</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="traitement_donnees.html">Traitement des données</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">health4earth</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Guide d’Utilisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install/contacts.html">Contacts &amp; Auteurs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Ingestion et Données</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/data_ingest.html">Module d’Ingestion</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Analyse et IA</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/analytics.html">Module d’Analyse (IA)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Exemples d'utilisation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gallery/examples.html">Galerie d’Exemples</a></li>
 </ul>
 
         </div>
@@ -76,46 +85,49 @@
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
- <a href="#H"><strong>H</strong></a>
- | <a href="#I"><strong>I</strong></a>
+ <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#P"><strong>P</strong></a>
- | <a href="#T"><strong>T</strong></a>
  
 </div>
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/analytics.html#health4earth.analytics.HealthAnalyzer.get_country_data">get_country_data() (health4earth.analytics.HealthAnalyzer method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
-    health4earth
+    health4earth.analytics
 
       <ul>
-        <li><a href="health4earth.html#module-health4earth">module</a>
-</li>
-      </ul></li>
-      <li>
-    health4earth.data_capitales
-
-      <ul>
-        <li><a href="health4earth.html#module-health4earth.data_capitales">module</a>
+        <li><a href="modules/analytics.html#module-health4earth.analytics">module</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
-    health4earth.data_co2
+    health4earth.data_ingest
 
       <ul>
-        <li><a href="health4earth.html#module-health4earth.data_co2">module</a>
+        <li><a href="modules/data_ingest.html#module-health4earth.data_ingest">module</a>
 </li>
       </ul></li>
+      <li><a href="modules/analytics.html#health4earth.analytics.HealthAnalyzer">HealthAnalyzer (class in health4earth.analytics)</a>
+</li>
   </ul></td>
 </tr></table>
 
-<h2 id="I">I</h2>
+<h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="traitement_donnees.html#term-IRSE"><strong>IRSE</strong></a>
+      <li><a href="modules/data_ingest.html#health4earth.data_ingest.load_merged_data">load_merged_data() (in module health4earth.data_ingest)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -127,11 +139,9 @@
     module
 
       <ul>
-        <li><a href="health4earth.html#module-health4earth">health4earth</a>
+        <li><a href="modules/analytics.html#module-health4earth.analytics">health4earth.analytics</a>
 </li>
-        <li><a href="health4earth.html#module-health4earth.data_capitales">health4earth.data_capitales</a>
-</li>
-        <li><a href="health4earth.html#module-health4earth.data_co2">health4earth.data_co2</a>
+        <li><a href="modules/data_ingest.html#module-health4earth.data_ingest">health4earth.data_ingest</a>
 </li>
       </ul></li>
   </ul></td>
@@ -140,15 +150,7 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="traitement_donnees.html#term-PDI"><strong>PDI</strong></a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="T">T</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="traitement_donnees.html#term-TCR"><strong>TCR</strong></a>
+      <li><a href="modules/analytics.html#health4earth.analytics.HealthAnalyzer.predict_evolution">predict_evolution() (health4earth.analytics.HealthAnalyzer method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -162,7 +164,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Health4Earth Team.</p>
+    <p>&#169; Copyright 2025, Master SSD Team.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
