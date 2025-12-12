@@ -1,45 +1,47 @@
-.. Documentation principale de Health4Earth
-   Générée avec sphinx-quickstart – personnalisée pour une présentation claire et soignée.
-
 Documentation Health4Earth
 ==========================
 
-Bienvenue dans la documentation technique du projet **Health4Earth**, une plateforme dédiée à l'analyse de l’impact des émissions de CO₂ sur la santé humaine.
+Bienvenue sur la documentation officielle du projet **Health4Earth**.
 
-Cette documentation a pour objectif de guider les utilisateurs, contributeurs et développeurs à travers les différentes fonctionnalités du projet : traitement des données, visualisations, modules utilisés, installation et bonnes pratiques.
+Ce package a été développé dans le cadre du cours HAX712X - Développement Logiciel.
+L'objectif est d'analyser l'impact environnemental (CO2) sur la santé publique via des outils de Data Science modernes.
 
-Utilisez la syntaxe ``reStructuredText`` pour rédiger ou améliorer les pages.
-Pour plus de détails, consultez la `documentation officielle <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_.
-
----
-
-Navigation
-----------
+Guide de Démarrage
+^^^^^^^^^^^^^^^^^^
 
 .. toctree::
    :maxdepth: 2
-   :caption: Sections principales
+   :caption: Installation et Contact
 
-   introduction
-   traitement_donnees
-   installation
-   modules
-   usage
+   install/installation
+   install/contacts
 
----
+Modules Principaux
+^^^^^^^^^^^^^^^^^^
 
-Index et ressources
-===================
+.. toctree::
+   :maxdepth: 2
+   :caption: Ingestion et Données
 
-Pour commencer
---------------
+   modules/data_ingest
 
-- Si vous découvrez le projet, commencez par :doc:`introduction`.
-- Pour comprendre comment les données sont traitées :doc:`traitement_donnees`.
+.. toctree::
+   :maxdepth: 2
+   :caption: Analyse et IA
 
-Ressources techniques
----------------------
+   modules/analytics
 
-* :ref:`genindex` — Index général  
-* :ref:`modindex` — Index des modules
+Galerie & Exemples
+^^^^^^^^^^^^^^^^^^
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Exemples d'utilisation
+
+   gallery/examples
+
+Index et Tables
+===============
+
+* :ref:`genindex`
+* :ref:`modindex`
